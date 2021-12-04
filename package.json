@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/NansenHo/YellowUI/issues"
   },
-  "homepage": "https://github.com/NansenHo/YellowUI#readme"
+  "homepage": "https://github.com/NansenHo/YellowUI#readme",
+  "dependencies": {
+    "vue": "^2.6.14"
+  }
 }
