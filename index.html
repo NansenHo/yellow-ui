@@ -27,36 +27,11 @@
             font-size: var(--font-size)
         }
     </style>
-    <style>
-        .y-button {
-            font-size: var(--font-size);
-            height: var(--button-height);
-            padding: 0 2em;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            background: var(--button-bg);
-        }
-
-        .y-button:hover {
-            background-color: var(--button-active-bg);
-        }
-
-        .y-button:focus {
-            outline: none;
-        }
-    </style>
 </head>
 <body>
 <div id="app">
     <y-button></y-button>
 </div>
-
-<script src="node_modules/vue/dist/vue.min.js"></script>
-<script src="button.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-    });
-</script>
+<script src="./src/app.js"></script>
 </body>
 </html>
