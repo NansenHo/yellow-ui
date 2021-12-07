@@ -1,10 +1,16 @@
 <template>
-  <button class="y-button">按钮</button>
+  <button class="y-button">
+    <svg class="icon" aria-hidden="true">
+      <use :xlink:href=`#icon-${icon}`></use>
+    </svg>
+    <slot></slot>
+  </button>
 </template>
 
 <script>
 export default {
   name: 'y-button',
+  props: ['icon']
 };
 </script>
 
