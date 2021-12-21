@@ -16,7 +16,22 @@
 <script>
 export default {
   name: 'y-button',
-  props: ['icon', 'iconPosition']
+  // props: ['icon', 'iconPosition']
+  // 用对象的写法可以写更多的功能
+  props: {
+    icon: {},
+    iconPosition: {
+      type: String,
+      // icon-position 的默认值
+      default: 'left',
+      // 属性校验器的写法
+      validator(value) {
+        // return true 不能省略
+        return value === 'left' || value === 'right';
+        // return value !== 'left' && value !== 'right' ? false : true; // 用三元运算符来做
+      }
+    }
+  }
 };
 </script>
 
