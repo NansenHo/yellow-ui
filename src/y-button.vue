@@ -1,14 +1,10 @@
 <template>
   <button class="y-button" v-if="iconPosition === 'right'">
     <slot></slot>
-    <svg v-if="icon" class="icon icon-right" aria-hidden="true">
-      <use :xlink:href=`#icon-${icon}`></use>
-    </svg>
+    <y-icon v-if="icon" :name="icon"></y-icon>
   </button>
   <button class="y-button" v-else>
-    <svg v-if="icon" class="icon icon-left" aria-hidden="true">
-      <use :xlink:href=`#icon-${icon}`></use>
-    </svg>
+    <y-icon v-if="icon" :name="icon"></y-icon>
     <slot></slot>
   </button>
 </template>
