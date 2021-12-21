@@ -1,5 +1,8 @@
 <template>
-  <svg class="y-icon y-icon-right" aria-hidden="true">
+  <svg v-if="iconPosition === 'right'" class="y-icon y-icon-right" aria-hidden="true">
+    <use :xlink:href=`#icon-${name}`></use>
+  </svg>
+  <svg v-else class="y-icon y-icon-left" aria-hidden="true">
     <use :xlink:href=`#icon-${name}`></use>
   </svg>
 </template>
@@ -7,7 +10,7 @@
 <script>
 export default {
   name: 'y-icon',
-  props: ['name']
+  props: ['name','iconPosition'],
 };
 </script>
 

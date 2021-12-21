@@ -1,7 +1,7 @@
 <template>
   <button class="y-button" v-if="iconPosition === 'right'">
     <slot></slot>
-    <y-icon v-if="icon" :name="icon"></y-icon>
+    <y-icon v-if="icon" :name="icon" :iconPosition="iconPosition"></y-icon>
   </button>
   <button class="y-button" v-else>
     <y-icon v-if="icon" :name="icon"></y-icon>
@@ -27,7 +27,7 @@ export default {
         // return value !== 'left' && value !== 'right' ? false : true; // 用三元运算符来做
       }
     }
-  }
+  },
 };
 </script>
 
