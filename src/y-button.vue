@@ -1,6 +1,12 @@
 <template>
-  <button class="y-button">
-    <svg v-if="icon" class="icon" aria-hidden="true">
+  <button class="y-button" v-if="iconPosition === 'right'">
+    <slot></slot>
+    <svg v-if="icon" class="icon icon-right" aria-hidden="true">
+      <use :xlink:href=`#icon-${icon}`></use>
+    </svg>
+  </button>
+  <button class="y-button" v-else>
+    <svg v-if="icon" class="icon icon-left" aria-hidden="true">
       <use :xlink:href=`#icon-${icon}`></use>
     </svg>
     <slot></slot>
@@ -10,18 +16,24 @@
 <script>
 export default {
   name: 'y-button',
-  props: ['icon']
+  props: ['icon', 'iconPosition']
 };
 </script>
 
 <style scoped lang="scss">
 .y-button {
   font-size: var(--font-size);
-  height: var(--button-height);
-  padding: 0 2em;
+  padding: 10px 16px;
+  color: var(--button-color);
+  text-align: left;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   background: var(--button-bg);
+  font-family: SF Pro SC, SF Pro Text, SF Pro Icons, PingFang SC, Helvetica Neue, Helvetica, Arial, sans-serif;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
 }
 
 .y-button:hover {
@@ -34,5 +46,24 @@ export default {
 
 .y-button:focus {
   outline: none;
+}
+
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.icon-left {
+  margin-right: 0.5em;
+  margin-left: 0;
+}
+
+.icon-right {
+  margin-right: 0;
+  margin-left: 0.5em;
 }
 </style>
