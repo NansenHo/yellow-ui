@@ -2,9 +2,11 @@
   <button class="y-button" v-if="iconPosition === 'right'">
     <slot></slot>
     <y-icon v-if="icon" :name="icon" :iconPosition="iconPosition"></y-icon>
+    <y-icon class="loading" name="loading" :iconPosition="iconPosition"></y-icon>
   </button>
   <button class="y-button" v-else>
     <y-icon v-if="icon" :name="icon"></y-icon>
+    <y-icon class="loading" name="loading"></y-icon>
     <slot></slot>
   </button>
 </template>
@@ -76,5 +78,18 @@ export default {
 .icon-right {
   margin-right: 0;
   margin-left: 0.5em;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+.loading {
+  animation: spin 1s infinite linear;
 }
 </style>

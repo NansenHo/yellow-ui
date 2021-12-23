@@ -10,15 +10,16 @@
 <script>
 export default {
   name: 'y-icon',
-  props: ['name','iconPosition'],
+  props: ['name', 'iconPosition'],
 };
 </script>
 
 <style lang="scss" scoped>
 .y-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
+  width: 18px;
+  height: 18px;
+  color: var(--button-color);
+  vertical-align: middle;
   fill: currentColor;
   overflow: hidden;
 }
@@ -32,4 +33,5 @@ export default {
   margin-right: 0;
   margin-left: 0.5em;
 }
+
 </style>
