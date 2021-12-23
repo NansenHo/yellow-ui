@@ -1,12 +1,12 @@
 <template>
   <button class="y-button" v-if="iconPosition === 'right'">
     <slot></slot>
-    <y-icon v-if="icon" :name="icon" :iconPosition="iconPosition"></y-icon>
-    <y-icon class="loading" name="loading" :iconPosition="iconPosition"></y-icon>
+    <y-icon v-if="icon && !loading" :name="icon" :iconPosition="iconPosition"></y-icon>
+    <y-icon v-if="loading" class="loading" name="loading" :iconPosition="iconPosition"></y-icon>
   </button>
   <button class="y-button" v-else>
-    <y-icon v-if="icon" :name="icon"></y-icon>
-    <y-icon class="loading" name="loading"></y-icon>
+    <y-icon v-if="icon && !loading" :name="icon"></y-icon>
+    <y-icon v-if="loading" class="loading" name="loading"></y-icon>
     <slot></slot>
   </button>
 </template>
@@ -18,6 +18,10 @@ export default {
   // 用对象的写法可以写更多的功能
   props: {
     icon: {},
+    loading: {
+      type: Boolean,
+      default: false,
+    },
     iconPosition: {
       type: String,
       // icon-position 的默认值
