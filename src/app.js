@@ -21,6 +21,8 @@ new Vue({
 
 // 单元测试
 import chai from 'chai';
+import spies from 'chai-spies'
+chai.use(spies)
 
 const expect = chai.expect;
 // 单元测试 - 测试 icon 属性
@@ -64,8 +66,9 @@ const expect = chai.expect;
 	vm.$destroy();
 }
 
-// 单元测试 -
+// 单元测试 - 测试点击事件
 {
+	// mock 模拟
 	const Constructor = Vue.extend(Button);
 	let vm = new Constructor({
 			propsData: {
@@ -74,12 +77,15 @@ const expect = chai.expect;
 		}
 	);
 	vm.$mount();
-	// 监听 vm
-	vm.$on('click', function () {
-		// 只要打印出了 1 或者控制台没有报错，都说明运行了该函数
+	let spy = chai.spy(function(){
 		console.log(1);
 		expect(1).to.eq(1);
-	});
+	})
+	// 为 vm 的点击事件添加监听函数 spy
+	vm.$on('click', spy);
 	let button = vm.$el;
+	// 调用 spy 函数
 	button.click();
+	// 期待我们的间谍函数被调用
+	expect(spy).to.have.been.called()
 }
