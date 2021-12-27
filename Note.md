@@ -176,3 +176,13 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 # 在我们 npm run test 之前记住先删掉打包记录
  rm -rf .cache dist 
 ```
+
+### 打包发布 npm
+
+1. `npm adduser` 命令行在终端中登录 npm 帐号
+2. 查看 package.json 中规定的入口文件是哪个？
+   + package.json 中规定的入口文件即，main 字段的值；
+   + 如果没有需要加上。该项目中最开始就没有；
+   + 这个入口文件里要引入我们想要导出的组件并导出。
+3. 检查 package.json 里面的项目名
+4. 没有问题就可以用 `npm publish` 发布了。
