@@ -1,10 +1,10 @@
 <template>
   <button class="y-button" v-if="iconPosition === 'right'">
     <slot></slot>
-    <y-icon class="y-icon-right" :name="icon"></y-icon>
+    <y-icon v-if="icon" class="y-icon-right" :name="icon"></y-icon>
   </button>
   <button class="y-button" v-else>
-    <y-icon class="y-icon-left" :name="icon"></y-icon>
+    <y-icon v-if="icon" class="y-icon-left" :name="icon"></y-icon>
     <slot></slot>
   </button>
 </template>
@@ -53,6 +53,7 @@ export default {
 
 .y-button:hover {
   background-color: var(--button-active-bg);
+  border-color: var(--border-color-hover);
 }
 
 .y-button:active {

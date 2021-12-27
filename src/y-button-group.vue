@@ -1,38 +1,31 @@
-#
+<template>
+  <div class="y-button-group">
+    <slot></slot>
+  </div>
+</template>
 
-### CSS 动画
-```css
-/* 声明一个叫 spin 的旋转动画*/
-@keyframes spin {
-  0% {
-    transform: rotate(0deg)
-  }
-  100% {
-    transform: rotate(360deg)
-  }
-}
+<script>
+export default {
+  name: 'y-button-group',
 
-.loading {
-  animation: spin 1s infinite linear;
-  /*
-  infinite : 无限循环
-  linear: 线性变化
-  */
-}
-```
-### SCSS 写法
-```scss
+};
+</script>
+
+<style lang="scss"
+       scoped>
 .y-button-group {
   display: inline-flex;
   vertical-align: middle;
 
   > .y-button {
     border-radius: 0;
+    margin-left: -1px;
 
-    // 注意
-    &:not(:first-child) {
-      border-left: none;
+    &:hover {
+      position: relative;
+      z-index: 1;
     }
+    // margin-left: -1px; 和 z-index: 1; 配合解决了三个按钮合一起的时候的边框问题
 
     &:first-child {
       border-top-left-radius: var(--border-radius);
@@ -45,4 +38,4 @@
     }
   }
 }
-```
+</style>
