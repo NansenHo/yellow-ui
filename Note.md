@@ -113,7 +113,8 @@ const expect = chai.expect;
 		}
 	);
 	// 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
-	button.$mount(''); // 没有挂载
+    // 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
+	button.$mount(); // 没有挂载
 	let useElement = button.$el.querySelector('use');
 	// console.log(useElement, 'useElement');
 	// 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
@@ -126,3 +127,9 @@ const expect = chai.expect;
 	// 这就是一套单元测试的大的思路
 }
 ```
+
+### `$emit`
+
+子组件可以使用 $emit,让父组件监听到自定义事件
+
+### 
