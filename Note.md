@@ -42,7 +42,7 @@
     // margin-left: -1px; 和 z-index: 1; 配合解决了三个按钮合一起的时候的边框问题
 
     &:first-child {
-      border-top-left-radius: var(--border-radius);
+      border-top-left-radius: var(--border-radius); 
       border-bottom-left-radius: var(--border-radius);
     }
 
@@ -71,3 +71,17 @@ export default {
 	}
 }
 ```
+
+### 两种开发模式 BDD & TDD
++ BDD：Behavior-Driven Development
+  行为驱动开发
++ TDD：Test-Driven Development
+  测试驱动开发
+
+Assert：断言，是编程术语，表示为一些布尔表达。
+
+编写代码时，我们总是会做出一些假设，断言就是用于在 代码 中捕捉这些假设。
+
+程序员相信在程序中的某个特定点该表达式值为真，可以在任何时候启用和禁用断言验证，因此可以在测试时启用断言而在部署时禁用断言。 同样，程序投入运行后，最终用户在遇到问题时可以重新启用断言。 
+
+chai.js 就是一个断言库，能让我们能更方便地断言。
