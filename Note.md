@@ -186,3 +186,6 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
    + 这个入口文件里要引入我们想要导出的组件并导出。
 3. 检查 package.json 里面的项目名
 4. 没有问题就可以用 `npm publish` 发布了。
+
+### `this.$slots.default`
+可以用 `this.$slots.default` 来判断 `<slot></slot>` 组件里有没有内容。

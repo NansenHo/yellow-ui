@@ -1,7 +1,7 @@
 <template>
   <button class="y-button"
           @click="$emit('click')"
-          v-if="iconPosition === 'right'">
+          v-if="iconPosition === 'right' && $slots.default">
     <slot></slot>
     <y-icon v-if="icon"
             class="y-icon-right"
@@ -9,11 +9,17 @@
   </button>
   <button class="y-button"
           @click="$emit('click')"
-          v-else>
+          v-else-if="iconPosition === 'left' && $slots.default">
     <y-icon v-if="icon"
             class="y-icon-left"
             :name="icon"></y-icon>
     <slot></slot>
+  </button>
+  <button class="y-button"
+          @click="$emit('click')"
+          v-else-if="!$slots.default">
+    <y-icon v-if="icon"
+            :name="icon"></y-icon>
   </button>
 </template>
 
