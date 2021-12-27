@@ -92,6 +92,8 @@ Assert：断言，是编程术语，表示为一些布尔表达。
 
 ### 单元测试
 
+用 chai.expect 来做断言
+
 ```javascript
 // app.js
 // 引入断言库 chai
@@ -113,7 +115,7 @@ const expect = chai.expect;
 		}
 	);
 	// 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
-    // 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
+	// 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
 	button.$mount(); // 没有挂载
 	let useElement = button.$el.querySelector('use');
 	// console.log(useElement, 'useElement');
@@ -128,8 +130,49 @@ const expect = chai.expect;
 }
 ```
 
+使用 chai-spies 监听回调函数
+
+```javascript
+// app.js
+// 单元测试 - 测试点击事件
+{
+	// mock 模拟
+	const Constructor = Vue.extend(Button);
+	let vm = new Constructor({
+			propsData: {
+				icon: 'settings',
+			}
+		}
+	);
+	vm.$mount();
+	// mock 了一个函数，之后用的是这个模拟函数来做的测试
+	let spy = chai.spy(function () {
+		console.log(1);
+		expect(1).to.eq(1);
+	})
+	// 为 vm 的点击事件添加监听函数 spy
+	vm.$on('click', spy);
+	let button = vm.$el;
+	// 调用 spy 函数
+	button.click();
+	// 期待我们的间谍函数被调用
+	expect(spy).to.have.been.called()
+}
+```
+
 ### `$emit`
 
 子组件可以使用 $emit,让父组件监听到自定义事件
 
-### 
+###  自动化测试
+
+[老师的博客](https://xiedaimala.com/tasks/b6ed1d11-cf6a-44df-a019-1ff87c3afe60/text_tutorials/62be8c2e-0f09-4a08-8d2c-b23bb1fe1b22)
+
+```shell
+npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon sinon-chai karma-chai karma-chai-spies
+```
+
+```shell
+# 在我们 npm run test 之前记住先删掉打包记录
+ rm -rf .cache dist 
+```

@@ -3,19 +3,28 @@
           @click="$emit('click')"
           v-if="iconPosition === 'right'">
     <slot></slot>
-    <y-icon v-if="icon" class="y-icon-right" :name="icon"></y-icon>
+    <y-icon v-if="icon"
+            class="y-icon-right"
+            :name="icon"></y-icon>
   </button>
   <button class="y-button"
           @click="$emit('click')"
           v-else>
-    <y-icon v-if="icon" class="y-icon-left" :name="icon"></y-icon>
+    <y-icon v-if="icon"
+            class="y-icon-left"
+            :name="icon"></y-icon>
     <slot></slot>
   </button>
 </template>
 
 <script>
+import Icon from './y-icon';
+
 export default {
   name: 'y-button',
+  components: {
+    'y-icon': Icon,
+  },
   // props: ['icon', 'iconPosition']
   // 用对象的写法可以写更多的功能
   props: {
@@ -35,7 +44,8 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped
+       lang="scss">
 .y-button {
   font-size: var(--font-size);
   padding: 10px 16px;
