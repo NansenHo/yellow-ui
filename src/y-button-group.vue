@@ -8,10 +8,10 @@
 export default {
   name: 'y-button-group',
   mounted() {
-    for(let node of this.$el.children){
-      let name = node.nodeName.toLowerCase()
-      if(name !== 'button'){
-        console.warn(`y-button-group 的子元素只能是 y-button，但你写的是 ${name}` )
+    for (let node of this.$el.children) {
+      let name = node.nodeName.toLowerCase();
+      if (name !== 'button') {
+        console.warn(`y-button-group 的子元素只能是 y-button，但你写的是 ${name}`);
       }
     }
   },
@@ -26,12 +26,16 @@ export default {
 
   > .y-button {
     border-radius: 0;
-    margin-left: -1px;
+
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
 
     &:hover {
       position: relative;
       z-index: 1;
     }
+
     // margin-left: -1px; 和 z-index: 1; 配合解决了三个按钮合一起的时候的边框问题
 
     &:first-child {

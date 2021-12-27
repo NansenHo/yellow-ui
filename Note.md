@@ -31,11 +31,15 @@
 
   > .y-button {
     border-radius: 0;
-
-    // 注意
+    
     &:not(:first-child) {
-      border-left: none;
+      margin-left: -1px;
     }
+    &:hover {
+      position: relative;
+      z-index: 1;
+    }
+    // margin-left: -1px; 和 z-index: 1; 配合解决了三个按钮合一起的时候的边框问题
 
     &:first-child {
       border-top-left-radius: var(--border-radius);
@@ -59,8 +63,9 @@ export default {
 		// this.$children 只能拿到 VueComponent 而 this.$el 可以拿到原生元素
 		for (let node of this.$el.children) {
 			// String.prototype.toLowerCase() 将调用该方法的字符串值转为小写形式
-			if (node.nodeName.toLowerCase() !== 'button') {
-				console.warn('y-button-group 的子元素只能是 y-button')
+			let name = node.nodeName.toLowerCase()
+			if (name !== 'button') {
+				console.warn(`y-button-group 的子元素只能是 y-button，但你写的是 ${name}`)
 			}
 		}
 	}
