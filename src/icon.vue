@@ -1,8 +1,8 @@
 <template>
-  <svg v-if="iconPosition === 'right'" class="y-icon y-icon-right" aria-hidden="true">
+  <svg v-if="name === 'loading'" class="y-icon y-icon-loading" aria-hidden="true">
     <use :xlink:href=`#icon-${name}`></use>
   </svg>
-  <svg v-else class="y-icon y-icon-left" aria-hidden="true">
+  <svg v-else class="y-icon" aria-hidden="true">
     <use :xlink:href=`#icon-${name}`></use>
   </svg>
 </template>
@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'y-icon',
-  props: ['name', 'iconPosition'],
+  props: ['name',],
 };
 </script>
 
@@ -24,14 +24,16 @@ export default {
   overflow: hidden;
 }
 
-.y-icon-left {
-  margin-right: 0.5em;
-  margin-left: 0;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
 }
 
-.y-icon-right {
-  margin-right: 0;
-  margin-left: 0.5em;
+.y-icon-loading {
+  animation: spin 1s infinite linear;
 }
-
 </style>

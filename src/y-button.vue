@@ -1,12 +1,10 @@
 <template>
   <button class="y-button" v-if="iconPosition === 'right'">
     <slot></slot>
-    <y-icon v-if="icon && !loading" :name="icon" :iconPosition="iconPosition"></y-icon>
-    <y-icon v-if="loading" class="loading" name="loading" :iconPosition="iconPosition"></y-icon>
+    <y-icon class="y-icon-right" :name="icon"></y-icon>
   </button>
   <button class="y-button" v-else>
-    <y-icon v-if="icon && !loading" :name="icon"></y-icon>
-    <y-icon v-if="loading" class="loading" name="loading"></y-icon>
+    <y-icon class="y-icon-left" :name="icon"></y-icon>
     <slot></slot>
   </button>
 </template>
@@ -84,16 +82,13 @@ export default {
   margin-left: 0.5em;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg)
-  }
-  100% {
-    transform: rotate(360deg)
-  }
+.y-icon-right {
+  margin-right: 0;
+  margin-left: 0.5em;
 }
 
-.loading {
-  animation: spin 1s infinite linear;
+.y-icon-left {
+  margin-right: 0.5em;
+  margin-left: 0;
 }
 </style>
