@@ -1,9 +1,13 @@
 <template>
-  <button class="y-button" v-if="iconPosition === 'right'">
+  <button class="y-button"
+          @click="$emit('click')"
+          v-if="iconPosition === 'right'">
     <slot></slot>
     <y-icon v-if="icon" class="y-icon-right" :name="icon"></y-icon>
   </button>
-  <button class="y-button" v-else>
+  <button class="y-button"
+          @click="$emit('click')"
+          v-else>
     <y-icon v-if="icon" class="y-icon-left" :name="icon"></y-icon>
     <slot></slot>
   </button>
@@ -16,10 +20,6 @@ export default {
   // 用对象的写法可以写更多的功能
   props: {
     icon: {},
-    loading: {
-      type: Boolean,
-      default: false,
-    },
     iconPosition: {
       type: String,
       // icon-position 的默认值
