@@ -240,3 +240,9 @@ yarn add "yellow"
 注意：该方法只能在本机上操作才能成功。
 
 ### 如何写 README.md 
+
+### parcel 起项目
+```shell
+npx parcel --no-cache index.html
+```
+一定不要忘了写入口文件，否则 parcel 会直接把 index.js 当成入口文件。
