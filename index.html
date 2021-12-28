@@ -31,10 +31,23 @@
 			}
 	</style>
 	<style>
+		.box {
+			margin: 20px;
+			display: flex;
+			}
 	</style>
 </head>
 <body>
 <div id="app">
+	<div class="box">
+		<y-input value="张三"></y-input>
+		<y-input value="李四" :disabled="true"></y-input>
+		<y-input value="李四" disabled></y-input>
+	</div>
+	<div class="box">
+		<y-input value="王五" readonly></y-input>
+		<y-input value="王五" error="姓名不能少于两个字"></y-input>
+	</div>
 	<y-button icon="settings"
 			  @click="test"
 			  icon-position="left">

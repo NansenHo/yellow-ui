@@ -71,6 +71,36 @@
 }
 ```
 
+### 根据元素上某个属性的存在与否来选择元素
+
+[CSS选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors)
+
+根据一个元素上的某个属性的存在来选择元素：
+
+```css
+/* y-input.vue */
+.y-input[disabled] {
+   border-color: #ccc;
+   color: #ccc;
+   cursor: not-allowed;
+   }
+```
+
+### class 的对象写法
+
+```html
+  <div class="y-wrapper" :class="{'error': error}" >
+    <input :value="value"
+           class="y-input"
+           :disabled="disabled"
+           :readonly="readonly"
+           type="text">
+  </div>
+```
+`:class="{'error': error}"` 的意思是，如果 error 存在那么就有 error 类，反之则没有 error 类。
+
+可以简写成 `:class="{error}"` 。 
+
 ### 警告用户不要在 y-button 组件外包 div
 
 ```javascript
@@ -253,3 +283,24 @@ npx parcel --no-cache index.html
 ```
 一定不要忘了写入口文件，否则 parcel 会直接把 index.js 当成入口文件。
 
+### 为什么单文件组件里面要写 name 呢？
+
+是用来调试的。
+
+我们在 chrome 中安装 vue.js devtools 这个拓展程序后， 我们就可以用组件的形式而不是用标签的形式来看页面。
+
+而在这个拓展程序里面，显示的组件名就是我们写的 name。
+
+### Vue 里不要写 XML 
+
+所有 Vue.js 的模板都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。[Vue 模板语法](https://cn.vuejs.org/v2/guide/syntax.html#ad)
+
+所以 Vue 会认为自定义标签默认是不自闭合的。
+
+```vue
+<!--正确写法-->
+<y-button></y-button>
+
+<!--容易出bug的写法-->
+<y-button />
+```
