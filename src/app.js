@@ -9,9 +9,6 @@ Vue.component('y-button-group', ButtonGroup);
 
 new Vue({
 	el: '#app',
-	data: {
-		loading1: false,
-	},
 	methods: {
 		test() {
 			console.log('1');

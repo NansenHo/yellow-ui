@@ -1,5 +1,14 @@
 #
 
+### 技术栈
+1. 单文件组件 Vue
+2. parcel 打包
+3. 单元测试
+4. 自动测试
+5. 持续集成
+6. npm 发布相关 package.json 的配置等
+7. yarn/npm link
+
 ### CSS 动画
 
 ```css
@@ -205,3 +214,29 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 2. 之后会在 dist 目录下，生成几个转义之后的文件。
 3. 再到 package.json 里面去将 main 字段对应的值改成 dist/index.js 。
 
+### 解决问题的关键是加快解决问题的效率
+
+可能问题所有人都不知道怎么做，但你解决问题的效率足够高，那你就是最快解决的那个。
+
+### `npm link`
+我们每次代码写好后，都需要更新版本号并 `npm publish` 一次才能测试到最新的。
+
+这样很麻烦，有别的方法吗？
+
+1. 在 yellowUI 中运行
+```shell
+yarn link  # 或者 npm link
+```
+考虑到建议用户使用 yarn 所以我这里也使用 `yarn link`。
+
+2. 然后到想要使用 yellowUI 的项目中，去运行
+```shell
+yarn add "yellow"
+```
+
+3. 我们再修改了 yellowUI 里面的代码的话，就只需要 `npx parcel build --no-cache --no-minify` 
+   然后在使用 yellowUI 的项目中就能拿到 yellowUI 里最新的代码了。
+
+注意：该方法只能在本机上操作才能成功。
+
+### 如何写 README.md 
