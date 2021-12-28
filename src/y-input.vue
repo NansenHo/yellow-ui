@@ -1,17 +1,26 @@
 <template>
   <div class="y-wrapper"
-       :class="{'error': error}">
+       :class="{warn}">
     <input :value="value"
            class="y-input"
            :disabled="disabled"
            :readonly="readonly"
            type="text">
+    <template v-if="warn">
+      <y-icon name="error" class="warn-icon"></y-icon>
+      <span class="warn-message">{{ warn }}</span>
+    </template>
   </div>
 </template>
 
 <script>
+import Icon from './y-icon';
+
 export default {
   name: 'y-input',
+  components: {
+    'y-icon': Icon
+  },
   props: {
     value: {
       type: String,
@@ -24,7 +33,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    error: {
+    warn: {
       type: String,
     }
   }
@@ -37,6 +46,13 @@ $box-shadow-color: rgba(0, 0, 0, 0.5);
 $border-color: #dcdfe6;
 $color: #606266;
 .y-wrapper {
+  display: inline-flex;
+  align-items: center;
+
+  > :not(:last-child) {
+    margin-right: 0.5em;
+  }
+
   > .y-input {
     border: 1px solid $border-color;
     color: $color;
@@ -65,10 +81,18 @@ $color: #606266;
     }
   }
 
-  &.error {
+  &.warn {
     > .input {
-      border: 1px solid red ;
+      border: 1px solid red;
     }
+  }
+
+  > .warn-icon {
+    fill: #f56c6c;
+  }
+
+  > .warn-message {
+    color: #f56c6c;
   }
 }
 </style>
