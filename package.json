@@ -1,10 +1,10 @@
 {
   "name": "yellow",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "这是一个Vue UI框架",
   "main": "dist/index.js",
   "scripts": {
-    "start": "parcel --no-cache index.html",
+    "start": "npx parcel --no-cache index.html",
     "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "parcel build test/* --no-minify && karma start --single-run"
   },

@@ -1,4 +1,6 @@
-#
+# 笔记
+
+## 项目相关
 
 ### 技术栈
 1. 单文件组件 Vue
@@ -8,6 +10,8 @@
 5. 持续集成
 6. npm 发布相关 package.json 的配置等
 7. yarn/npm link
+
+## CSS
 
 ### CSS 动画
 
@@ -85,6 +89,8 @@ export default {
 	}
 }
 ```
+
+## 测试
 
 ### 两种开发模式 BDD & TDD
 
@@ -246,3 +252,4 @@ yarn add "yellow"
 npx parcel --no-cache index.html
 ```
 一定不要忘了写入口文件，否则 parcel 会直接把 index.js 当成入口文件。
+
