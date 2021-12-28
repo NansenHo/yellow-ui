@@ -187,5 +187,19 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 3. 检查 package.json 里面的项目名
 4. 没有问题就可以用 `npm publish` 发布了。
 
+### 打包之后就需要自己下载自己的包来试一下了
+在同一个项目里，yarn 和 npm 不能混着用，会出 bug 。
+
 ### `this.$slots.default`
 可以用 `this.$slots.default` 来判断 `<slot></slot>` 组件里有没有内容。
+
+### import 是 ES6 的语法，node.js 暂时还不支持
+我们需要将 import 用 Babel 转义一下。
+
+1. 直接用 parcel 打包一下就行。别忘了加 --no-minify --no-cache 。
+   ```shell
+   npx parcel build index.js --no-minify --no-cache
+   ```
+2. 之后会在 dist 目录下，生成几个转义之后的文件。
+3. 再到 package.json 里面去将 main 字段对应的值改成 dist/index.js 。
+
