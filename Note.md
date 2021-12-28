@@ -196,10 +196,12 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 ### import 是 ES6 的语法，node.js 暂时还不支持
 我们需要将 import 用 Babel 转义一下。
 
-1. 直接用 parcel 打包一下就行。别忘了加 --no-minify --no-cache 。
+1. 直接用 parcel 打包一下就行。别忘了加 `--no-minify` 和 `--no-cache` 。
    ```shell
    npx parcel build index.js --no-minify --no-cache
    ```
+   不加 `--no-mimify` 的话，在 HTML 里写的 `<slot></slot>` 标签被删除了。
+   不加 `--no-cache` 的话，可能会被之前的缓存所影响。
 2. 之后会在 dist 目录下，生成几个转义之后的文件。
 3. 再到 package.json 里面去将 main 字段对应的值改成 dist/index.js 。
 
