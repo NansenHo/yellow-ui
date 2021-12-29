@@ -401,9 +401,37 @@ v-model 其实是这两代码的语法糖
 
 ### git branch
 
-创建一个名叫 branchName 的分支。
+创建一个名叫 branchName 的分支。（目前我在 main 分支里）
 
 ```gitexclude
 git branch branchName
 ```
+我们到目前为止提交的代码都会存一份到这个新的分支里面。（我们仍在 main 分支里）
 
+如果我们这时候提交新代码，
+
+```gitexclude
+git add .
+git commit -m 'add ...'
+git push
+```
+这些代码将是提交推送到 main 分支里。
+
+把本地分支推送到远程分支去：
+
+```gitexclude
+git push origin branchName:branchName
+```
+前一个 branchName 是本地分支名，后一个 branchName 是远程分支名。
+
+切换分支：
+```gitexclude
+git checkout branchName
+```
+
+查看 git 历史
+
+```gitexclude
+git log
+```
+使用 `git log` 或 `git log path/to/` 后， git 一直停留在 log 模式，这时只需要**按 q 键**即可退出 。
