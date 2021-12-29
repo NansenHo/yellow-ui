@@ -34,23 +34,41 @@
 		.box {
 			margin: 20px;
 			display: flex;
+			align-items: center;
+			}
+		.title {
+			margin-right: 20px;
 			}
 	</style>
 </head>
 <body>
 <div id="app">
 	<div class="box">
+		<p class="title">一般输入框：</p>
 		<y-input value="张三"></y-input>
-		<y-input value="李四" :disabled="true"></y-input>
-		<y-input value="李四" disabled></y-input>
 	</div>
 	<div class="box">
-		<y-input value="王五" readonly></y-input>
-		<y-input value="王五" warn="姓名不能少于两个字"></y-input>
+		<p class="title">禁用输入框：</p>
+		<y-input value="李四"
+				 style="margin-right: 20px"
+				 :disabled="true"></y-input>
+		<y-input value="李四"
+				 disabled></y-input>
+	</div>
+	<div class="box">
+		<p class="title">只读输入框：</p>
+		<y-input value="王五"
+				 readonly></y-input>
+	</div>
+	<div class="box">
+		<p class="title">带警告信息的输入框：</p>
+		<y-input value="王五"
+				 warn="姓名不能少于两个字"></y-input>
 	</div>
 	<div class="box">
 		<y-input v-model="message"></y-input>
-		<p>{{message}}</p>
+		<p>{{ message }}</p>
+		<y-button @click="message += 1">+1</y-button>
 	</div>
 	<y-button icon="settings"
 			  @click="test"

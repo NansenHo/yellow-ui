@@ -347,6 +347,7 @@ export default {
          :value="message"
          @input="message = $event.target.value">
   <p>{{ message }}</p>
+  <button @click="message += 1"></button>
 </template>
 
 <script>
@@ -362,8 +363,8 @@ export default {
 
 v-model 其实是这两代码的语法糖
 
-+ `:value="message"` 把 message 的值动态放到 input 里，
-+ `@input="message = $event.target.value"` 再在触发 input 事件后把事件里面的值取出来赋值到 message。
++ `:value="message"` 把 message 的值动态放到 input 标签里，
++ `@input="message = $event.target.value"` 再在触发 @input 事件后把事件里面的值取出来赋值到 message。
 
 ### `$emit`
 
@@ -388,21 +389,15 @@ v-model 其实是这两代码的语法糖
     按钮
   </y-button>
 </template>
-
-<!--<srcipt>-->
-<!--export default {-->
-<!--   methods: {-->
-<!--      test(){-->
-<!--        console.log(1)-->
-<!--      }-->
-<!--   },-->
-<!--}-->
-<!--</srcipt>-->
 ```
 
 当有地方在使用 y-button 组件时，如果在组件上添加了一个事件， 那 vue 不知道这个事件具体是作用在 y-button 组件里的哪个元素上的。
 
-所以我们就在我们想要其作用到的 y-button 组件里的元素上，添加一个 `vm.$emit('eventName', [...args])`
+所以我们就在我们想要其作用到的 y-button 组件里的元素上，添加一个 `vm.$emit('eventName', [...args])` 
 
 官方文档讲得挺好的，看了就能懂了。[Vue $emit 官方文档](https://cn.vuejs.org/v2/api/#vm-emit)
+
+## git
+
+### git branch
 
