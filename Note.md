@@ -72,6 +72,27 @@
 }
 ```
 
+```scss
+// y-col.vue 
+.col {
+   height: 100px;
+   // 虽然每个 col 的宽度都是 50%，但是由于 row 的 flex-wrap 属性默认是 nowrap，并不换行，所以就会挤一行了。
+   width: 50%;
+   background: gray;
+   border: 1px solid #FFF;
+
+   $className: col-; // 声明了一个 className 变量，其值是 col-
+   @for $n from 1 through 24 { // loops 循环 24 次
+      &.#{$className}#{$n} { // #{} 是插值的意思
+         // .col.class-prefix1
+         // .col.class-prefixn
+         // .col.class-prefix24
+         width: ($n/24) * 100%;
+      }
+   }
+}
+```
+
 ### 根据元素上某个属性的存在与否来选择元素
 
 [CSS选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors)
@@ -104,6 +125,12 @@
 `:class="{'error': error}"` 的意思是，如果 error 存在那么就有 error 类，反之则没有 error 类。
 
 可以简写成 `:class="{error}"` 。
+
+### SCSS 的 for 循环写法
+
+```scss
+
+```
 
 ### 警告用户不要在 y-button 组件外包 div
 
@@ -406,6 +433,7 @@ v-model 其实是这两代码的语法糖
 ```gitexclude
 git branch branchName
 ```
+
 我们到目前为止提交的代码都会存一份到这个新的分支里面。（我们仍在 main 分支里）
 
 如果我们这时候提交新代码，
