@@ -401,3 +401,9 @@ v-model 其实是这两代码的语法糖
 
 ### git branch
 
+创建一个名叫 branchName 的分支。
+
+```gitexclude
+git branch branchName
+```
+
