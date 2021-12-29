@@ -48,6 +48,10 @@
 		<y-input value="王五" readonly></y-input>
 		<y-input value="王五" warn="姓名不能少于两个字"></y-input>
 	</div>
+	<div class="box">
+		<y-input v-model="message"></y-input>
+		<p>{{message}}</p>
+	</div>
 	<y-button icon="settings"
 			  @click="test"
 			  icon-position="left">

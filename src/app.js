@@ -11,6 +11,9 @@ Vue.component('y-input', Input)
 
 new Vue({
 	el: '#app',
+	data: {
+		message: 'hello'
+	},
 	methods: {
 		test() {
 			console.log('1');

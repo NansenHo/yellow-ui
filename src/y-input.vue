@@ -5,6 +5,10 @@
            class="y-input"
            :disabled="disabled"
            :readonly="readonly"
+           @change="$emit('change', $event.target.value)"
+           @input="$emit('input', $event.target.value)"
+           @blur="$emit('blur', $event.target.value)"
+           @focus="$emit('focus', $event.target.value)"
            type="text">
     <template v-if="warn">
       <y-icon name="error" class="warn-icon"></y-icon>
