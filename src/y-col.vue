@@ -25,15 +25,15 @@ export default {
     phone: {
       type: Object,
       //TODO 这里的验证函数写法 - 笔记
-      validator(value) {
+      validator: function (value) {
         let keys = Object.keys(value);
-        let valid = true;
-        keys.foreach((key) => {
-          if (['span', 'offset', 'align'].includes(key)) {
-            valid = false;
-          }
-          return valid;
-        });
+        keys = Array.from(keys);
+        let result = true;
+        keys.forEach((key)=>{
+          result = ['span', 'align', 'offset'].includes(key)
+          return result
+        })
+        return result
       }
     }
   },
@@ -47,7 +47,7 @@ export default {
       let {span, offset, align, phone} = this;
       let phoneClass = [];
       if (phone) {
-        phoneClass = [`col-phone-${phone.span}`,];
+        phoneClass = [this.span && `col-phone-${phone.span}`,];
       }
       return [
         this.span && `col-${this.span}`,
@@ -105,7 +105,19 @@ export default {
 
   //TODO @media 的写法
   @media (max-width: 576px) {
+    $className: col-phone-;
+    @for $n from 1 through 24 {
+      &.#{$className}#{$n} {
+        width: ($n/24) * 100%;
+      }
+    }
 
+    $className: offset-phone-;
+    @for $n from 1 through 24 {
+      &.#{$className}#{$n} {
+        margin-left: ($n/24) * 100%;
+      }
+    }
   }
 }
 
