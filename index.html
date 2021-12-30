@@ -41,32 +41,73 @@
 			}
 	</style>
 	<style>
+		.demoBox {
+			min-height: 50px;
+			border: 1px solid red;
+			background: gray;
+			}
 	</style>
 </head>
 <body>
 <div id="app">
-	<y-row gutter="10">
-		<y-col>1</y-col>
-		<y-col>2</y-col>
+	<y-row class="topBar">
+		<y-col class="demoBox"
+			   :span="5">
+			<y-row align="middle">
+				<y-col>1</y-col>
+				<y-col>2</y-col>
+				<y-col>3</y-col>
+				<y-col>4</y-col>
+			</y-row>
+		</y-col>
+		<y-col class="demoBox"
+			   :span="19">
+			<y-row align="left">
+				<y-col>1</y-col>
+				<y-col>2</y-col>
+				<y-col>3</y-col>
+				<y-col>4</y-col>
+				<y-col>5</y-col>
+				<y-col>6</y-col>
+				<y-col>7</y-col>
+			</y-row>
+		</y-col>
 	</y-row>
-	<y-row gutter="18">
-		<y-col>1</y-col>
-		<y-col>2</y-col>
-		<y-col>2</y-col>
+	<y-row class="logo-search-qrcode">
+		<y-col class="demoBox"
+			   span="6"
+			   align="middle">
+			<img src="https://xiedaimala.com/packs/_/assets/images/logos/red-logo-3f8db9041e6c15d4ae7ed7e4087c4b98.png"
+				 style="height:24px ;max-width: 100%;"
+				 alt="">
+		</y-col>
+		<y-col class="demoBox"
+			   span="12"></y-col>
+		<y-col class="demoBox"
+			   span="6"></y-col>
 	</y-row>
-	<y-row gutter="20">
-		<y-col span="2">1</y-col>
-		<y-col span="20" offset="2">2</y-col>
-	</y-row>
-	<y-row gutter="20">
-		<y-col span="4">1</y-col>
-		<y-col span="20">2</y-col>
-	</y-row>
-    <y-row gutter="20">
-        <y-col :span="3/22">1</y-col>
-        <y-col :span="3/22" offset="1">2</y-col>
-        <y-col :span="3/22" offset="1">2</y-col>
-    </y-row>
+	<!--	<y-row gutter="10">-->
+	<!--		<y-col>1</y-col>-->
+	<!--		<y-col>2</y-col>-->
+	<!--	</y-row>-->
+	<!--	<y-row gutter="18">-->
+	<!--		<y-col>1</y-col>-->
+	<!--		<y-col>2</y-col>-->
+	<!--		<y-col>2</y-col>-->
+	<!--	</y-row>-->
+	<!--	<y-row gutter="20">-->
+	<!--		<y-col span="2">1</y-col>-->
+	<!--		<y-col span="20" offset="2">2</y-col>-->
+	<!--	</y-row>-->
+	<!--	<y-row gutter="20">-->
+	<!--		<y-col span="4">1</y-col>-->
+	<!--		<y-col span="20">2</y-col>-->
+	<!--	</y-row>-->
+	<!--    <y-row gutter="20">-->
+	<!--        <y-col :span="3/22">1</y-col>-->
+	<!--        <y-col :span="3/22" offset="1">2</y-col>-->
+	<!--        <y-col :span="3/22" offset="1">2</y-col>-->
+	<!--    </y-row>-->
 	<div class="box">
 		<p class="title">一般输入框：</p>
 		<y-input value="张三"></y-input>

@@ -151,104 +151,6 @@ export default {
 }
 ```
 
-## 测试
-
-### 两种开发模式 BDD & TDD
-
-+ BDD：Behavior-Driven Development 行为驱动开发
-+ TDD：Test-Driven Development 测试驱动开发
-
-Assert：断言，是编程术语，表示为一些布尔表达。
-
-编写代码时，我们总是会做出一些假设，断言就是用于在 代码 中捕捉这些假设。
-
-程序员相信在程序中的某个特定点该表达式值为真，可以在任何时候启用和禁用断言验证，因此可以在测试时启用断言而在部署时禁用断言。 同样，程序投入运行后，最终用户在遇到问题时可以重新启用断言。
-
-[chai.js](https://www.chaijs.com/) 就是一个断言库，能让我们能更方便地断言。
-
-### 单元测试
-
-用 chai.expect 来做断言
-
-```javascript
-// app.js
-// 引入断言库 chai
-import chai from 'chai';
-
-const expect = chai.expect;
-// 单元测试
-{
-	// console.log(Button); // Button 是一个对象
-	// 将 Button 这个对象构造成一个函数
-	// 因为对象没法实例化出一个东西
-	const Constructor = Vue.extend(Button);
-	// console.log(Constructor); // Constructor 是一个函数
-	// button 就是 Button 的实例
-	let button = new Constructor({
-			propsData: {
-				icon: 'settings',
-			}
-		}
-	);
-	// 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
-	// 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
-	button.$mount(); // 没有挂载
-	let useElement = button.$el.querySelector('use');
-	// console.log(useElement, 'useElement');
-	// 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
-	// 断言结果为 true，控制台不会打印什么，即通过了测试，如果为 false，控制台会报错。
-	let href = useElement.getAttribute('xlink:href');
-	expect(href).to.eq('#icon-settings');
-
-	// 我们用 let button = new Constructor({...}) 输入了一个 button
-	// 然后再输入 expect(...).to.eq(...) 断言来检验代码是否正确
-	// 这就是一套单元测试的大的思路
-}
-```
-
-使用 chai-spies 监听回调函数
-
-```javascript
-// app.js
-// 单元测试 - 测试点击事件
-{
-	// mock 模拟
-	const Constructor = Vue.extend(Button);
-	let vm = new Constructor({
-			propsData: {
-				icon: 'settings',
-			}
-		}
-	);
-	vm.$mount();
-	// mock 了一个函数，之后用的是这个模拟函数来做的测试
-	let spy = chai.spy(function () {
-		console.log(1);
-		expect(1).to.eq(1);
-	})
-	// 为 vm 的点击事件添加监听函数 spy
-	vm.$on('click', spy);
-	let button = vm.$el;
-	// 调用 spy 函数
-	button.click();
-	// 期待我们的间谍函数被调用
-	expect(spy).to.have.been.called()
-}
-```
-
-### 自动化测试
-
-[老师的博客](https://xiedaimala.com/tasks/b6ed1d11-cf6a-44df-a019-1ff87c3afe60/text_tutorials/62be8c2e-0f09-4a08-8d2c-b23bb1fe1b22)
-
-```shell
-npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon sinon-chai karma-chai karma-chai-spies
-```
-
-```shell
-# 在我们 npm run test 之前记住先删掉打包记录
- rm -rf .cache dist 
-```
-
 ### 打包发布 npm
 
 1. `npm adduser` 命令行在终端中登录 npm 帐号
@@ -325,6 +227,14 @@ npx parcel --no-cache index.html
 我们在 chrome 中安装 vue.js devtools 这个拓展程序后， 我们就可以用组件的形式而不是用标签的形式来看页面。
 
 而在这个拓展程序里面，显示的组件名就是我们写的 name。
+
+## JavaScript
+
+### Array.prototype.includes() 会返回一个 Boolean 值
+
+[Array.prototype.includes mdn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
+
+includes() 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回 false。
 
 ## Vue
 
@@ -448,20 +358,20 @@ v-model 其实是这两代码的语法糖
 ```vue
 <!--父组件-->
 created() {
-  console.log('father created');
+console.log('father created');
 },
 mounted() {
-  console.log('father mounted');
+console.log('father mounted');
 }
 ```
 
 ```vue
 <!-- 子组件-->
 created() {
-  console.log('son created');
+console.log('son created');
 },
 mounted() {
-  console.log('son mounted');
+console.log('son mounted');
 }
 ```
 
@@ -487,11 +397,11 @@ mounted() {
 ```vue
 <!--col.vue-->
 <div class="col"
-    :style="{paddingLeft: gutter/2 + 'px', paddingRight: gutter/2 + 'px'}" 
-    :class="[span && `col-${span}`, offset && `offset-${offset}`]">
- <div style="border: 1px solid red;">
-   <slot></slot>
- </div>
+     :style="{paddingLeft: gutter/2 + 'px', paddingRight: gutter/2 + 'px'}"
+     :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+<div style="border: 1px solid red;">
+  <slot></slot>
+</div>
 </div>
 ```
 
@@ -500,57 +410,60 @@ mounted() {
 ```vue
 <!--col.vue-->
 <template>
-   <div class="col"
-        :style="colStyle"
-        :class="[span && `col-${span}`, offset && `offset-${offset}`]">
-      <div style="border: 1px solid red;">
-         <slot></slot>
-      </div>
-   </div>
+  <div class="col"
+       :style="colStyle"
+       :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+    <div style="border: 1px solid red;">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-   name: 'y-col',
-   props: {
-      span: {
-         type: [Number, String]
-      },
-      offset: {
-         type: [Number, String]
-      },
-   },
-   data() {
+  name: 'y-col',
+  props: {
+    span: {
+      type: [Number, String]
+    },
+    offset: {
+      type: [Number, String]
+    },
+  },
+  data() {
+    return {
+      gutter: 0,
+    };
+  },
+  computed: {
+    colStyle: function () {
       return {
-         gutter: 0,
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
       };
-   },
-   computed: {
-      colStyle: function () {
-         return {
-            paddingLeft: this.gutter / 2 + 'px',
-            paddingRight: this.gutter / 2 + 'px'
-         };
-      }
-   }
+    }
+  }
 };
 </script>
 ```
+
+这种代码重构的方式叫做：**提取变量法** 。就是把我们想要简化的东西取个名字。下面的 `:class` 也能用得到这个方法。
 
 ### `:class` 绑定 HTML Class
 
 我们可以传给 `v-bind:class` 一个对象或者一个数组，以动态地切换 class。
 
 ```vue
+
 <div class="col"
      :style="colStyle"
      :class="[span && `col-${span}`, offset && `offset-${offset}`]">
-   <div style="border: 1px solid red;">
-      <slot></slot>
-   </div>
+<slot></slot>
 </div>
 ```
+
 ```vue
+
 <template>
   <div class="col"
        :style="colStyle"
@@ -590,6 +503,105 @@ export default {
   }
 };
 </script>
+```
+
+
+## 测试
+
+### 两种开发模式 BDD & TDD
+
++ BDD：Behavior-Driven Development 行为驱动开发
++ TDD：Test-Driven Development 测试驱动开发
+
+Assert：断言，是编程术语，表示为一些布尔表达。
+
+编写代码时，我们总是会做出一些假设，断言就是用于在 代码 中捕捉这些假设。
+
+程序员相信在程序中的某个特定点该表达式值为真，可以在任何时候启用和禁用断言验证，因此可以在测试时启用断言而在部署时禁用断言。 同样，程序投入运行后，最终用户在遇到问题时可以重新启用断言。
+
+[chai.js](https://www.chaijs.com/) 就是一个断言库，能让我们能更方便地断言。
+
+### 单元测试
+
+用 chai.expect 来做断言
+
+```javascript
+// app.js
+// 引入断言库 chai
+import chai from 'chai';
+
+const expect = chai.expect;
+// 单元测试
+{
+	// console.log(Button); // Button 是一个对象
+	// 将 Button 这个对象构造成一个函数
+	// 因为对象没法实例化出一个东西
+	const Constructor = Vue.extend(Button);
+	// console.log(Constructor); // Constructor 是一个函数
+	// button 就是 Button 的实例
+	let button = new Constructor({
+			propsData: {
+				icon: 'settings',
+			}
+		}
+	);
+	// 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
+	// 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
+	button.$mount(); // 没有挂载
+	let useElement = button.$el.querySelector('use');
+	// console.log(useElement, 'useElement');
+	// 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
+	// 断言结果为 true，控制台不会打印什么，即通过了测试，如果为 false，控制台会报错。
+	let href = useElement.getAttribute('xlink:href');
+	expect(href).to.eq('#icon-settings');
+
+	// 我们用 let button = new Constructor({...}) 输入了一个 button
+	// 然后再输入 expect(...).to.eq(...) 断言来检验代码是否正确
+	// 这就是一套单元测试的大的思路
+}
+```
+
+使用 chai-spies 监听回调函数
+
+```javascript
+// app.js
+// 单元测试 - 测试点击事件
+{
+	// mock 模拟
+	const Constructor = Vue.extend(Button);
+	let vm = new Constructor({
+			propsData: {
+				icon: 'settings',
+			}
+		}
+	);
+	vm.$mount();
+	// mock 了一个函数，之后用的是这个模拟函数来做的测试
+	let spy = chai.spy(function () {
+		console.log(1);
+		expect(1).to.eq(1);
+	})
+	// 为 vm 的点击事件添加监听函数 spy
+	vm.$on('click', spy);
+	let button = vm.$el;
+	// 调用 spy 函数
+	button.click();
+	// 期待我们的间谍函数被调用
+	expect(spy).to.have.been.called()
+}
+```
+
+### 自动化测试
+
+[老师的博客](https://xiedaimala.com/tasks/b6ed1d11-cf6a-44df-a019-1ff87c3afe60/text_tutorials/62be8c2e-0f09-4a08-8d2c-b23bb1fe1b22)
+
+```shell
+npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon sinon-chai karma-chai karma-chai-spies
+```
+
+```shell
+# 在我们 npm run test 之前记住先删掉打包记录
+ rm -rf .cache dist 
 ```
 
 
