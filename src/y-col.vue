@@ -29,11 +29,11 @@ export default {
         let keys = Object.keys(value);
         keys = Array.from(keys);
         let result = true;
-        keys.forEach((key)=>{
-          result = ['span', 'align', 'offset'].includes(key)
-          return result
-        })
-        return result
+        keys.forEach((key) => {
+          result = ['span', 'align', 'offset'].includes(key);
+          return result;
+        });
+        return result;
       }
     }
   },
@@ -105,6 +105,22 @@ export default {
 
   //TODO @media 的写法
   @media (max-width: 576px) {
+    $className: col-phone-;
+    @for $n from 1 through 24 {
+      &.#{$className}#{$n} {
+        width: ($n/24) * 100%;
+      }
+    }
+
+    $className: offset-phone-;
+    @for $n from 1 through 24 {
+      &.#{$className}#{$n} {
+        margin-left: ($n/24) * 100%;
+      }
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 768px) {
     $className: col-phone-;
     @for $n from 1 through 24 {
       &.#{$className}#{$n} {

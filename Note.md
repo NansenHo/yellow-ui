@@ -20,21 +20,21 @@
 /* icon.vue */
 /* 声明一个叫 spin 的旋转动画*/
 @keyframes spin {
-	0% {
-		transform: rotate(0deg)
-		}
-	100% {
-		transform: rotate(360deg)
-		}
-	}
+    0% {
+        transform: rotate(0deg)
+        }
+    100% {
+        transform: rotate(360deg)
+        }
+    }
 
 .loading {
-	animation: spin 1s infinite linear;
-	/*
+    animation: spin 1s infinite linear;
+    /*
     infinite : 无限循环
     linear: 线性变化
     */
-	}
+    }
 ```
 
 ### SCSS 写法
@@ -102,10 +102,10 @@
 ```css
 /* y-input.vue */
 .y-input[disabled] {
-	border-color: #ccc;
-	color: #ccc;
-	cursor: not-allowed;
-	}
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+    }
 ```
 
 ### class 的对象写法
@@ -113,12 +113,12 @@
 ```html
 
 <div class="y-wrapper"
-	 :class="{'error': error}">
-	<input :value="value"
-		   class="y-input"
-		   :disabled="disabled"
-		   :readonly="readonly"
-		   type="text">
+     :class="{'error': error}">
+    <input :value="value"
+           class="y-input"
+           :disabled="disabled"
+           :readonly="readonly"
+           type="text">
 </div>
 ```
 
@@ -149,19 +149,38 @@
 ```javascript
 // y-button-group.vue
 export default {
-	mounted() {
-		// 这里不能用 in
-		// this.$children 只能拿到 VueComponent 而 this.$el 可以拿到原生元素
-		for (let node of this.$el.children) {
-			// String.prototype.toLowerCase() 将调用该方法的字符串值转为小写形式
-			let name = node.nodeName.toLowerCase()
-			if (name !== 'button') {
-				console.warn(`y-button-group 的子元素只能是 y-button，但你写的是 ${name}`)
-			}
-		}
-	}
+    mounted() {
+        // 这里不能用 in
+        // this.$children 只能拿到 VueComponent 而 this.$el 可以拿到原生元素
+        for (let node of this.$el.children) {
+            // String.prototype.toLowerCase() 将调用该方法的字符串值转为小写形式
+            let name = node.nodeName.toLowerCase()
+            if (name !== 'button') {
+                console.warn(`y-button-group 的子元素只能是 y-button，但你写的是 ${name}`)
+            }
+        }
+    }
 }
 ```
+
+### CSS 的先后顺序与优先级
+
+越靠后的 CSS 的优先级越高。
+
+```scss
+.col {
+   border: 1px solid blue;
+}
+
+@media (max-width: 576px) {
+  .col {
+    border: 1px solid red;
+  }
+}
+```
++ 我们这样将手机端的样式放在后面的话，页面就会默认显示 blue，
++ 也只有写在后面，手机端样式生效了，才能盖过写在优先级更低前面的 blue，
++ 如果手机端样式写在 blue 的前面，那切换到手机页面也无法生效了， 因为优先级不够。
 
 ### 打包发布 npm
 
@@ -261,7 +280,7 @@ includes() 方法用来判断一个数组是否包含一个指定的值，根据
 <y-button></y-button>
 
 <!--容易出bug的写法-->
-<y-button />
+<y-button/>
 ```
 
 ### Vue v-model 双向绑定是一个语法糖
@@ -517,7 +536,6 @@ export default {
 </script>
 ```
 
-
 ## 测试
 
 ### 两种开发模式 BDD & TDD
@@ -545,31 +563,31 @@ import chai from 'chai';
 const expect = chai.expect;
 // 单元测试
 {
-	// console.log(Button); // Button 是一个对象
-	// 将 Button 这个对象构造成一个函数
-	// 因为对象没法实例化出一个东西
-	const Constructor = Vue.extend(Button);
-	// console.log(Constructor); // Constructor 是一个函数
-	// button 就是 Button 的实例
-	let button = new Constructor({
-			propsData: {
-				icon: 'settings',
-			}
-		}
-	);
-	// 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
-	// 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
-	button.$mount(); // 没有挂载
-	let useElement = button.$el.querySelector('use');
-	// console.log(useElement, 'useElement');
-	// 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
-	// 断言结果为 true，控制台不会打印什么，即通过了测试，如果为 false，控制台会报错。
-	let href = useElement.getAttribute('xlink:href');
-	expect(href).to.eq('#icon-settings');
+    // console.log(Button); // Button 是一个对象
+    // 将 Button 这个对象构造成一个函数
+    // 因为对象没法实例化出一个东西
+    const Constructor = Vue.extend(Button);
+    // console.log(Constructor); // Constructor 是一个函数
+    // button 就是 Button 的实例
+    let button = new Constructor({
+            propsData: {
+                icon: 'settings',
+            }
+        }
+    );
+    // 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
+    // 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
+    button.$mount(); // 没有挂载
+    let useElement = button.$el.querySelector('use');
+    // console.log(useElement, 'useElement');
+    // 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
+    // 断言结果为 true，控制台不会打印什么，即通过了测试，如果为 false，控制台会报错。
+    let href = useElement.getAttribute('xlink:href');
+    expect(href).to.eq('#icon-settings');
 
-	// 我们用 let button = new Constructor({...}) 输入了一个 button
-	// 然后再输入 expect(...).to.eq(...) 断言来检验代码是否正确
-	// 这就是一套单元测试的大的思路
+    // 我们用 let button = new Constructor({...}) 输入了一个 button
+    // 然后再输入 expect(...).to.eq(...) 断言来检验代码是否正确
+    // 这就是一套单元测试的大的思路
 }
 ```
 
@@ -579,27 +597,27 @@ const expect = chai.expect;
 // app.js
 // 单元测试 - 测试点击事件
 {
-	// mock 模拟
-	const Constructor = Vue.extend(Button);
-	let vm = new Constructor({
-			propsData: {
-				icon: 'settings',
-			}
-		}
-	);
-	vm.$mount();
-	// mock 了一个函数，之后用的是这个模拟函数来做的测试
-	let spy = chai.spy(function () {
-		console.log(1);
-		expect(1).to.eq(1);
-	})
-	// 为 vm 的点击事件添加监听函数 spy
-	vm.$on('click', spy);
-	let button = vm.$el;
-	// 调用 spy 函数
-	button.click();
-	// 期待我们的间谍函数被调用
-	expect(spy).to.have.been.called()
+    // mock 模拟
+    const Constructor = Vue.extend(Button);
+    let vm = new Constructor({
+            propsData: {
+                icon: 'settings',
+            }
+        }
+    );
+    vm.$mount();
+    // mock 了一个函数，之后用的是这个模拟函数来做的测试
+    let spy = chai.spy(function () {
+        console.log(1);
+        expect(1).to.eq(1);
+    })
+    // 为 vm 的点击事件添加监听函数 spy
+    vm.$on('click', spy);
+    let button = vm.$el;
+    // 调用 spy 函数
+    button.click();
+    // 期待我们的间谍函数被调用
+    expect(spy).to.have.been.called()
 }
 ```
 
@@ -615,7 +633,6 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 # 在我们 npm run test 之前记住先删掉打包记录
  rm -rf .cache dist 
 ```
-
 
 ## git
 
