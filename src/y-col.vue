@@ -21,6 +21,20 @@ export default {
       validator(value) {
         return ['left', 'middle', 'right'].includes(value);
       }
+    },
+    phone: {
+      type: Object,
+      //TODO 这里的验证函数写法 - 笔记
+      validator(value) {
+        let keys = Object.keys(value);
+        let valid = true;
+        keys.foreach((key) => {
+          if (['span', 'offset', 'align'].includes(key)) {
+            valid = false;
+          }
+          return valid;
+        });
+      }
     }
   },
   data() {
@@ -30,7 +44,17 @@ export default {
   },
   computed: {
     colClasses() {
-      return [this.span && `col-${this.span}`, this.offset && `offset-${this.offset}`, this.align && `align-${this.align}`];
+      let {span, offset, align, phone} = this;
+      let phoneClass = [];
+      if (phone) {
+        phoneClass = [`col-phone-${phone.span}`,];
+      }
+      return [
+        this.span && `col-${this.span}`,
+        this.offset && `offset-${this.offset}`,
+        this.align && `align-${this.align}`,
+        ...phoneClass
+      ];
     },
     colStyle: function () {
       return {
@@ -61,6 +85,7 @@ export default {
     justify-content: flex-end;
   }
 
+  //TODO SCSS 的 for 循环写法等
   $className: col-; // 声明了一个 className 变量，其值是 col-
   @for $n from 1 through 24 { // loops 循环 24 次
     &.#{$className}#{$n} { // #{} 是插值的意思
@@ -76,6 +101,11 @@ export default {
     &.#{$className}#{$n} {
       margin-left: ($n/24) * 100%;
     }
+  }
+
+  //TODO @media 的写法
+  @media (max-width: 576px) {
+
   }
 }
 

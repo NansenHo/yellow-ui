@@ -50,6 +50,10 @@
 </head>
 <body>
 <div id="app">
+	<y-row gutter="20">
+		<y-col class="demoBox" span="2" :phone="{span: 12}">1</y-col>
+		<y-col class="demoBox" span="20" offset="2" :phone="{span: 12, offset: 0}">2</y-col>
+	</y-row>
 	<y-row class="topBar">
 		<y-col class="demoBox"
 			   :span="5">
