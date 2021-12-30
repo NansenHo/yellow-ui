@@ -1,7 +1,7 @@
 <template>
   <div class="col"
-       :style="{paddingLeft: gutter/2 + 'px', paddingRight: gutter/2 + 'px'}"
-       :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+       :style="colStyle"
+       :class="colClasses">
     <div style="border: 1px solid red;">
       <slot></slot>
     </div>
@@ -21,8 +21,19 @@ export default {
   },
   data() {
     return {
-      gutter: 0
+      gutter: 0,
     };
+  },
+  computed: {
+    colClasses() {
+      return [this.span && `col-${this.span}`, this.offset && `offset-${this.offset}`];
+    },
+    colStyle: function () {
+      return {
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
+      };
+    }
   }
 };
 </script>

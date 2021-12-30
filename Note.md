@@ -478,6 +478,121 @@ mounted() {
 
 父组件都 mounted 了，就说明子组件也都已经 mounted 了，那我们想在父组件里打印出 `this.$children` 就应该在 mounted 里面打印。
 
+### `:style` 绑定内联样式
+
+`v-bind:style` 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。
+
+[:style 绑定内联样式](https://cn.vuejs.org/v2/guide/class-and-style.html#%E7%BB%91%E5%AE%9A%E5%86%85%E8%81%94%E6%A0%B7%E5%BC%8F)
+
+```vue
+<!--col.vue-->
+<div class="col"
+    :style="{paddingLeft: gutter/2 + 'px', paddingRight: gutter/2 + 'px'}" 
+    :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+ <div style="border: 1px solid red;">
+   <slot></slot>
+ </div>
+</div>
+```
+
+`:style` 很好用，但是就是代码排布看着太不整洁干净了，而且易读性也较差。既然 `:style` 的值是一个对象，那我们就可以把这个对象放在 computed 里面，就会整洁易读很多。
+
+```vue
+<!--col.vue-->
+<template>
+   <div class="col"
+        :style="colStyle"
+        :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+      <div style="border: 1px solid red;">
+         <slot></slot>
+      </div>
+   </div>
+</template>
+
+<script>
+export default {
+   name: 'y-col',
+   props: {
+      span: {
+         type: [Number, String]
+      },
+      offset: {
+         type: [Number, String]
+      },
+   },
+   data() {
+      return {
+         gutter: 0,
+      };
+   },
+   computed: {
+      colStyle: function () {
+         return {
+            paddingLeft: this.gutter / 2 + 'px',
+            paddingRight: this.gutter / 2 + 'px'
+         };
+      }
+   }
+};
+</script>
+```
+
+### `:class` 绑定 HTML Class
+
+我们可以传给 `v-bind:class` 一个对象或者一个数组，以动态地切换 class。
+
+```vue
+<div class="col"
+     :style="colStyle"
+     :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+   <div style="border: 1px solid red;">
+      <slot></slot>
+   </div>
+</div>
+```
+```vue
+<template>
+  <div class="col"
+       :style="colStyle"
+       :class="colClasses">
+    <div style="border: 1px solid red;">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'y-col',
+  props: {
+    span: {
+      type: [Number, String]
+    },
+    offset: {
+      type: [Number, String]
+    },
+  },
+  data() {
+    return {
+      gutter: 0,
+    };
+  },
+  computed: {
+    colClasses() {
+      return [this.span && `col-${this.span}`, this.offset && `offset-${this.offset}`];
+    },
+    colStyle: function () {
+      return {
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
+      };
+    }
+  }
+};
+</script>
+```
+
+
 ## git
 
 ### git branch
