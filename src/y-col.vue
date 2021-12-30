@@ -1,6 +1,10 @@
 <template>
-  <div class="col" :class="[`col-${span}`]">
-    <slot></slot>
+  <div class="col"
+       :style="{paddingLeft: gutter/2 + 'px', paddingRight: gutter/2 + 'px'}"
+       :class="[span && `col-${span}`, offset && `offset-${offset}`]">
+    <div style="border: 1px solid red;">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -10,7 +14,15 @@ export default {
   props: {
     span: {
       type: [Number, String]
-    }
+    },
+    offset: {
+      type: [Number, String]
+    },
+  },
+  data() {
+    return {
+      gutter: 0
+    };
   }
 };
 </script>
@@ -33,6 +45,17 @@ export default {
       width: ($n/24) * 100%;
     }
   }
+
+  $className: offset-; // 声明了一个 className 变量，其值是 col-
+  @for $n from 1 through 24 { // loops 循环 24 次
+    &.#{$className}#{$n} { // #{} 是插值的意思
+      // .col.class-prefix1
+      // .col.class-prefixn
+      // .col.class-prefix24
+      margin-left: ($n/24) * 100%;
+    }
+  }
+
 }
 
 </style>

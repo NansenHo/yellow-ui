@@ -75,21 +75,21 @@
 ```scss
 // y-col.vue 
 .col {
-   height: 100px;
-   // 虽然每个 col 的宽度都是 50%，但是由于 row 的 flex-wrap 属性默认是 nowrap，并不换行，所以就会挤一行了。
-   width: 50%;
-   background: gray;
-   border: 1px solid #FFF;
+  height: 100px;
+  // 虽然每个 col 的宽度都是 50%，但是由于 row 的 flex-wrap 属性默认是 nowrap，并不换行，所以就会挤一行了。
+  width: 50%;
+  background: gray;
+  border: 1px solid #FFF;
 
-   $className: col-; // 声明了一个 className 变量，其值是 col-
-   @for $n from 1 through 24 { // loops 循环 24 次
-      &.#{$className}#{$n} { // #{} 是插值的意思
-         // .col.class-prefix1
-         // .col.class-prefixn
-         // .col.class-prefix24
-         width: ($n/24) * 100%;
-      }
-   }
+  $className: col-; // 声明了一个 className 变量，其值是 col-
+  @for $n from 1 through 24 { // loops 循环 24 次
+    &.#{$className}#{$n} { // #{} 是插值的意思
+      // .col.class-prefix1
+      // .col.class-prefixn
+      // .col.class-prefix24
+      width: ($n/24) * 100%;
+    }
+  }
 }
 ```
 
@@ -420,9 +420,63 @@ v-model 其实是这两代码的语法糖
 
 当有地方在使用 y-button 组件时，如果在组件上添加了一个事件， 那 vue 不知道这个事件具体是作用在 y-button 组件里的哪个元素上的。
 
-所以我们就在我们想要其作用到的 y-button 组件里的元素上，添加一个 `vm.$emit('eventName', [...args])` 
+所以我们就在我们想要其作用到的 y-button 组件里的元素上，添加一个 `vm.$emit('eventName', [...args])`
 
 官方文档讲得挺好的，看了就能懂了。[Vue $emit 官方文档](https://cn.vuejs.org/v2/api/#vm-emit)
+
+### created 和 mounted 的区别
+
+我们发现在父组件 created 生命周期里，打印 `this.$children` 出来是一个空数组，但是点击这个空数组，里面又是有元素的。
+
+这是因为，父组件在我们打印`this.$children` 的时候，即 created 生命周期里，还没有儿子，在打印完之后才有的儿子。
+
+所以表面上看着是个空数组，但是点开里面却又有元素。
+
+如果是在 mounted 生命周期里，就能正常打印出 `this.$children` 这个数组。
+
+由此，可以发现 created 和 mounted 就像下面这两个 DOM 操作一样，
+
+1. created 像是
+   `let div = document.createElement('div')`，在内存里将元素/组件等生成了，但还未挂载到页面上。
+2. mounted 像是
+   `document.body.appendChild(div)` ，将创建的元素/组件等挂载到页面上了。
+
+**所以 created 是在内存里创建了元素/组件等，但还未放到页面里，mountd 是把元素/组件等放页面里了。**
+
+那我们也可以测试一下父组件和子组件什么的创建顺序
+
+```vue
+<!--父组件-->
+created() {
+  console.log('father created');
+},
+mounted() {
+  console.log('father mounted');
+}
+```
+
+```vue
+<!-- 子组件-->
+created() {
+  console.log('son created');
+},
+mounted() {
+  console.log('son mounted');
+}
+```
+
+```javascript
+// 控制台打印的结果
+// father created
+// son created
+// son mounted
+// father mounted
+```
+
++ 可以看出父组件在内存中构建完成后，构建子组件；
++ 子组件挂载到画面上之后，再去把父组件挂载到页面上。
+
+父组件都 mounted 了，就说明子组件也都已经 mounted 了，那我们想在父组件里打印出 `this.$children` 就应该在 mounted 里面打印。
 
 ## git
 
@@ -443,6 +497,7 @@ git add .
 git commit -m 'add ...'
 git push
 ```
+
 这些代码将是提交推送到 main 分支里。
 
 把本地分支推送到远程分支去：
@@ -450,9 +505,11 @@ git push
 ```gitexclude
 git push origin branchName:branchName
 ```
+
 前一个 branchName 是本地分支名，后一个 branchName 是远程分支名。
 
 切换分支：
+
 ```gitexclude
 git checkout branchName
 ```
@@ -462,4 +519,5 @@ git checkout branchName
 ```gitexclude
 git log
 ```
+
 使用 `git log` 或 `git log path/to/` 后， git 一直停留在 log 模式，这时只需要**按 q 键**即可退出 。
