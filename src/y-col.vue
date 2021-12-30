@@ -46,16 +46,12 @@ export default {
     }
   }
 
-  $className: offset-; // 声明了一个 className 变量，其值是 col-
-  @for $n from 1 through 24 { // loops 循环 24 次
-    &.#{$className}#{$n} { // #{} 是插值的意思
-      // .col.class-prefix1
-      // .col.class-prefixn
-      // .col.class-prefix24
+  $className: offset-;
+  @for $n from 1 through 24 {
+    &.#{$className}#{$n} {
       margin-left: ($n/24) * 100%;
     }
   }
-
 }
 
 </style>

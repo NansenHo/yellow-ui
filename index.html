@@ -62,9 +62,11 @@
 		<y-col span="4">1</y-col>
 		<y-col span="20">2</y-col>
 	</y-row>
-
-
-
+    <y-row gutter="20">
+        <y-col :span="3/22">1</y-col>
+        <y-col :span="3/22" offset="1">2</y-col>
+        <y-col :span="3/22" offset="1">2</y-col>
+    </y-row>
 	<div class="box">
 		<p class="title">一般输入框：</p>
 		<y-input value="张三"></y-input>
