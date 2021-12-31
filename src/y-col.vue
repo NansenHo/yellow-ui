@@ -58,13 +58,13 @@ export default {
     colClasses() {
       let { span, offset, align, phone, ipad, narrowPc, pc, widePc } = this;
       return [
-        this.span && `col-${this.span}`,
-        this.offset && `offset-${this.offset}`,
-        this.align && `align-${this.align}`,
-        ...(ipad && [`col-ipad-${ipad.span}`]),
-        ...(narrowPc && [`col-narrowPc-${narrowPc.span}`]),
-        ...(pc && [`col-pc-${pc.span}`]),
-        ...(widePc && [`col-widePc-${widePc.span}`]),
+        span && `col-${span}`,
+        offset && `offset-${offset}`,
+        align && `align-${align}`,
+        ...(ipad ? [`col-ipad-${ipad.span}`] : []),
+        ...(narrowPc ? [`col-narrowPc-${narrowPc.span}`] : []),
+        ...(pc ? [`col-pc-${pc.span}`] : []),
+        ...(widePc ? [`col-widePc-${widePc.span}`] : []),
       ];
     },
     colStyle: function () {
