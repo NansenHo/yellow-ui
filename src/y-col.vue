@@ -31,13 +31,9 @@ export default {
         return ["left", "middle", "right"].includes(value);
       },
     },
-    phone: {
-      type: Object,
-      // validator: validator, 的省略，js 语法支持这样做
-      validator,
-    },
     ipad: {
       type: Object,
+      // validator: validator, 的省略，js 语法支持这样做
       validator,
     },
     narrowPc: {
@@ -65,7 +61,6 @@ export default {
         this.span && `col-${this.span}`,
         this.offset && `offset-${this.offset}`,
         this.align && `align-${this.align}`,
-        ...(phone && [`col-phone-${phone.span}`]),
         ...(ipad && [`col-ipad-${ipad.span}`]),
         ...(narrowPc && [`col-narrowPc-${narrowPc.span}`]),
         ...(pc && [`col-pc-${pc.span}`]),
@@ -121,22 +116,6 @@ export default {
   }
 
   //TODO: @media 的写法
-  @media (max-width: 576px) {
-    $className: col-phone-;
-    @for $n from 1 through 24 {
-      &.#{$className}#{$n} {
-        width: ($n/24) * 100%;
-      }
-    }
-
-    $className: offset-phone-;
-    @for $n from 1 through 24 {
-      &.#{$className}#{$n} {
-        margin-left: ($n/24) * 100%;
-      }
-    }
-  }
-
   @media (min-width: 577px) and (max-width: 768px) {
     $className: col-ipad-;
     @for $n from 1 through 24 {
