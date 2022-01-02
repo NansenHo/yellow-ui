@@ -57,14 +57,13 @@ export default {
   computed: {
     colClasses() {
       let { span, offset, align, phone, ipad, narrowPc, pc, widePc } = this;
+      let createClassName = this.createClassName;
       return [
-        span && `col-${span}`,
-        offset && `offset-${offset}`,
-        align && `align-${align}`,
-        ...(ipad ? [`col-ipad-${ipad.span}`] : []),
-        ...(narrowPc ? [`col-narrowPc-${narrowPc.span}`] : []),
-        ...(pc ? [`col-pc-${pc.span}`] : []),
-        ...(widePc ? [`col-widePc-${widePc.span}`] : []),
+        ...createClassName({ span, offset, align }),
+        ...createClassName(ipad, "ipad-"),
+        ...createClassName(narrowPc, "narrowPc-"),
+        ...createClassName(pc, "pc-"),
+        ...createClassName(widePc, "widePc-"),
       ];
     },
     colStyle: function () {
@@ -72,6 +71,25 @@ export default {
         paddingLeft: this.gutter / 2 + "px",
         paddingRight: this.gutter / 2 + "px",
       };
+    },
+  },
+  methods: {
+    createClassName(obj, devices = "") {
+      // str 默认等于空字符串
+      if (!obj) {
+        return [];
+      }
+      let array = [];
+      if (obj.span) {
+        array.push(`col-${devices}${obj.span}`);
+      }
+      if (obj.offset) {
+        array.push(`offset-${devices}${obj.offset}`);
+      }
+      if (obj.align) {
+        array.push(`align-${devices}${obj.align}`);
+      }
+      return array;
     },
   },
 };
