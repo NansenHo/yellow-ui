@@ -469,6 +469,82 @@ export default {
 </script>
 ```
 
+```vue
+<!--  -->
+<template>
+  <div class="container" :class="containerClass">
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "y-container",
+  data() {
+    return {
+      // class 的值是一个对象
+      containerClass: {
+        // 为 true 时，classList 里面就会加上一个 hasAside
+        hasAside: false,
+      },
+    };
+  },
+  mounted() {
+    this.$children.forEach((vm) => {
+      console.log(vm.$options.name);
+      if (vm.$options.name === "y-aside") {
+        this.containerClass.hasAside = true;
+      }
+    });
+  },
+};
+</script>
+```
+
+### Vue 的渲染
+
++ 一般的渲染
+
+```javascript
+var div = document.createElement("div"); // 生成
+document.body.appendChild(div); // 挂载
+```
+上面的是同步的。
+
++ Vue 的渲染不是同步的
+
+```vue
+
+```
+
+### Vue 动画
+
+[进入/离开 & 列表过渡](https://cn.vuejs.org/v2/guide/transitions.html)
+
++ 首先，在需要添加动画效果的元素/组件外包上 `<transition></transition>` 标签
+```vue
+<transition name="fade">
+  <div class="aside" v-if="visible">
+    <slot></slot>
+    <y-icon class="icon" name="settings" @click="hide"></y-icon>
+  </div>
+</transition>
+```
+
++ 然后，再添加 CSS 
+
+```vue
+<style lang='scss' scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>
+```
+
+
 ## 测试
 
 ### 两种开发模式 BDD & TDD
@@ -565,6 +641,12 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
  rm -rf .cache dist
 ```
 
+### 如果有一步操作需要在参数里面加 "down"
+
+否则会会默认所有操作都是同步的。
+
+这是测试用例的普遍规定。
+
 ## npm parcel 等工具使用
 
 ### 打包发布 npm
@@ -638,11 +720,15 @@ npx parcel --no-cache index.html
 
 ### 为什么单文件组件里面要写 name 呢？
 
-是用来调试的。
++ 是用来调试的。
 
 我们在 chrome 中安装 vue.js devtools 这个拓展程序后， 我们就可以用组件的形式而不是用标签的形式来看页面。
 
 而在这个拓展程序里面，显示的组件名就是我们写的 name。
+
++ this.$children 数组里用来找到组件
+
+this.#children 里的每一项的 $options 里面的 `__proto__` 里面的 name 。
 
 ## git
 

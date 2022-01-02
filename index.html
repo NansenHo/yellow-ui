@@ -49,10 +49,32 @@
         background: gray;
       }
     </style>
+    <style>
+      .demo {
+        min-height: 100px;
+      }
+      .aside{
+        background: #D5DCE5;
+        width: 200px;
+      }
+      .header{
+        background: #b5c0cf;
+        height: 50px;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <y-row>
+      <y-container style="height: 100vh">
+        <y-header>header2</y-header>
+        <y-container>
+          <y-aside>aside</y-aside>
+          <y-content>content</y-content>
+        </y-container>
+        <y-footer>footer</y-footer>
+      </y-container>
+
+      <!-- <y-row>
         <y-col
           class="demoBox"
           span="23"
@@ -60,7 +82,7 @@
           :ipad="{span:'10', offset: '14'}"
           >1</y-col
         >
-      </y-row>
+      </y-row> -->
       <!--	<y-row class="topBar">-->
       <!--		<y-col class="demoBox"-->
       <!--			   :span="5">-->
@@ -119,7 +141,7 @@
       <!--        <y-col :span="3/22" offset="1">2</y-col>-->
       <!--        <y-col :span="3/22" offset="1">2</y-col>-->
       <!--    </y-row>-->
-      <div class="box">
+      <!-- <div class="box">
         <p class="title">一般输入框：</p>
         <y-input value="张三"></y-input>
       </div>
@@ -151,16 +173,16 @@
       <y-button icon="loading" icon-position="right"> 按钮 </y-button>
       <y-button icon="settings" icon-position="left"> 按钮 </y-button>
       <y-button icon="settings"></y-button>
-      <!--    <y-button icon="settings" icon-position="up">-->
+      <y-button icon="settings" icon-position="up">-->
       <!--        按钮-->
       <!--    </y-button>-->
-      <y-icon name="download"></y-icon>
-      <y-button-group>
+      <!-- <y-icon name="download"></y-icon> -->
+      <!-- <y-button-group>
         <y-button icon="left">上一页</y-button>
         <y-button>更多</y-button>
         <y-button icon="right" icon-position="right">下一页 </y-button>
       </y-button-group>
-      <y-button>确认</y-button>
+      <y-button>确认</y-button> -->
     </div>
     <script src="./src/app.js"></script>
   </body>

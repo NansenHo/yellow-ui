@@ -1,17 +1,22 @@
 <template>
-  <svg v-if="name === 'loading'" class="y-icon y-icon-loading" aria-hidden="true">
-    <use :xlink:href=`#icon-${name}`></use>
+  <svg
+    v-if="name === 'loading'"
+    @click="$emit('click')"
+    class="y-icon y-icon-loading"
+    aria-hidden="true"
+  >
+    <use :xlink:href="`#icon-${name}`"></use>
   </svg>
-  <svg v-else class="y-icon" aria-hidden="true">
-    <use :xlink:href=`#icon-${name}`></use>
+  <svg v-else class="y-icon" aria-hidden="true" @click="$emit('click')">
+    <use :xlink:href="`#icon-${name}`"></use>
   </svg>
 </template>
 
 <script>
-import './svg'
+import "./svg";
 export default {
-  name: 'y-icon',
-  props: ['name',],
+  name: "y-icon",
+  props: ["name"],
 };
 </script>
 
@@ -27,10 +32,10 @@ export default {
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg)
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg)
+    transform: rotate(360deg);
   }
 }
 
