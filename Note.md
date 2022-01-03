@@ -180,6 +180,20 @@ export default {
 - 也只有写在后面，手机端样式生效了，才能盖过写在优先级更低前面的 blue，
 - 如果手机端样式写在 blue 的前面，那切换到手机页面也无法生效了， 因为优先级不够。
 
+### flex-shrink
+
+[flex-shrink - MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-shrink)
+
+**`flex-shrink`** 属性指定了 flex 元素的收缩规则。
+
+flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值。
+
+### `min-height` 和 ` height: 100%`
+
+如果父元素的高度是用 min-height 来写的，那其子元素再写 height: 100% 是不会生效的。
+
+
+
 ## JavaScript
 
 ### Array.prototype.includes() 会返回一个 Boolean 值
@@ -586,8 +600,10 @@ this.$toast();
 
 专门写一个插件
 
-- 写一个 plugin.js 文件，直接导出一个 install 函数
+- 写一个 plugin.js 文件，直接暴露一个 install 函数
+  
   install 函数有两个参数，第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象。
+  
   ```javascript
   export default {
     install(Vue, options) {
@@ -597,17 +613,129 @@ this.$toast();
     },
   };
   ```
-  - 用户在需要用该插件的地方，import 并 use 这个插件
-    use 会去执行 plugin 里面的 install 函数
-    `javascript import plugin from "./plugin"; Vue.use(plugin); `
-    这样子就避免了上面的两个问题。
+  用户在需要用该插件的地方，import 并 Vue.use 这个插件
+  Vue.use 就会去执行 plugin 里面的 install 函数。[API - Vue.use(plugin)](https://cn.vuejs.org/v2/api/#Vue-use)
+  
+  ````javascript
+  import plugin from "./plugin"; 
+  
+  Vue.use(plugin);
+  ````
 
-1. 是用户自己引入并使用插件的，所以不会存在用户改了 prototype 我们的 $toast 再覆盖了的情况。
+​		 这样子就避免了上面的两个问题。
+
+1. 是用户自己引入并使用插件的，所以不存在用户改了 prototype ，然后又用我们的 $toast 再覆盖了的情况。
 2. 也不会存在 Vue 版本对不上，因为 plugin 里面的 Vue 参数是从 Vue.use(plugin) 传过来的，不需要我们自己去 import ，所以用户用的是什么版本的 Vue 我们用的也是什么版本的。
 
-### 如何用 JavaScript 来取用 vue 组件
+### Vue.extend(options)
 
-[Vue 动态创建实例](https://zhuanlan.zhihu.com/p/38076208)
+使用基础 Vue 构造器，创建一个“子类”。
+
+参数是一个包含组件选项的对象。
+
+Vue.extend(options) 里面的 data 必须是一个函数
+
+```javascript
+// data 必须是这种写法
+data: function () {
+    return {
+      firstName: 'Walter',
+      lastName: 'White',
+      alias: 'Heisenberg'
+    }¸
+```
+
+`let Constructor = Vue.extend(Toast);` 
+
+### vm.$mount([elementOrSelector])
+
+用于手动将未挂载的 Vue 实例挂载到文档中。
+
+如果参数为空的话，模板将被渲染为文档之外的的元素，然后我们需要使用原生 DOM API 把它插入文档中。
+
+这个方法返回实例自身，因而可以链式调用其它实例方法。
+
+### vm.$el
+
+Vue 实例使用的根 DOM 元素。
+
+### 理解 plugin.js 文件
+
+```javascript
+import Toast from "./y-toast";
+export default {
+  // 开发插件 - Vue.js 插件应该暴露一个 install 函数
+  install(Vue, options) {
+    // 修改 Vue.prototype 添加一个 $toast
+    // 接受一个 message 参数
+    Vue.prototype.$toast = function (message) {
+      // Vue.extend(options) 创建构造器 Constructor，用来创建子类
+      let Constructor = Vue.extend(Toast);
+      // 创建了一个 Toast 的子类 toast
+      let toast = new Constructor();
+      // 把 message 放到 toast 子类的 slot 组件里面去
+      // vm.$slots.default 是一个数组，所以也需要传一个数组进去
+      // 这一步必须要放到 toast.$mount() 的前面，
+      // 否则会出现元素挂载上去了，但是里面没有 message
+      toast.$slots.default = [message];
+      // vm.$mount 手动挂载一个 DOM 到实例 vm 上去，
+      // 不 mount 的话，所有生命周期的钩子都不会执行。
+      toast.$mount();
+      // 因为 toast.$mount() 里没有写 elementOrSelector 参数，
+      // 所以需要用 DOM 操作再将 toast 子类里面的元素放到页面 body 里去。
+      document.body.appendChild(toast.$el);
+    };
+  },
+};
+
+```
+
+即每次我们 `this.$toast(message)` 就会创建了一个 Toast 的子类，并且把 message 放到子类的 slot 里面去，然后会再把这个子类的所有元素都放到 `this.$toast(message)` 所在的页面里面来。
+
+这里面涉及一个知识点，就是如何用 JavaScript 来获取 vue 组件。[Vue 动态创建实例](https://zhuanlan.zhihu.com/p/38076208)
+
+JavaScript 获取 DOM 的话就是那些原生 DOM 操作了。
+
+### props
+
+注意：如果 props 的 default 是一个对象，那需要用函数来返回这个对象的方式来写。
+
+```javascript
+props: {
+    autoClose: {
+      type: Boolean,
+      default: true,
+    },
+    closeButton: {
+      type: Object,
+      // 如果你的 default 是一个对象的话，那你需要这样来写
+      // 写一个函数来返回这个对象
+      default: () => {
+        return {
+          text: "关闭",
+          callback: (toast) => {
+            toast.close();
+          },
+        };
+      },
+    },
+  },
+```
+
+这是为什么呢？
+
+在一个单文件组件里，export default {...} 导出的对象其实是一堆选项。
+
+如果我们将 default 直接写成了对象，那页面里同时有两个该组件，且其中一个组件对 default 做了更改，另一个组件也会被影响到。这是因为对象是引用的，两个组件都引用的同一个对象，所以其中一个更改了，另一个也会受到影响。
+
+以上，所以我们需要用 function 来为每一个组件 return 他们自己的一个对象。
+
+### Vue.nextTick([callback, context])
+
+[ vue.nextTick() 与 setTimeout 的区别](https://blog.csdn.net/wei_dan1129/article/details/116269801)
+
++ **nextTick** 相当于一个异步函数，在**下次 DOM 更新循环结束之后**执行延迟回调。
++ nextTick 与 setTimeout 都是异步函数 不同的是 **nextTick 比 setTimeout 优先执行**。
 
 ## 测试
 
@@ -838,4 +966,8 @@ git log
 
 使用 `git log` 或 `git log path/to/` 后， git 一直停留在 log 模式，这时只需要**按 q 键**即可退出 。
 
-## 编程杂谈
+## 编程经验
+
+### 如果你眼睛观察到的和 JS 打印/执行出来的结果对不上，那一半来说是异步的问题。
+
+### 

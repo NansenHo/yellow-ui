@@ -1,7 +1,16 @@
 <!--  -->
 <template>
-  <div class="toast">
-    <slot></slot>
+  <div class="toast" ref="toast">
+    <div class="message">
+      <slot v-if="!enableHtml"></slot>
+      <div v-else v-html="$slots.default[0]"></div>
+    </div>
+    <div class="closeBox">
+      <div class="line" ref="line"></div>
+      <span class="close" v-if="closeButton" @click="onClose()">{{
+        closeButton.text
+      }}</span>
+    </div>
   </div>
 </template>
 
@@ -17,6 +26,27 @@ export default {
     //这里存放数据
     return {};
   },
+  props: {
+    autoClose: {
+      type: Boolean,
+      default: true,
+    },
+    closeButton: {
+      type: Object,
+      // 如果你的 default 是一个对象的话，那你需要这样来写
+      // 写一个函数来返回这个对象
+      default: () => {
+        return {
+          text: "关闭",
+          callback: undefined,
+        };
+      },
+    },
+    enableHtml: {
+      type: Boolean,
+      default: false,
+    },
+  },
   //监听属性 类似于data概念
   computed: {},
   //监控data中的数据变化
@@ -24,23 +54,40 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
-  mounted() {},
-  //生命周期 - 创建之前
-  beforeCreate() {},
-  //生命周期 - 挂载之前
-  beforeMount() {},
-  //生命周期 - 更新之前
-  beforeUpdate() {},
-  //生命周期 - 更新之后
-  updated() {},
-  //生命周期 - 销毁之前
-  beforeDestroy() {},
-  //生命周期 - 销毁完成
-  destroyed() {},
-  //如果页面有keep-alive缓存功能，这个函数会触发
-  activated() {},
+  mounted() {
+    this.updateLineHeight();
+    this.handleAutoClose();
+  },
   //方法集合
-  methods: {},
+  methods: {
+    updateLineHeight() {
+      // console.log(this.$refs.toast.style.height); 这样拿不到高度
+      this.$nextTick(() => {
+        this.$refs.line.style.height = `${
+          this.$refs.toast.getBoundingClientRect().height
+        }px`;
+      });
+    },
+    handleAutoClose() {
+      if (this.autoClose) {
+        setTimeout(() => {
+          this.close();
+        }, 5000);
+      }
+    },
+    close() {
+      // this.$el 能访问到 Vue 实例使用的根 DOM 元素。
+      this.$el.remove();
+      // 会把挂在DOM元素上的事件也取消。完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
+      this.$destroy();
+    },
+    onClose() {
+      this.close();
+      if (this.closeButton && typeof this.closeButton.callback === "function") {
+        this.closeButton.callback();
+      }
+    },
+  },
 };
 </script>
 <style lang='scss' scoped>
@@ -53,16 +100,38 @@ $height: 40px;
   left: 50%;
   transform: translateX(-50%);
   font-size: $font-size;
-  height: $height;
+  min-height: $height;
   display: flex;
   align-items: center;
   border-radius: 8px;
   border: 1px solid #ebeef5;
-  padding: 14px 26px 14px 13px;
+  //   padding: 14px 26px 14px 13px;
   background: #fff;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-  transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
+  transition: opacity 0.3s, transform 0.3s, left 0.3s, right 0.3s, top 0.4s,
+    bottom 0.3s;
   overflow: hidden;
-  width: 330px;
+  min-width: 330px;
+  justify-content: space-between;
+
+  > .message {
+    padding:  14px 0 14px 16px;
+  }
+
+  > .closeBox {
+    display: flex;
+    align-items: center;
+
+    > .line {
+      border-left: 1px solid #666;
+      margin-left: 16px;
+    }
+
+    > .close {
+      padding: 0 20px 0 20px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+  }
 }
 </style>
