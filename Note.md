@@ -110,23 +110,16 @@
 }
 ```
 
-### class 的对象写法
+### CSS 水平居中
 
-```html
-<div class="y-wrapper" :class="{'error': error}">
-  <input
-    :value="value"
-    class="y-input"
-    :disabled="disabled"
-    :readonly="readonly"
-    type="text"
-  />
-</div>
+```css
+.toast {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
 ```
-
-`:class="{'error': error}"` 的意思是，如果 error 存在那么就有 error 类，反之则没有 error 类。
-
-可以简写成 `:class="{error}"` 。
 
 ### SCSS 的 for 循环写法
 
@@ -503,25 +496,45 @@ export default {
 
 ### Vue 的渲染
 
-+ 一般的渲染
+- 一般的渲染
 
 ```javascript
 var div = document.createElement("div"); // 生成
 document.body.appendChild(div); // 挂载
 ```
+
 上面的是同步的。
 
-+ Vue 的渲染不是同步的
+- Vue 的渲染不是同步的
 
 ```vue
 
 ```
 
+### class 的对象写法
+
+```html
+<div class="y-wrapper" :class="{'error': error}">
+  <input
+    :value="value"
+    class="y-input"
+    :disabled="disabled"
+    :readonly="readonly"
+    type="text"
+  />
+</div>
+```
+
+`:class="{'error': error}"` 的意思是，如果 error 存在那么就有 error 类，反之则没有 error 类。
+
+可以简写成 `:class="{error}"` 。
+
 ### Vue 动画
 
 [进入/离开 & 列表过渡](https://cn.vuejs.org/v2/guide/transitions.html)
 
-+ 首先，在需要添加动画效果的元素/组件外包上 `<transition></transition>` 标签
+- 首先，在需要添加动画效果的元素/组件外包上 `<transition></transition>` 标签
+
 ```vue
 <transition name="fade">
   <div class="aside" v-if="visible">
@@ -531,19 +544,70 @@ document.body.appendChild(div); // 挂载
 </transition>
 ```
 
-+ 然后，再添加 CSS 
+- 然后，再添加 CSS
 
 ```vue
-<style lang='scss' scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
 ```
 
+### Vue 开发插件 install
+
+- 将 $toast 挂到 Vue prototype 上去
+
+```javascript
+import Vue from "vue";
+Vue.prototype.$toast = function () {
+  console.log(1);
+};
+```
+
+- 然后我们就可以在 Vue 实例中这样使用了
+
+```javascript
+this.$toast();
+```
+
+但直接这样改 prototype 好吗？
+
+- 首先，有可能之前用户自己也加了 $toast ，那我们的就会将用户自己加的覆盖掉了，这样的做法**侵入性太强**，不太好。
+- 也不应该直接 `import Vue from 'vue'` 因为我们不知道用户引入的是 vue2 还是 vue。
+- 所以这种方法不行，还是要按官网教程专门写一个插件
+
+[Vue 开发插件 install](https://cn.vuejs.org/v2/guide/plugins.html#%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6)
+
+专门写一个插件
+
+- 写一个 plugin.js 文件，直接导出一个 install 函数
+  install 函数有两个参数，第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象。
+  ```javascript
+  export default {
+    install(Vue, options) {
+      Vue.prototype.$toast = function () {
+        console.log("i am toast");
+      };
+    },
+  };
+  ```
+  - 用户在需要用该插件的地方，import 并 use 这个插件
+    use 会去执行 plugin 里面的 install 函数
+    `javascript import plugin from "./plugin"; Vue.use(plugin); `
+    这样子就避免了上面的两个问题。
+
+1. 是用户自己引入并使用插件的，所以不会存在用户改了 prototype 我们的 $toast 再覆盖了的情况。
+2. 也不会存在 Vue 版本对不上，因为 plugin 里面的 Vue 参数是从 Vue.use(plugin) 传过来的，不需要我们自己去 import ，所以用户用的是什么版本的 Vue 我们用的也是什么版本的。
+
+### 如何用 JavaScript 来取用 vue 组件
+
+[Vue 动态创建实例](https://zhuanlan.zhihu.com/p/38076208)
 
 ## 测试
 
@@ -720,13 +784,13 @@ npx parcel --no-cache index.html
 
 ### 为什么单文件组件里面要写 name 呢？
 
-+ 是用来调试的。
+- 是用来调试的。
 
 我们在 chrome 中安装 vue.js devtools 这个拓展程序后， 我们就可以用组件的形式而不是用标签的形式来看页面。
 
 而在这个拓展程序里面，显示的组件名就是我们写的 name。
 
-+ this.$children 数组里用来找到组件
+- this.$children 数组里用来找到组件
 
 this.#children 里的每一项的 $options 里面的 `__proto__` 里面的 name 。
 
