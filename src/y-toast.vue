@@ -98,6 +98,7 @@ $height: 40px;
   position: fixed;
   top: 0;
   left: 50%;
+  color: #606266;
   transform: translateX(-50%);
   font-size: $font-size;
   min-height: $height;
@@ -123,7 +124,7 @@ $height: 40px;
     align-items: center;
 
     > .line {
-      border-left: 1px solid #666;
+      border-left: 1px solid #ebeef5;
       margin-left: 16px;
     }
 

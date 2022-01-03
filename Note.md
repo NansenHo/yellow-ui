@@ -519,7 +519,7 @@ document.body.appendChild(div); // 挂载
 
 上面的是同步的。
 
-- Vue 的渲染不是同步的
+- Vue 的渲染不是同步的，Vue 是异步更新 DOM 的
 
 ```vue
 
@@ -733,6 +733,8 @@ props: {
 ### Vue.nextTick([callback, context])
 
 [ vue.nextTick() 与 setTimeout 的区别](https://blog.csdn.net/wei_dan1129/article/details/116269801)
+
+[$nextTick VS setTimeout 看看它们的差异](https://www.php.cn/vuejs/479875.html)
 
 + **nextTick** 相当于一个异步函数，在**下次 DOM 更新循环结束之后**执行延迟回调。
 + nextTick 与 setTimeout 都是异步函数 不同的是 **nextTick 比 setTimeout 优先执行**。
