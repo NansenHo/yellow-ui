@@ -28,23 +28,23 @@ new Vue({
   data: {
     message: "hello",
   },
-  mounted() {
-    this.$toast("<strong>xxxxx", {
-      enableHtml: false,
-      position: "middle",
-      closeButton: {
-        text: "已充值",
-        callback(){
-          console.log(1)
-        }
-      },
-    });
-  },
+  mounted() {},
   methods: {
     test() {
       console.log("1");
     },
-    showToast() {},
+    showToast() {
+      this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}`, {
+        enableHtml: false,
+        position: "middle",
+        closeButton: {
+          text: "已充值",
+          callback() {
+            console.log(1);
+          },
+        },
+      });
+    },
   },
   components: {
     "y-container": Container,

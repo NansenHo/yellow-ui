@@ -210,6 +210,26 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 ## JavaScript
 
+### Math.random()
+
+Math 是 JavaScript 的原生对象，提供各种数学功能。
+
+该对象不是构造函数，不能生成实例，所有的属性和方法都必须在 Math 对象上调用。
+
+`Math.random()` 返回 0 到 1 之间的一个伪随机数，可能等于 0 ，但是一定小于 1 。
+
+该随机数的数据类型是 number 类型。
+
+
+### parseInt(string, radix)
+
+解析一个字符串并返回指定基数的十进制整数。
+
+接受以下两个参数：
+1. 第一个参数 string 是要被解析的值。如果参数不是一个字符串，则将其转换为字符串
+2. radix（可选），从 2 到 36，表示字符串的基数。例如指定 16 表示被解析值是十六进制数。
+  注意，10 不是 redix 的默认值。
+
 ### Array.prototype.includes() 会返回一个 Boolean 值
 
 [Array.prototype.includes mdn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)

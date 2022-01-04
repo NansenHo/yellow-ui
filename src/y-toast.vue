@@ -91,6 +91,7 @@ export default {
     close() {
       // this.$el 能访问到 Vue 实例使用的根 DOM 元素。
       this.$el.remove();
+      this.$emit("close");
       // 会把挂在DOM元素上的事件也取消。完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
       this.$destroy();
     },
@@ -107,7 +108,18 @@ export default {
 //@import url(); 引入公共css类
 $font-size: 14px;
 $height: 40px;
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .toast {
+  animation: fade 1s;
   position: fixed;
   color: #606266;
   font-size: $font-size;
@@ -119,8 +131,6 @@ $height: 40px;
   //   padding: 14px 26px 14px 13px;
   background: #fff;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-  transition: opacity 0.3s, transform 0.3s, left 0.3s, right 0.3s, top 0.4s,
-    bottom 0.3s;
   overflow: hidden;
   min-width: 330px;
   justify-content: space-between;
