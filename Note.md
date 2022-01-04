@@ -261,6 +261,20 @@ let x = (obj, devices = "") => {
 
 ## Vue
 
+### .sync 修饰符
+
+下面这两种写法完全等价。
+
+```vue
+<y-tabs :selected.sync="selectedTab"></y-tabs>
+```
+
+```vue
+<y-tabs :selected="selectedTab" @update:selected="selectedTab = $event"></y-tabs>
+```
+
+`update:selected` 这一整个是事件名。
+
 ### 拿到一个元素的高度
 
 首先在那个元素上设置一个 ref
@@ -1028,4 +1042,17 @@ git log
 
 ### 如果你眼睛观察到的和 JS 打印/执行出来的结果对不上，那一半来说是异步的问题。
 
-###
+### 解决 bug 的思路
+
++ 按照报错提示去找问题
++ 用 **二分法** 定位 bug 所在具体代码
++ 打 log 并分析代码
+
+### 写代码必走四步
+
+1. 需求
+2. UI
+3. 代码
+4. 测试
+
+

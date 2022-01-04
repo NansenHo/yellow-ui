@@ -78,6 +78,7 @@ export default {
     updateLineHeight() {
       // console.log(this.$refs.toast.style.height); //这样拿不到高度
       this.$nextTick(() => {
+        // console.log(this.$refs.line, "this.$refs");
         this.$refs.line.style.height = `${
           this.$refs.toast.getBoundingClientRect().height
         }px`;
