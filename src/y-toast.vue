@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class="toast" ref="toast">
+  <div class="toast" ref="toast" :class="toastClass">
     <div class="message">
       <slot v-if="!enableHtml"></slot>
       <div v-else v-html="$slots.default[0]"></div>
@@ -46,9 +46,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    position: {
+      type: String,
+      default: "top",
+      validator(value) {
+        return ["top", "bottom", "middle"].indexOf(value) >= 0;
+      },
+    },
   },
   //监听属性 类似于data概念
-  computed: {},
+  computed: {
+    toastClass() {
+      return {
+        [`position-${this.position}`]: true,
+      };
+    },
+  },
   //监控data中的数据变化
   watch: {},
   //生命周期 - 创建完成（可以访问当前this实例）
@@ -61,7 +74,7 @@ export default {
   //方法集合
   methods: {
     updateLineHeight() {
-      // console.log(this.$refs.toast.style.height); 这样拿不到高度
+      // console.log(this.$refs.toast.style.height); //这样拿不到高度
       this.$nextTick(() => {
         this.$refs.line.style.height = `${
           this.$refs.toast.getBoundingClientRect().height
@@ -90,16 +103,13 @@ export default {
   },
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 //@import url(); 引入公共css类
 $font-size: 14px;
 $height: 40px;
 .toast {
   position: fixed;
-  top: 0;
-  left: 50%;
   color: #606266;
-  transform: translateX(-50%);
   font-size: $font-size;
   min-height: $height;
   display: flex;
@@ -114,9 +124,25 @@ $height: 40px;
   overflow: hidden;
   min-width: 330px;
   justify-content: space-between;
+  left: 50%;
+
+  &.position-top {
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  &.position-bottom {
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+
+  &.position-middle {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   > .message {
-    padding:  14px 0 14px 16px;
+    padding: 14px 0 14px 16px;
   }
 
   > .closeBox {
@@ -124,7 +150,7 @@ $height: 40px;
     align-items: center;
 
     > .line {
-      border-left: 1px solid #ebeef5;
+      border-left: 1px solid #abb2c4;
       margin-left: 16px;
     }
 

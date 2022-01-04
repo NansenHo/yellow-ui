@@ -11,7 +11,7 @@ let validator = (value) => {
   keys = Array.from(keys);
   let result = true;
   keys.forEach((key) => {
-    result = ["span", "align", "offset"].includes(key);
+    result = ["span", "align", "offset"].indexOf(key) >= 0;
     return result;
   });
   return result;
@@ -28,7 +28,7 @@ export default {
     align: {
       type: String,
       validator(value) {
-        return ["left", "middle", "right"].includes(value);
+        return ["left", "middle", "right"].indexOf(value) >= 0;
       },
     },
     ipad: {

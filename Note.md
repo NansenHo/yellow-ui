@@ -14,6 +14,22 @@
 
 ## CSS
 
+### transform
+
+注意，像下面一样 translateX 和 translateY 一起使用的话，前面的 translateX 会失效。
+
+```css
+transform: translateX(-50%);
+transform: translateY(-50%);
+```
+
+所以如果我们想在 X 轴和 Y 轴都设置时，需要这样用
+
+```css
+transform: translate(-50%, -50%);
+```
+
+
 ### CSS 动画
 
 ```css
@@ -192,8 +208,6 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 如果父元素的高度是用 min-height 来写的，那其子元素再写 height: 100% 是不会生效的。
 
-
-
 ## JavaScript
 
 ### Array.prototype.includes() 会返回一个 Boolean 值
@@ -201,6 +215,10 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 [Array.prototype.includes mdn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
 
 includes() 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回 false。
+
+### 推荐使用 indexOf() 替代 includes() 因为兼容性更好
+
+但推荐用另一个兼容性更好的方法：`indexOf()` [indexOf MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
 
 ### 函数的参数默认值设置
 
@@ -222,6 +240,24 @@ let x = (obj, devices = "") => {
 ```
 
 ## Vue
+
+### 拿到一个元素的高度
+
+首先在那个元素上设置一个 ref
+
+然后 `this.$refs.toast.getBoundingClientRect().height` 就可以拿到这个元素的高度。
+
+注意，`this.$refs.toast.style.height` 是拿不到元素的高度的。
+
+```javascript
+updateLineHeight() {
+  // console.log(this.$refs.toast.style.height); 这样拿不到高度
+  this.$nextTick(() => {
+    // 别忘了加 px
+    this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`;
+  });
+},
+```
 
 ### Vue 里不要写 XML
 
@@ -601,9 +637,9 @@ this.$toast();
 专门写一个插件
 
 - 写一个 plugin.js 文件，直接暴露一个 install 函数
-  
+
   install 函数有两个参数，第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象。
-  
+
   ```javascript
   export default {
     install(Vue, options) {
@@ -613,16 +649,17 @@ this.$toast();
     },
   };
   ```
+
   用户在需要用该插件的地方，import 并 Vue.use 这个插件
   Vue.use 就会去执行 plugin 里面的 install 函数。[API - Vue.use(plugin)](https://cn.vuejs.org/v2/api/#Vue-use)
-  
-  ````javascript
-  import plugin from "./plugin"; 
-  
-  Vue.use(plugin);
-  ````
 
-​		 这样子就避免了上面的两个问题。
+  ```javascript
+  import plugin from "./plugin";
+
+  Vue.use(plugin);
+  ```
+
+​ 这样子就避免了上面的两个问题。
 
 1. 是用户自己引入并使用插件的，所以不存在用户改了 prototype ，然后又用我们的 $toast 再覆盖了的情况。
 2. 也不会存在 Vue 版本对不上，因为 plugin 里面的 Vue 参数是从 Vue.use(plugin) 传过来的，不需要我们自己去 import ，所以用户用的是什么版本的 Vue 我们用的也是什么版本的。
@@ -645,7 +682,7 @@ data: function () {
     }¸
 ```
 
-`let Constructor = Vue.extend(Toast);` 
+`let Constructor = Vue.extend(Toast);`
 
 ### vm.$mount([elementOrSelector])
 
@@ -687,7 +724,6 @@ export default {
     };
   },
 };
-
 ```
 
 即每次我们 `this.$toast(message)` 就会创建了一个 Toast 的子类，并且把 message 放到子类的 slot 里面去，然后会再把这个子类的所有元素都放到 `this.$toast(message)` 所在的页面里面来。
@@ -736,8 +772,8 @@ props: {
 
 [$nextTick VS setTimeout 看看它们的差异](https://www.php.cn/vuejs/479875.html)
 
-+ **nextTick** 相当于一个异步函数，在**下次 DOM 更新循环结束之后**执行延迟回调。
-+ nextTick 与 setTimeout 都是异步函数 不同的是 **nextTick 比 setTimeout 优先执行**。
+- **nextTick** 相当于一个异步函数，在**下次 DOM 更新循环结束之后**执行延迟回调。
+- nextTick 与 setTimeout 都是异步函数 不同的是 **nextTick 比 setTimeout 优先执行**。
 
 ## 测试
 
@@ -972,4 +1008,4 @@ git log
 
 ### 如果你眼睛观察到的和 JS 打印/执行出来的结果对不上，那一半来说是异步的问题。
 
-### 
+###

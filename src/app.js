@@ -31,6 +31,13 @@ new Vue({
   mounted() {
     this.$toast("<strong>xxxxx", {
       enableHtml: false,
+      position: "middle",
+      closeButton: {
+        text: "已充值",
+        callback(){
+          console.log(1)
+        }
+      },
     });
   },
   methods: {
