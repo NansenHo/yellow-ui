@@ -1,15 +1,17 @@
 <!--  -->
 <template>
-  <div class="toast" ref="toast" :class="toastClass">
-    <div class="message">
-      <slot v-if="!enableHtml"></slot>
-      <div v-else v-html="$slots.default[0]"></div>
-    </div>
-    <div class="closeBox">
-      <div class="line" ref="line"></div>
-      <span class="close" v-if="closeButton" @click="onClose()">{{
-        closeButton.text
-      }}</span>
+  <div class="wrapper" :class="toastClass">
+    <div class="toast" ref="toast">
+      <div class="message">
+        <slot v-if="!enableHtml"></slot>
+        <div v-else v-html="$slots.default[0]"></div>
+      </div>
+      <div class="closeBox">
+        <div class="line" ref="line"></div>
+        <span class="close" v-if="closeButton" @click="onClose()">{{
+          closeButton.text
+        }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -118,9 +120,29 @@ $height: 40px;
   }
 }
 
+// 负责居中
+.wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &.position-top {
+    top: 0;
+  }
+
+  &.position-bottom {
+    bottom: 0;
+  }
+
+  &.position-middle {
+    top: 50%;
+    // 重置 wrapper 的 transform
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
 .toast {
   animation: fade 1s;
-  position: fixed;
   color: #606266;
   font-size: $font-size;
   min-height: $height;
@@ -134,22 +156,6 @@ $height: 40px;
   overflow: hidden;
   min-width: 330px;
   justify-content: space-between;
-  left: 50%;
-
-  &.position-top {
-    top: 0;
-    transform: translateX(-50%);
-  }
-
-  &.position-bottom {
-    bottom: 0;
-    transform: translateX(-50%);
-  }
-
-  &.position-middle {
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
 
   > .message {
     padding: 14px 0 14px 16px;

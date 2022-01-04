@@ -21,11 +21,11 @@ export default {
 };
 
 // 帮助函数
-function createToast({ Vue, message, toastData, onClose }) {
+function createToast({ Vue, message, propsData, onClose }) {
   let Constructor = Vue.extend(Toast);
   let toast = new Constructor({
-    // propsData: toastData, 简写成下面
-    toastData,
+    // propsData: propsData, //简写成下面
+    propsData,
   });
   toast.$slots.default = [message];
   toast.$on("close", onClose);
