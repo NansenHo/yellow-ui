@@ -222,6 +222,14 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 ## JavaScript
 
+### Element.getBoundingClientRect()
+
+[Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
+
+Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
+
+
+
 ### Math.random()
 
 Math 是 JavaScript 的原生对象，提供各种数学功能。
