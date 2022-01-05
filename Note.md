@@ -272,6 +272,43 @@ let x = (obj, devices = "") => {
 
 ## Vue
 
+### slot
+
+一个组件里可以有多个 `<slot></slot>` 。
+
+```vue
+<!--y-tabs-nav-->
+<template>
+  <div class="tabs-nav">
+    <slot></slot>
+    <div class="actions-wrapper">
+      <slot name="actions"></slot>
+    </div>
+  </div>
+</template>
+```
+
+```vue
+<y-tabs-nav>
+<template slot="actions">
+  <button>设置</button>
+</template>
+<y-tabs-item name="world">
+  世界杯
+</y-tabs-item>
+<y-tabs-item name="olympics" disabled>
+  奥运会
+</y-tabs-item>
+<y-tabs-item name="chinese">
+  全运会
+</y-tabs-item>
+</y-tabs-nav>
+```
+
+我们在 slot 组件上设置一个 name 属性，然后我们插入东西的时候，只需要在插入内容上再加上一个 slot 属性，上面写上 slot 组件对应的 name 值即可。
+
+如果没有写 slot 属性的东西就默认放到没有 name 属性的 slot 组件中。
+
 ### slot 组件上不能使用 class 属性
 
 如果需要加 class 那就得在 slot 的外层包上 div，再给外层的 div 加上 class ，把样式写在外层 div 上即可。
@@ -952,12 +989,17 @@ props 是我们组件的的入参，传入参数。
 而 data 是我们组件内部的数据，是组件自身维护的值。
 
 如果把组件当成一个函数来理解，可以将 props 理解为需要传入的参数，而 data 就是函数作用域内声明的数据。
+
 ```javascript
-function x(props){
+function x(props) {
     let data1 = 1
     let data2 = props
 }
 ```
+
+组件自己最好不要改 props 的值，因为这是传进来的东西。
+
+你可以声明一个内部 data ，然后你将 props 赋值到这个 data ，再自己去修改这个 data。
 
 ### Vue.nextTick([callback, context])
 
@@ -1214,4 +1256,9 @@ git log
 3. 代码
 4. 测试
 
+### 框架的最主要的目的是：
+
+让团队里的傻逼也写不出 bug 来，从而保证代码的质量。
+
+比如说傻逼会去直接改 props ，为了防止他们做这样的事，所以就写了框架里面直接规定了你不能改 props ，你一旦改了就报错。
 
