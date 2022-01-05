@@ -34,33 +34,34 @@ Vue.component('y-tabs-pane', TabsPane)
 Vue.use(plugin); // use 会去执行 plugin 里面的 install 函数
 
 new Vue({
-  el: "#app",
-  data: {
-    message: "hello",
-    selectedTab: "chinese",
-  },
-  mounted() {},
-  methods: {
-    test() {
-      console.log("1");
+    el: "#app",
+    data: {
+        message: "hello",
+        selectedTab: "chinese",
     },
-    showToast() {
-      this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}`, {
-        enableHtml: false,
-        position: "middle",
-        closeButton: {
-          text: "已充值",
-          callback() {
-            console.log(1);
-          },
+    mounted() {
+    },
+    methods: {
+        test() {
+            console.log("1");
         },
-      });
+        showToast() {
+            this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}`, {
+                enableHtml: false,
+                position: "middle",
+                closeButton: {
+                    text: "已充值",
+                    callback() {
+                        console.log(1);
+                    },
+                },
+            });
+        },
     },
-  },
-  components: {
-    "y-container": Container,
-    "y-header": Header,
-    "y-content": Content,
-    "y-footer": Footer,
-  },
+    components: {
+        "y-container": Container,
+        "y-header": Header,
+        "y-content": Content,
+        "y-footer": Footer,
+    },
 });

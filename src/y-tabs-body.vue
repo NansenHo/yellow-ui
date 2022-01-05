@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "y-tabs-body"
+  name: "y-tabs-body",
 }
 </script>
 

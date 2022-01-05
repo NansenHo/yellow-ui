@@ -30,7 +30,6 @@ export default {
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
     this.$children.forEach((vm) => {
-      console.log(vm.$options.name);
       if (vm.$options.name === "y-aside") {
         this.containerClass.hasAside = true;
       }

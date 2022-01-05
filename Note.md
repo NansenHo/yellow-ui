@@ -14,21 +14,33 @@
 
 ## CSS
 
+### 把元素放置在画面的最右边
+
+```css
+/* y-tabs-nav.vue */
+.actions-wrapper {
+    margin-left: auto;
+}
+```
+
 ### transform
 
 注意，像下面一样 translateX 和 translateY 一起使用的话，前面的 translateX 会失效。
 
 ```css
-transform: translateX(-50%);
-transform: translateY(-50%);
+.xxx {
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+}
 ```
 
 所以如果我们想在 X 轴和 Y 轴都设置时，需要这样用
 
 ```css
-transform: translate(-50%, -50%);
+.xxx {
+    transform: translate(-50%, -50%);
+}
 ```
-
 
 ### CSS 动画
 
@@ -36,20 +48,20 @@ transform: translate(-50%, -50%);
 /* icon.vue */
 /* 声明一个叫 spin 的旋转动画*/
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .loading {
-  animation: spin 1s infinite linear;
-  /*
-    infinite : 无限循环
-    linear: 线性变化
-    */
+    animation: spin 1s infinite linear;
+    /*
+      infinite : 无限循环
+      linear: 线性变化
+      */
 }
 ```
 
@@ -120,9 +132,9 @@ transform: translate(-50%, -50%);
 ```css
 /* y-input.vue */
 .y-input[disabled] {
-  border-color: #ccc;
-  color: #ccc;
-  cursor: not-allowed;
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
 }
 ```
 
@@ -130,10 +142,10 @@ transform: translate(-50%, -50%);
 
 ```css
 .toast {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 ```
 
@@ -160,19 +172,19 @@ transform: translate(-50%, -50%);
 ```javascript
 // y-button-group.vue
 export default {
-  mounted() {
-    // 这里不能用 in
-    // this.$children 只能拿到 VueComponent 而 this.$el 可以拿到原生元素
-    for (let node of this.$el.children) {
-      // String.prototype.toLowerCase() 将调用该方法的字符串值转为小写形式
-      let name = node.nodeName.toLowerCase();
-      if (name !== "button") {
-        console.warn(
-          `y-button-group 的子元素只能是 y-button，但你写的是 ${name}`
-        );
-      }
-    }
-  },
+    mounted() {
+        // 这里不能用 in
+        // this.$children 只能拿到 VueComponent 而 this.$el 可以拿到原生元素
+        for (let node of this.$el.children) {
+            // String.prototype.toLowerCase() 将调用该方法的字符串值转为小写形式
+            let name = node.nodeName.toLowerCase();
+            if (name !== "button") {
+                console.warn(
+                    `y-button-group 的子元素只能是 y-button，但你写的是 ${name}`
+                );
+            }
+        }
+    },
 };
 ```
 
@@ -220,15 +232,14 @@ Math 是 JavaScript 的原生对象，提供各种数学功能。
 
 该随机数的数据类型是 number 类型。
 
-
 ### parseInt(string, radix)
 
 解析一个字符串并返回指定基数的十进制整数。
 
 接受以下两个参数：
+
 1. 第一个参数 string 是要被解析的值。如果参数不是一个字符串，则将其转换为字符串
-2. radix（可选），从 2 到 36，表示字符串的基数。例如指定 16 表示被解析值是十六进制数。
-  注意，10 不是 redix 的默认值。
+2. radix（可选），从 2 到 36，表示字符串的基数。例如指定 16 表示被解析值是十六进制数。 注意，10 不是 redix 的默认值。
 
 ### Array.prototype.includes() 会返回一个 Boolean 值
 
@@ -244,32 +255,139 @@ includes() 方法用来判断一个数组是否包含一个指定的值，根据
 
 ```javascript
 let x = (obj, devices = "") => {
-  // str 默认等于空字符串
-  let array = [];
-  if (obj.span) {
-    array.push(`col-${devices}-${obj.span}`);
-  }
-  if (obj.offset) {
-    array.push(`offset-${devices}-${obj.offset}`);
-  }
-  if (obj.align) {
-    array.push(`align-${devices}-${obj.align}`);
-  }
-  return array;
+    // str 默认等于空字符串
+    let array = [];
+    if (obj.span) {
+        array.push(`col-${devices}-${obj.span}`);
+    }
+    if (obj.offset) {
+        array.push(`offset-${devices}-${obj.offset}`);
+    }
+    if (obj.align) {
+        array.push(`align-${devices}-${obj.align}`);
+    }
+    return array;
 };
 ```
 
 ## Vue
+
+### slot 组件上不能使用 class 属性
+
+如果需要加 class 那就得在 slot 的外层包上 div，再给外层的 div 加上 class ，把样式写在外层 div 上即可。
+
+```vue
+
+<div class="xxx">
+<slot></slot>
+</div>
+
+<style>
+.xxx {
+}
+</style>
+```
+
+### provide & inject & eventBus
+
+如果一个 Vue 实例里写了 provide 属性，那该实例的所有子孙后代都可以访问到这个 provide 。
+
+provide 是唯一一个跨子孙曾孙...组件也能调用的组件。
+
+provide 选项应该是**一个对象**或**返回一个对象的函数**。比如下面这种写法：
+
+```vue
+
+<script>
+import Vue from 'vue'
+
+export default {
+  data() {
+    return {
+      eventBus: new Vue()
+    }
+  },
+  provide() { // 返回一个对象的函数
+    return {
+      eventBus: this.eventBus,
+    }
+  },
+}
+</script>
+```
+
+EventBus 实际上是一个不具备 DOM 的组件，它有的仅仅是它的实例方法而已，所以非常轻便。
+
+我们也只需要它的实例方法，
+
++ $emit 触发一个事件
++ $on 监听一个事件
++ $off 取消监听一个事件
+
+只要能有以上三个行为的东西就可以，而一个 Vue 实例就具有以上三个行为，所以我们选择了一个叫 EventBus 的 Vue 实例来满足需求。
+
+而且单独的一个和其他组件没有关系的 EventBus 使用起来更加方便。
+
+我们有两种方式来初始化 EventBus：
+
+1. 创建一个 .js 文件然后在组件引入该 js 文件，或者直接在组件中初始化 EventBus
+   ```javascript
+    // .js 文件内可以这样写
+    import Vue from 'vue'
+    export const EventBus = new Vue()
+    ```
+   我们这次用的就是直接在组件中初始化 EventBus 这种方式。
+2. 直接在项目中的 main.js 中初始化 EventBus 这种方式初始化的 EventBus 是一个全局的事件总线
+   ```javascript
+    // main.js
+    Vue.prototype.$EventBus = new Vue()
+    ```
+
+那后代如何访问到祖先组件的这个 provide 呢？
+
+只需要注入 `inject: ['eventBus'],` 即可。大家拿到的都是 eventBus 的引用。
+
+```vue
+
+<script>
+export default {
+  inject: ['eventBus'],
+  created() {
+    console.log(this.eventBus, "eventBus");
+  },
+}
+</script>
+```
+
+### Vue 的事件是不会冒泡的
+
+Vue 的事件是不会冒泡的，在子标签上触发的事件，不会传到父标签上。
+
+事件在哪里被调用，就只能在哪里被监听。
+
+也有办法能让 Vue 冒泡，但最好不要这样做。
+
+### 多个 `class="xxx"` `:class="xxx"` Vue 会默认合并
+
+只有 `class="xxx"` 和 `:style="xxx"` 才不会合并。
+
+### 私有属性是给 Vue 作者用的
+
+我们打印一个 Vue 实例，会看到很多下划线 _ 开头的属性，这些属性都是私有属性，是给 Vue 的作者用的，不要使用。
+
+$ 开头的属性才是 Vue 作者专门给我们用的，$ 开头的我们就可以随便用了。
 
 ### .sync 修饰符
 
 下面这两种写法完全等价。
 
 ```vue
+
 <y-tabs :selected.sync="selectedTab"></y-tabs>
 ```
 
 ```vue
+
 <y-tabs :selected="selectedTab" @update:selected="selectedTab = $event"></y-tabs>
 ```
 
@@ -283,14 +401,21 @@ let x = (obj, devices = "") => {
 
 注意，`this.$refs.toast.style.height` 是拿不到元素的高度的。
 
-```javascript
-updateLineHeight() {
-  // console.log(this.$refs.toast.style.height); 这样拿不到高度
-  this.$nextTick(() => {
-    // 别忘了加 px
-    this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`;
-  });
-},
+```vue
+
+<script>
+export default {
+  methods: {
+    updateLineHeight() {
+      // console.log(this.$refs.toast.style.height); 这样拿不到高度
+      this.$nextTick(() => {
+        // 别忘了加 px
+        this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`;
+      })
+    },
+  },
+}
+</script>
 ```
 
 ### Vue 里不要写 XML
@@ -304,7 +429,7 @@ updateLineHeight() {
 <y-button></y-button>
 
 <!--容易出bug的写法-->
-<y-button />
+<y-button/>
 ```
 
 ### Vue v-model 双向绑定是一个语法糖
@@ -312,8 +437,9 @@ updateLineHeight() {
 下面的代码，我们在 input 里面更改 message 的值，data 里面的 message 也会更改。
 
 ```vue
+
 <template>
-  <input type="text" v-model="message" />
+  <input type="text" v-model="message"/>
   <p>{{ message }}</p>
 </template>
 
@@ -333,7 +459,7 @@ export default {
 ```vue
 // 这种写法依旧可以实现 v-model 的效果
 <template>
-  <input type="text" :value="message" @input="message = $event.target.value" />
+  <input type="text" :value="message" @input="message = $event.target.value"/>
   <p>{{ message }}</p>
   <button @click="message += 1"></button>
 </template>
@@ -370,7 +496,7 @@ v-model 其实是这两代码的语法糖
 ```vue
 <!-- 调用了 y-button 的父组件 -->
 <template>
-  <y-button icon="settings" @click="test" icon-position="left"> 按钮 </y-button>
+  <y-button icon="settings" @click="test" icon-position="left"> 按钮</y-button>
 </template>
 ```
 
@@ -449,9 +575,9 @@ mounted'); }
 <!--col.vue-->
 <template>
   <div
-    class="col"
-    :style="colStyle"
-    :class="[span && `col-${span}`, offset && `offset-${offset}`]"
+      class="col"
+      :style="colStyle"
+      :class="[span && `col-${span}`, offset && `offset-${offset}`]"
   >
     <div style="border: 1px solid red;">
       <slot></slot>
@@ -494,16 +620,18 @@ export default {
 我们可以传给 `v-bind:class` 一个对象或者一个数组，以动态地切换 class。
 
 ```vue
+
 <div
-  class="col"
-  :style="colStyle"
-  :class="[span && `col-${span}`, offset && `offset-${offset}`]"
+    class="col"
+    :style="colStyle"
+    :class="[span && `col-${span}`, offset && `offset-${offset}`]"
 >
 <slot></slot>
 </div>
 ```
 
 ```vue
+
 <template>
   <div class="col" :style="colStyle" :class="colClasses">
     <div style="border: 1px solid red;">
@@ -598,14 +726,15 @@ document.body.appendChild(div); // 挂载
 ### class 的对象写法
 
 ```html
+
 <div class="y-wrapper" :class="{'error': error}">
-  <input
-    :value="value"
-    class="y-input"
-    :disabled="disabled"
-    :readonly="readonly"
-    type="text"
-  />
+    <input
+            :value="value"
+            class="y-input"
+            :disabled="disabled"
+            :readonly="readonly"
+            type="text"
+    />
 </div>
 ```
 
@@ -620,22 +749,25 @@ document.body.appendChild(div); // 挂载
 - 首先，在需要添加动画效果的元素/组件外包上 `<transition></transition>` 标签
 
 ```vue
+
 <transition name="fade">
-  <div class="aside" v-if="visible">
-    <slot></slot>
-    <y-icon class="icon" name="settings" @click="hide"></y-icon>
-  </div>
+<div class="aside" v-if="visible">
+  <slot></slot>
+  <y-icon class="icon" name="settings" @click="hide"></y-icon>
+</div>
 </transition>
 ```
 
 - 然后，再添加 CSS
 
 ```vue
+
 <style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
@@ -649,8 +781,9 @@ document.body.appendChild(div); // 挂载
 
 ```javascript
 import Vue from "vue";
+
 Vue.prototype.$toast = function () {
-  console.log(1);
+    console.log(1);
 };
 ```
 
@@ -684,8 +817,8 @@ this.$toast();
   };
   ```
 
-  用户在需要用该插件的地方，import 并 Vue.use 这个插件
-  Vue.use 就会去执行 plugin 里面的 install 函数。[API - Vue.use(plugin)](https://cn.vuejs.org/v2/api/#Vue-use)
+  用户在需要用该插件的地方，import 并 Vue.use 这个插件 Vue.use 就会去执行 plugin 里面的 install
+  函数。[API - Vue.use(plugin)](https://cn.vuejs.org/v2/api/#Vue-use)
 
   ```javascript
   import plugin from "./plugin";
@@ -706,17 +839,19 @@ this.$toast();
 
 Vue.extend(options) 里面的 data 必须是一个函数
 
-```javascript
+```vue
 // data 必须是这种写法
+var Profile = Vue.extend({
+template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
 data: function () {
-    return {
-      firstName: 'Walter',
-      lastName: 'White',
-      alias: 'Heisenberg'
-    }¸
+return {
+firstName: 'Walter',
+lastName: 'White',
+alias: 'Heisenberg'
+}
+}
+})
 ```
-
-`let Constructor = Vue.extend(Toast);`
 
 ### vm.$mount([elementOrSelector])
 
@@ -734,33 +869,35 @@ Vue 实例使用的根 DOM 元素。
 
 ```javascript
 import Toast from "./y-toast";
+
 export default {
-  // 开发插件 - Vue.js 插件应该暴露一个 install 函数
-  install(Vue, options) {
-    // 修改 Vue.prototype 添加一个 $toast
-    // 接受一个 message 参数
-    Vue.prototype.$toast = function (message) {
-      // Vue.extend(options) 创建构造器 Constructor，用来创建子类
-      let Constructor = Vue.extend(Toast);
-      // 创建了一个 Toast 的子类 toast
-      let toast = new Constructor();
-      // 把 message 放到 toast 子类的 slot 组件里面去
-      // vm.$slots.default 是一个数组，所以也需要传一个数组进去
-      // 这一步必须要放到 toast.$mount() 的前面，
-      // 否则会出现元素挂载上去了，但是里面没有 message
-      toast.$slots.default = [message];
-      // vm.$mount 手动挂载一个 DOM 到实例 vm 上去，
-      // 不 mount 的话，所有生命周期的钩子都不会执行。
-      toast.$mount();
-      // 因为 toast.$mount() 里没有写 elementOrSelector 参数，
-      // 所以需要用 DOM 操作再将 toast 子类里面的元素放到页面 body 里去。
-      document.body.appendChild(toast.$el);
-    };
-  },
+    // 开发插件 - Vue.js 插件应该暴露一个 install 函数
+    install(Vue, options) {
+        // 修改 Vue.prototype 添加一个 $toast
+        // 接受一个 message 参数
+        Vue.prototype.$toast = function (message) {
+            // Vue.extend(options) 创建构造器 Constructor，用来创建子类
+            let Constructor = Vue.extend(Toast);
+            // 创建了一个 Toast 的子类 toast
+            let toast = new Constructor();
+            // 把 message 放到 toast 子类的 slot 组件里面去
+            // vm.$slots.default 是一个数组，所以也需要传一个数组进去
+            // 这一步必须要放到 toast.$mount() 的前面，
+            // 否则会出现元素挂载上去了，但是里面没有 message
+            toast.$slots.default = [message];
+            // vm.$mount 手动挂载一个 DOM 到实例 vm 上去，
+            // 不 mount 的话，所有生命周期的钩子都不会执行。
+            toast.$mount();
+            // 因为 toast.$mount() 里没有写 elementOrSelector 参数，
+            // 所以需要用 DOM 操作再将 toast 子类里面的元素放到页面 body 里去。
+            document.body.appendChild(toast.$el);
+        };
+    },
 };
 ```
 
-即每次我们 `this.$toast(message)` 就会创建了一个 Toast 的子类，并且把 message 放到子类的 slot 里面去，然后会再把这个子类的所有元素都放到 `this.$toast(message)` 所在的页面里面来。
+即每次我们 `this.$toast(message)` 就会创建了一个 Toast 的子类，并且把 message 放到子类的 slot 里面去，然后会再把这个子类的所有元素都放到 `this.$toast(message)`
+所在的页面里面来。
 
 这里面涉及一个知识点，就是如何用 JavaScript 来获取 vue 组件。[Vue 动态创建实例](https://zhuanlan.zhihu.com/p/38076208)
 
@@ -770,11 +907,15 @@ JavaScript 获取 DOM 的话就是那些原生 DOM 操作了。
 
 注意：如果 props 的 default 是一个对象，那需要用函数来返回这个对象的方式来写。
 
-```javascript
-props: {
+```vue
+
+<script>
+export default {
+  props: {
     autoClose: {
       type: Boolean,
-      default: true,
+      default:
+          true,
     },
     closeButton: {
       type: Object,
@@ -790,6 +931,8 @@ props: {
       },
     },
   },
+}
+</script>
 ```
 
 这是为什么呢？
@@ -799,6 +942,22 @@ props: {
 如果我们将 default 直接写成了对象，那页面里同时有两个该组件，且其中一个组件对 default 做了更改，另一个组件也会被影响到。这是因为对象是引用的，两个组件都引用的同一个对象，所以其中一个更改了，另一个也会受到影响。
 
 以上，所以我们需要用 function 来为每一个组件 return 他们自己的一个对象。
+
+### data 和 props 有什么区别？
+
+如果需要传值的时候才用 props 。
+
+props 是我们组件的的入参，传入参数。
+
+而 data 是我们组件内部的数据，是组件自身维护的值。
+
+如果把组件当成一个函数来理解，可以将 props 理解为需要传入的参数，而 data 就是函数作用域内声明的数据。
+```javascript
+function x(props){
+    let data1 = 1
+    let data2 = props
+}
+```
 
 ### Vue.nextTick([callback, context])
 
@@ -836,30 +995,30 @@ import chai from "chai";
 const expect = chai.expect;
 // 单元测试
 {
-  // console.log(Button); // Button 是一个对象
-  // 将 Button 这个对象构造成一个函数
-  // 因为对象没法实例化出一个东西
-  const Constructor = Vue.extend(Button);
-  // console.log(Constructor); // Constructor 是一个函数
-  // button 就是 Button 的实例
-  let button = new Constructor({
-    propsData: {
-      icon: "settings",
-    },
-  });
-  // 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
-  // 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
-  button.$mount(); // 没有挂载
-  let useElement = button.$el.querySelector("use");
-  // console.log(useElement, 'useElement');
-  // 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
-  // 断言结果为 true，控制台不会打印什么，即通过了测试，如果为 false，控制台会报错。
-  let href = useElement.getAttribute("xlink:href");
-  expect(href).to.eq("#icon-settings");
+    // console.log(Button); // Button 是一个对象
+    // 将 Button 这个对象构造成一个函数
+    // 因为对象没法实例化出一个东西
+    const Constructor = Vue.extend(Button);
+    // console.log(Constructor); // Constructor 是一个函数
+    // button 就是 Button 的实例
+    let button = new Constructor({
+        propsData: {
+            icon: "settings",
+        },
+    });
+    // 构造实例之后，再将实例挂载到某 DOM 元素上，也可以不挂载
+    // 但如果是要用元素 style 的话，就需要挂载了，因为不渲染的话也拿不到 style
+    button.$mount(); // 没有挂载
+    let useElement = button.$el.querySelector("use");
+    // console.log(useElement, 'useElement');
+    // 我们断言了 useElement 的 xlink:href 属性等于 #icon-settings，
+    // 断言结果为 true，控制台不会打印什么，即通过了测试，如果为 false，控制台会报错。
+    let href = useElement.getAttribute("xlink:href");
+    expect(href).to.eq("#icon-settings");
 
-  // 我们用 let button = new Constructor({...}) 输入了一个 button
-  // 然后再输入 expect(...).to.eq(...) 断言来检验代码是否正确
-  // 这就是一套单元测试的大的思路
+    // 我们用 let button = new Constructor({...}) 输入了一个 button
+    // 然后再输入 expect(...).to.eq(...) 断言来检验代码是否正确
+    // 这就是一套单元测试的大的思路
 }
 ```
 
@@ -869,26 +1028,26 @@ const expect = chai.expect;
 // app.js
 // 单元测试 - 测试点击事件
 {
-  // mock 模拟
-  const Constructor = Vue.extend(Button);
-  let vm = new Constructor({
-    propsData: {
-      icon: "settings",
-    },
-  });
-  vm.$mount();
-  // mock 了一个函数，之后用的是这个模拟函数来做的测试
-  let spy = chai.spy(function () {
-    console.log(1);
-    expect(1).to.eq(1);
-  });
-  // 为 vm 的点击事件添加监听函数 spy
-  vm.$on("click", spy);
-  let button = vm.$el;
-  // 调用 spy 函数
-  button.click();
-  // 期待我们的间谍函数被调用
-  expect(spy).to.have.been.called();
+    // mock 模拟
+    const Constructor = Vue.extend(Button);
+    let vm = new Constructor({
+        propsData: {
+            icon: "settings",
+        },
+    });
+    vm.$mount();
+    // mock 了一个函数，之后用的是这个模拟函数来做的测试
+    let spy = chai.spy(function () {
+        console.log(1);
+        expect(1).to.eq(1);
+    });
+    // 为 vm 的点击事件添加监听函数 spy
+    vm.$on("click", spy);
+    let button = vm.$el;
+    // 调用 spy 函数
+    button.click();
+    // 期待我们的间谍函数被调用
+    expect(spy).to.have.been.called();
 }
 ```
 
@@ -917,9 +1076,9 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 
 1. `npm adduser` 命令行在终端中登录 npm 帐号
 2. 查看 package.json 中规定的入口文件是哪个？
-   - package.json 中规定的入口文件即，main 字段的值；
-   - 如果没有需要加上。该项目中最开始就没有；
-   - 这个入口文件里要引入我们想要导出的组件并导出。
+    - package.json 中规定的入口文件即，main 字段的值；
+    - 如果没有需要加上。该项目中最开始就没有；
+    - 这个入口文件里要引入我们想要导出的组件并导出。
 3. 检查 package.json 里面的项目名
 4. 没有问题就可以用 `npm publish` 发布了。
 
