@@ -39,7 +39,7 @@ export default {
   methods: {
     xxx() {
       // 当点击了该item，那就会更新 selected 为 this.name
-      this.eventBus.$emit('update:selected', this.name)
+      this.eventBus.$emit('update:selected', this ,this.name)
     }
   },
 }
@@ -48,15 +48,21 @@ export default {
 <style lang="scss" scoped>
 .tabs-item {
   flex-shrink: 0;
-  padding: 0 2em;
   cursor: pointer;
-  border: 1px solid green;
   height: 100%;
   display: flex;
   align-items: center;
+  color: #303133;
+  padding: 0 20px;
+  box-sizing: border-box;
+  line-height: 40px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
 
   &.active {
-    background: red;
+    color: #409eff;
+    font-weight: bold;
   }
 }
 </style>
