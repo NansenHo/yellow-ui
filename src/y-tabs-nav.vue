@@ -15,7 +15,7 @@ export default {
   created() {
     this.eventBus.$on("update:selected", (vm, item) => {
       console.log(item, "item")
-      console.log(vm.$el.getBoundingClientRect());
+      console.log(vm.$el.getBoundingClientRect(), "1");
     })
   },
 }

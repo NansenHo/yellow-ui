@@ -33,7 +33,16 @@ export default {
     }
   },
   mounted() {
-    this.$emit("update:selected", this.selected)
+    console.log(this.$children);
+    this.$children.forEach((vm) => {
+      if (vm.$options.name === "y-tabs-nav") {
+        vm.$children.forEach((vmChildren) => {
+          if (vmChildren.$options.name === 'y-tabs-item' && vmChildren.name === this.selected) {
+            this.$emit("update:selected", this.selected, vmChildren)
+          }
+        })
+      }
+    })
   }
 }
 </script>
