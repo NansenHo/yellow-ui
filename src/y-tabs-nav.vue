@@ -12,10 +12,16 @@
 export default {
   name: "y-tabs-nav",
   inject: ['eventBus'],
-  created() {
-    this.eventBus.$on("update:selected", (vm, item) => {
-      console.log(item, "item")
-      console.log(vm.$el.getBoundingClientRect(), "1");
+  data() {
+    return {}
+  },
+  mounted() {
+    this.eventBus.$on("update:selected", (vm) => {
+      let {width, left} = vm.$el.getBoundingClientRect()
+      if (this.$refs.line) {
+        this.$refs.line.style.width = `${width}px`
+        this.$refs.line.style.left = `${left}px`
+      }
     })
   },
 }
@@ -28,13 +34,13 @@ $tab-height: 40px;
   height: 40px;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid black;
   position: relative;
 
   .line {
     position: absolute;
     bottom: 0;
     border-bottom: 1px solid #409eff;
+    transition: all .25s;
   }
 
   > .actions-wrapper {

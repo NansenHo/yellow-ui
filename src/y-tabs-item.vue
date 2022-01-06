@@ -32,8 +32,8 @@ export default {
   },
   created() {
     // item 本身也监听这个事件
-    this.eventBus.$on('update:selected', (name) => {
-      this.active = name === this.name;
+    this.eventBus.$on('update:selected', (vm) => {
+      this.active = vm.name === this.name;
     })
   },
   methods: {
