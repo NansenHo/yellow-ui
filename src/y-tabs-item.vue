@@ -33,9 +33,11 @@ export default {
   },
   created() {
     // item 本身也监听这个事件
-    this.eventBus.$on('update:selected', (vm) => {
-      this.active = vm.name === this.name;
-    })
+    if (this.eventBus) {
+      this.eventBus.$on('update:selected', (vm) => {
+        this.active = vm.name === this.name;
+      })
+    }
   },
   methods: {
     onClick() {
@@ -48,7 +50,6 @@ export default {
   },
 }
 </script>
-
 <style lang="scss" scoped>
 .tabs-item {
   flex-shrink: 0;

@@ -27,18 +27,18 @@ export default {
     }
   },
   created() {
-    this.eventBus.$on('update:selected', (vm) => {
-      this.active = vm.name === this.name;
-    })
+    if (this.eventBus) {
+      this.eventBus.$on('update:selected', (vm) => {
+        this.active = vm.name === this.name;
+      })
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .tabs-pane {
-  margin-top: 20px;
   &.active {
-    background: red;
   }
 }
 </style>

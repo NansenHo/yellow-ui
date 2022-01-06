@@ -16,13 +16,15 @@ export default {
     return {}
   },
   mounted() {
-    this.eventBus.$on("update:selected", (vm) => {
-      let {width, left} = vm.$el.getBoundingClientRect()
-      if (this.$refs.line) {
-        this.$refs.line.style.width = `${width}px`
-        this.$refs.line.style.left = `${left}px`
-      }
-    })
+    if (this.eventBus) {
+      this.eventBus.$on("update:selected", (vm) => {
+        let {width, left} = vm.$el.getBoundingClientRect()
+        if (this.$refs.line) {
+          this.$refs.line.style.width = `${width}px`
+          this.$refs.line.style.left = `${left}px`
+        }
+      })
+    }
   },
 }
 </script>
@@ -36,6 +38,7 @@ $tab-height: 40px;
   align-items: center;
   position: relative;
   border-bottom: 1px solid #e4e7ed;
+  margin: 0 0 15px 0;
 
   .line {
     position: absolute;
