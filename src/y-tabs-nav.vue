@@ -35,16 +35,23 @@ $tab-height: 40px;
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  border-bottom: 1px solid #e4e7ed;
 
   .line {
     position: absolute;
     bottom: 0;
-    border-bottom: 1px solid #409eff;
+    height: 2px;
+    background: #409eff;
+    border-radius: 8px;
     transition: all .25s;
   }
 
   > .actions-wrapper {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
   }
 }
 </style>
