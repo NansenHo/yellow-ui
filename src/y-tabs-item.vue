@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-item" @click="xxx" :class="classes">
+  <div class="tabs-item" @click="onClick" :class="classes">
     <slot></slot>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
   computed: {
     classes() {
       return {
-        active: this.active
+        active: this.active,
+        disabled: this.disabled
       }
     }
   },
@@ -37,9 +38,12 @@ export default {
     })
   },
   methods: {
-    xxx() {
+    onClick() {
+      if (this.disabled) {
+        return
+      }
       // 当点击了该item，那就会更新 selected 为 this.name
-      this.eventBus.$emit('update:selected', this ,this.name)
+      this.eventBus.$emit('update:selected', this, this.name)
     }
   },
 }
@@ -63,6 +67,12 @@ export default {
   &.active {
     color: #409eff;
     font-weight: bold;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    background: #fff;
+    color: #c0c4cc;
   }
 }
 </style>
