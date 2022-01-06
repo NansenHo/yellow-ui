@@ -1,6 +1,6 @@
 <template>
-  <div class="popover" @click="appear">
-    <div class="content-wrapper" v-if="visible">
+  <div class="popover" @click.stop="appear">
+    <div class="content-wrapper" v-if="visible" @click.stop>
       <slot name="content"></slot>
     </div>
     <slot></slot>
@@ -20,12 +20,19 @@ export default {
       this.visible = !this.visible
       console.log("visible changed")
       if (this.visible === true) {
-        this.$nextTick(() => {
-          document.addEventListener("click", () => {
+        setTimeout(() => {
+          console.log("新增 document 监听器")
+          let documentClick = () => {
             this.visible = false
+            console.log("删除一个节点")
+            console.log("document 隐藏")
+            document.removeEventListener('click', documentClick)
             console.log("click body")
-          })
+          }
+          document.addEventListener("click", documentClick)
         })
+      }else{
+        console.log("按钮 隐藏")
       }
     }
   }

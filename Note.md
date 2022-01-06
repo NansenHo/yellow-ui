@@ -222,6 +222,30 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 ## JavaScript
 
+### documentClick() 和 documentClick.bind(this) 是两个不同的函数
+
+```vue
+<script>
+export default {
+  methods: {
+    appear() {
+      this.visible = !this.visible
+      if (this.visible === true) {
+        this.$nextTick(() => {
+          // 我们这里绑定的事件不是 documentClick() 而是 documentClick.bind(this)
+          document.addEventListener("click", function documentClick() {
+            this.visible = false
+            document.removeEventListener('click', documentClick)
+          }.bind(this))
+        })
+      }
+    }
+  }
+}
+</script>
+```
+所以当我们写 `document.removeEventListener('click', documentClick)` 的时候，实际上移除的方法是 documentClick()，但 documentClick.bind(this) 还在 document 上。
+
 ### Element.getBoundingClientRect()
 
 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
@@ -279,6 +303,21 @@ let x = (obj, devices = "") => {
 ```
 
 ## Vue
+
+### .stop 事件修饰符用于阻止事件冒泡
+
+[Vue 事件修饰符](https://cn.vuejs.org/v2/guide/events.html#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6)
+
+```vue
+<template>
+  <div class="popover" @click.stop="appear">
+    <div class="content-wrapper" @click.stop>
+      <slot name="content"></slot>
+    </div>
+    <slot></slot>
+  </div>
+</template>
+```
 
 ### slot
 
