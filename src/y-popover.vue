@@ -18,6 +18,15 @@ export default {
   methods: {
     appear() {
       this.visible = !this.visible
+      console.log("visible changed")
+      if (this.visible === true) {
+        this.$nextTick(() => {
+          document.addEventListener("click", () => {
+            this.visible = false
+            console.log("click body")
+          })
+        })
+      }
     }
   }
 }
