@@ -17,6 +17,7 @@ import TabsBody from "./y-tabs-body";
 import TabsNav from "./y-tabs-nav";
 import TabsItem from "./y-tabs-item";
 import TabsPane from "./y-tabs-pane";
+import Popover from "./y-popover";
 
 Vue.component("y-button", Button);
 Vue.component("y-icon", Icon);
@@ -31,6 +32,7 @@ Vue.component('y-tabs-body', TabsBody)
 Vue.component('y-tabs-nav', TabsNav)
 Vue.component('y-tabs-item', TabsItem)
 Vue.component('y-tabs-pane', TabsPane)
+Vue.component('y-popover', Popover)
 Vue.use(plugin); // use 会去执行 plugin 里面的 install 函数
 
 new Vue({

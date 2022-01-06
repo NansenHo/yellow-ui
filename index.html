@@ -67,34 +67,42 @@
     </style>
 </head>
 <body>
-<div id="app">
-    <y-tabs :selected.sync="selectedTab" direction="vertical">
-        <y-tabs-nav>
-            <template slot="actions">
-                <button>设置</button>
-            </template>
-            <y-tabs-item name="world">
-                世界杯
-            </y-tabs-item>
-            <y-tabs-item name="olympics" disabled>
-                奥运会
-            </y-tabs-item>
-            <y-tabs-item name="chinese">
-                全运会
-            </y-tabs-item>
-        </y-tabs-nav>
-        <y-tabs-body>
-            <y-tabs-pane name="world">
-                世界杯相关
-            </y-tabs-pane>
-            <y-tabs-pane name="olympics">
-                奥运会相关
-            </y-tabs-pane>
-            <y-tabs-pane name="chinese">
-                全运会相关
-            </y-tabs-pane>
-        </y-tabs-body>
-    </y-tabs>
+<div id="app" style="margin-top: 100px; margin-left: 100px;">
+
+    <y-popover>
+        <template slot="content">
+            <div>popover 内容</div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
+
+    <!--    <y-tabs :selected.sync="selectedTab" direction="vertical">-->
+    <!--        <y-tabs-nav>-->
+    <!--            <template slot="actions">-->
+    <!--                <button>设置</button>-->
+    <!--            </template>-->
+    <!--            <y-tabs-item name="world">-->
+    <!--                世界杯-->
+    <!--            </y-tabs-item>-->
+    <!--            <y-tabs-item name="olympics" disabled>-->
+    <!--                奥运会-->
+    <!--            </y-tabs-item>-->
+    <!--            <y-tabs-item name="chinese">-->
+    <!--                全运会-->
+    <!--            </y-tabs-item>-->
+    <!--        </y-tabs-nav>-->
+    <!--        <y-tabs-body>-->
+    <!--            <y-tabs-pane name="world">-->
+    <!--                世界杯相关-->
+    <!--            </y-tabs-pane>-->
+    <!--            <y-tabs-pane name="olympics">-->
+    <!--                奥运会相关-->
+    <!--            </y-tabs-pane>-->
+    <!--            <y-tabs-pane name="chinese">-->
+    <!--                全运会相关-->
+    <!--            </y-tabs-pane>-->
+    <!--        </y-tabs-body>-->
+    <!--    </y-tabs>-->
 
     <!--      <button class="toast" @click="showToast">-->
     <!--        show toast-->
