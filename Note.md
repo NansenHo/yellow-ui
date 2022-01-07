@@ -229,6 +229,7 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 [contains 方法](https://www.cnblogs.com/rubylouvre/archive/2009/10/14/1583523.html)
 
 文章批注：
+
 + firefox 也是支持该方法的。
 
 如果A元素包含B元素，则返回true，否则false。
@@ -238,6 +239,7 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 ### documentClick() 和 documentClick.bind(this) 是两个不同的函数
 
 ```vue
+
 <script>
 export default {
   methods: {
@@ -257,15 +259,15 @@ export default {
 }
 </script>
 ```
-所以当我们写 `document.removeEventListener('click', documentClick)` 的时候，实际上移除的方法是 documentClick()，但 documentClick.bind(this) 还在 document 上。
+
+所以当我们写 `document.removeEventListener('click', documentClick)` 的时候，实际上移除的方法是 documentClick()，但 documentClick.bind(this)
+还在 document 上。
 
 ### Element.getBoundingClientRect()
 
 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
 
 Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
-
-
 
 ### Math.random()
 
@@ -317,13 +319,14 @@ let x = (obj, devices = "") => {
 
 ## Vue
 
-### 
+###   
 
 ### .stop 事件修饰符用于阻止事件冒泡
 
 [Vue 事件修饰符](https://cn.vuejs.org/v2/guide/events.html#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6)
 
 ```vue
+
 <template>
   <div class="popover" @click.stop="appear">
     <div class="content-wrapper" @click.stop>
@@ -333,6 +336,10 @@ let x = (obj, devices = "") => {
   </div>
 </template>
 ```
+
+但对于我们的 UI 组件库项目来说，最好是所有的组件都不要阻止冒泡。
+
+我们阻止了用户就会遇到很多bug。
 
 ### slot
 
@@ -351,6 +358,7 @@ let x = (obj, devices = "") => {
 ```
 
 ```vue
+
 <y-tabs-nav>
 <template slot="actions">
   <button>设置</button>
@@ -422,8 +430,6 @@ EventBus 实际上是一个不具备 DOM 的组件，它有的仅仅是它的实
 + $emit 触发/发布一个事件
 + $on 监听/订阅一个事件
 + $off 取消监听/订阅一个事件
-
-
 
 只要能有以上三个行为的东西就可以，而一个 Vue 实例就具有以上三个行为，所以我们选择了一个叫 EventBus 的 Vue 实例来满足需求。
 
@@ -1305,7 +1311,112 @@ git log
 
 ## 编程经验
 
-### 如果你眼睛观察到的和 JS 打印/执行出来的结果对不上，那一半来说是异步的问题。
+### 功能实现后一定要对代码进行重构
+
+比如我们写完下面的这些代码，实现了功能，解决了 bug
+
+```vue
+
+<script>
+export default {
+  methods: {
+    appear(event) {
+      console.log(this.$refs.triggerWrapper, "$refs.triggerWrapper")
+      console.log(event.target, "event.target");
+      if (this.$refs.triggerWrapper.contains(event.target)) {
+        console.log("下面")
+        console.log(this.visible, "this.visible1");
+        this.visible = !this.visible
+        console.log(this.visible, "this.visible2");
+        if (this.visible === true) {
+          // 这里尝试用 $this.nextTick 来做，但不行，所以用的 setTimeout
+          setTimeout(() => {
+            document.body.appendChild(this.$refs.contentWrapper)
+            let {top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+            // 加上 window.scrollX/Y 解决横纵轴上有轮动条时，定位不准问题。
+            this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
+            this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
+            console.log("放到页面里了")
+            console.log("新增 document 监听器")
+            let documentClick = (e) => {
+              if (this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target)) {
+                console.log("我点击了弹出内容，弹出内容不关闭")
+              } else {
+                this.visible = false
+                document.removeEventListener('click', documentClick)
+                console.log("点击了弹出内容以外的部分，并关闭弹出内容")
+              }
+            }
+            document.addEventListener("click", documentClick)
+          })
+        }
+      } else {
+        console.log("下面")
+      }
+    }
+  },
+}
+</script>
+```
+
+但代码相当凌乱。我们需要
+
++ 删掉测试用的 console.log
++ 并删掉其他不必要的代码
++ 将负责某一具体功能的代码提取出来写成一个方法
+
+然后我们就能得到下面的更加简洁，逻辑清晰，易读性更高的代码。
+
+```vue
+<script>
+export default {
+  methods: {
+    // 定位 contentWrapper 出现的位置
+    locate() {
+      document.body.appendChild(this.$refs.contentWrapper)
+      let {top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+      // 加上 window.scrollX/Y 解决横纵轴上有轮动条时，定位不准问题。
+      this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
+      this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
+    },
+
+    // 监听 document 上的点击事件
+    listenToDocument() {
+      let documentClick = (e) => {
+        if (!(this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target))) {
+          this.visible = false
+          document.removeEventListener('click', documentClick)
+        }
+      }
+      document.addEventListener("click", documentClick)
+    },
+
+    visibleTrue() {
+      // 这里尝试用 $this.nextTick 来做，但不行，所以用的 setTimeout
+      setTimeout(() => {
+        this.locate()
+        this.listenToDocument()
+      })
+    },
+
+    appear(event) {
+      if (this.$refs.triggerWrapper.contains(event.target)) {
+        this.visible = !this.visible
+        if (this.visible === true) {
+          this.visibleTrue()
+        }
+      }
+    }
+  },
+}
+</script>
+```
+
+### 「高内聚，低耦合」设计模式
+
+比如说，如果有个方法很重要，就把它都整合内聚到一个方法里，
+
+### 如果你眼睛观察到的和 JS 打印/执行出来的结果对不上，那很有可能就是异步的问题。
 
 ### 解决 bug 的思路
 
@@ -1325,4 +1436,3 @@ git log
 让团队里的傻逼也写不出 bug 来，从而保证代码的质量。
 
 比如说傻逼会去直接改 props ，为了防止他们做这样的事，所以就写了框架里面直接规定了你不能改 props ，你一旦改了就报错。
-
