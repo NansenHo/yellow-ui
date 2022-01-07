@@ -224,6 +224,17 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 ## JavaScript
 
+### contains 方法
+
+[contains 方法](https://www.cnblogs.com/rubylouvre/archive/2009/10/14/1583523.html)
+
+文章批注：
++ firefox 也是支持该方法的。
+
+如果A元素包含B元素，则返回true，否则false。
+
+唯一不支持这个方法的是IE的死对头firefox。
+
 ### documentClick() 和 documentClick.bind(this) 是两个不同的函数
 
 ```vue
