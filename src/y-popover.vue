@@ -17,7 +17,7 @@ export default {
       visible: false,
     }
   },
-  mounted(){
+  mounted() {
     console.log(this.$refs.triggerWrapper)
   },
   methods: {
@@ -27,6 +27,9 @@ export default {
       if (this.visible === true) {
         setTimeout(() => {
           document.body.appendChild(this.$refs.contentWrapper)
+          let {top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+          this.$refs.contentWrapper.style.left = left + 'px';
+          this.$refs.contentWrapper.style.top = top + 'px';
           console.log("新增 document 监听器")
           let documentClick = () => {
             this.visible = false
@@ -54,8 +57,6 @@ export default {
 
 .content-wrapper {
   position: absolute;
-  bottom: 50%;
-  left: 0;
   border: 1px solid #ebeef5;
   padding: 18px 20px;
   background: #fff;
@@ -66,5 +67,6 @@ export default {
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   word-break: break-all;
   width: 200px;
+  transform: translateY(-100%);
 }
 </style>

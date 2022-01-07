@@ -25,6 +25,8 @@
 
 ### transform
 
+transform : 使改变形态；使改变外观（或性质）；使改观；
+
 注意，像下面一样 translateX 和 translateY 一起使用的话，前面的 translateX 会失效。
 
 ```css
