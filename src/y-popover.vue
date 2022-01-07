@@ -28,8 +28,10 @@ export default {
         setTimeout(() => {
           document.body.appendChild(this.$refs.contentWrapper)
           let {top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-          this.$refs.contentWrapper.style.left = left + 'px';
-          this.$refs.contentWrapper.style.top = top + 'px';
+          console.log(top, left, "top, left")
+          // 加上 window.scrollX/Y 解决横纵轴上有轮动条时，定位不准问题。
+          this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
+          this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
           console.log("新增 document 监听器")
           let documentClick = () => {
             this.visible = false
