@@ -39,7 +39,7 @@ export default {
             console.log("放到页面里了")
             console.log("新增 document 监听器")
             let documentClick = (e) => {
-              if (this.$refs.contentWrapper.contains(e.target)) {
+              if (this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target)) {
                 console.log("我点击了弹出内容，弹出内容不关闭")
               } else {
                 this.visible = false
