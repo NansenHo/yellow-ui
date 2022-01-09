@@ -1,5 +1,5 @@
 <template>
-  <div class="popover" @click="appear" ref="popover">
+  <div class="popover" ref="popover">
     <div ref="contentWrapper" class="content-wrapper"
          :style="popoverWidth" v-if="visible"
          :class="{[`position-${position}`]: true}">
@@ -33,12 +33,44 @@ export default {
       validator(value) {
         return ['top', 'right', "bottom", "left"].indexOf(value) >= 0
       }
+    },
+    trigger: {
+      type: String,
+      default: "hover",
+      validator(value) {
+        return ["hover", "click"].indexOf(value) >= 0
+      }
+    },
+  },
+  mounted() {
+    this.$refs.triggerWrapper.addEventListener(this.visibleTrueEvent, () => {
+      this.visibleTrue()
+    })
+    this.$refs.triggerWrapper.addEventListener(this.visibleFalseEvent, () => {
+      this.visible = false
+    })
+  },
+  computed: {
+    visibleTrueEvent() {
+      if (this.trigger === "click") {
+        return "click"
+      } else {
+        return "mouseenter"
+      }
+    },
+    visibleFalseEvent() {
+      if (this.trigger === "click") {
+        return "click"
+      } else {
+        return "mouseleave"
+      }
     }
   },
   methods: {
     // 定位 contentWrapper 出现的位置
     locate() {
       const {contentWrapper, triggerWrapper} = this.$refs
+      console.log(contentWrapper, "contentWrapper") // 绑定 click 事件时，是 undefined
       document.body.appendChild(contentWrapper)
       const {height, top, left, width} = triggerWrapper.getBoundingClientRect()
       const {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
@@ -64,8 +96,6 @@ export default {
       // 不能用上面的 . 写法，由于 this.position 是一个动态的值
       contentWrapper.style.top = positionTable[this.position].top + "px";
       contentWrapper.style.left = positionTable[this.position].left + "px";
-      console.log(positionTable[this.position])
-      console.log(positionTable[top])
     },
 
     // 监听 document 上的点击事件
@@ -80,6 +110,9 @@ export default {
     },
 
     visibleTrue() {
+      console.log(this.visible)
+      this.visible = true
+      console.log(this.visible)
       // 这里尝试用 $this.nextTick 来做，但不行，所以用的 setTimeout
       setTimeout(() => {
         this.locate()
@@ -88,8 +121,9 @@ export default {
     },
 
     appear(event) {
+      console.log(1);
+      console.log(event.target)
       if (this.$refs.triggerWrapper.contains(event.target)) {
-        this.visible = !this.visible
         if (this.visible === true) {
           this.visibleTrue()
         }

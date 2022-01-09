@@ -332,7 +332,16 @@ let positionTable = {
 }
 ```
 
-然后再讲
+然后再将对应的值放到 top 和 left 里去
+
+```javascript
+contentWrapper.style.top = positionTable[this.position].top + "px";
+contentWrapper.style.left = positionTable[this.position].left + "px";
+```
+
+这样就ok了，避免了 if else 写过多的逻辑。这样清晰明明了，简洁大方地就解决了问题。
+
+下面是最终的完整代码：
 
 ```javascript
 const {contentWrapper, triggerWrapper} = this.$refs
