@@ -320,6 +320,10 @@ export default {
 
 Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
 
+### Math.abs()
+
+Math.abs(x) 函数返回指定数字 “x“ 的绝对值。
+
 ### Math.random()
 
 Math 是 JavaScript 的原生对象，提供各种数学功能。
