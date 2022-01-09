@@ -43,12 +43,17 @@ export default {
     },
   },
   mounted() {
-    this.$refs.triggerWrapper.addEventListener(this.visibleTrueEvent, () => {
-      this.visibleTrue()
-    })
-    this.$refs.triggerWrapper.addEventListener(this.visibleFalseEvent, () => {
-      this.visible = false
-    })
+    if (this.trigger === "click") {
+      this.$refs.popover.addEventListener('click', this.appear)
+    } else {
+      this.$refs.popover.addEventListener("mouseover", this.visibleTrue)
+      this.$refs.popover.addEventListener("mouseleave", () => {
+        this.visible = false
+      })
+    }
+  },
+  beforeDestroy() {
+    this.removePopoverListeners()
   },
   computed: {
     visibleTrueEvent() {
@@ -67,10 +72,20 @@ export default {
     }
   },
   methods: {
+    removePopoverListeners() {
+      if (this.trigger === "click") {
+        this.$refs.popover.removeEventListener('click', this.appear)
+      } else {
+        this.$refs.popover.removeEventListener("mouseover", this.visibleTrue)
+        this.$refs.popover.removeEventListener("mouseleave", () => {
+          this.visible = false
+        })
+      }
+    },
+
     // 定位 contentWrapper 出现的位置
     locate() {
       const {contentWrapper, triggerWrapper} = this.$refs
-      console.log(contentWrapper, "contentWrapper") // 绑定 click 事件时，是 undefined
       document.body.appendChild(contentWrapper)
       const {height, top, left, width} = triggerWrapper.getBoundingClientRect()
       const {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
@@ -102,7 +117,6 @@ export default {
     listenToDocument() {
       let documentClick = (e) => {
         if (!(this.$refs.contentWrapper && this.$refs.contentWrapper.contains(e.target))) {
-          this.visible = false
           document.removeEventListener('click', documentClick)
         }
       }
@@ -110,20 +124,17 @@ export default {
     },
 
     visibleTrue() {
-      console.log(this.visible)
       this.visible = true
-      console.log(this.visible)
       // 这里尝试用 $this.nextTick 来做，但不行，所以用的 setTimeout
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.locate()
         this.listenToDocument()
       })
     },
 
     appear(event) {
-      console.log(1);
-      console.log(event.target)
       if (this.$refs.triggerWrapper.contains(event.target)) {
+        this.visible = !this.visible
         if (this.visible === true) {
           this.visibleTrue()
         }
