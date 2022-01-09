@@ -35,13 +35,13 @@
 }
 ```
 
-### word-break 
+### word-break
 
 英文网站推荐不要使用 `word-break: break-all;`
 
 因为 break-all 会把很多单词拦腰斩断，比较影响阅读体验。
 
-中文的话还行。 
+中文的话还行。
 
 ### calc() 是一个 CSS 函数
 
@@ -275,6 +275,92 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 ## JavaScript
 
+### 表驱动编程
+
+逻辑相似的多个 if & else if & else ... 可以用表驱动编程来重构、优化。
+
+```javascript
+let {contentWrapper, triggerWrapper} = this.$refs
+document.body.appendChild(contentWrapper)
+let {height, top, left, width} = triggerWrapper.getBoundingClientRect()
+let {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
+if (this.position === 'top') {
+    // 加上 window.scrollX/Y 解决横纵轴上有轮动条时，定位不准问题。
+    contentWrapper.style.left = left + window.scrollX + 'px';
+    contentWrapper.style.top = top + window.scrollY + 'px';
+} else if (this.position === "bottom") {
+    contentWrapper.style.left = left + window.scrollX + 'px';
+    contentWrapper.style.top = top + height + window.scrollY + 'px';
+} else if (this.position === 'left') {
+    contentWrapper.style.left = left + window.scrollX + 'px';
+    contentWrapper.style.top = top + window.scrollY + (height - height_contentWrapper) / 2 + 'px';
+} else if (this.position === "right") {
+    contentWrapper.style.left = left + window.scrollX + width + 'px';
+    contentWrapper.style.top = top + window.scrollY + (height - height_contentWrapper) / 2 + 'px';
+}
+```
+
+从上面呢我们可以看出来
+
+|      | top | right | bottom | left |
+|:-----|-----|-------|--------|------|
+| top  | ... | ...   | ...    | ...  |
+| left | ... | ...   | ...    | ...  |
+
+我们的逻辑就是这张表，四列分别有自己的 top 和 left 。
+
+我们现在需要写一个逻辑来一个对象。
+
+```javascript
+let positionTable = {
+    top: {
+        top: top + window.scrollY,
+        left: left + window.scrollX,
+    },
+    right: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX + width,
+    },
+    bottom: {
+        top: top + height + window.scrollY,
+        left: left + window.scrollX,
+    },
+    left: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX,
+    },
+}
+```
+
+然后再讲
+
+```javascript
+const {contentWrapper, triggerWrapper} = this.$refs
+document.body.appendChild(contentWrapper)
+const {height, top, left, width} = triggerWrapper.getBoundingClientRect()
+const {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
+let positionTable = {
+    top: {
+        top: top + window.scrollY,
+        left: left + window.scrollX,
+    },
+    right: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX + width,
+    },
+    bottom: {
+        top: top + height + window.scrollY,
+        left: left + window.scrollX,
+    },
+    left: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX,
+    },
+}
+contentWrapper.style.top = positionTable[this.position].top + "px";
+contentWrapper.style.left = positionTable[this.position].left + "px";
+```
+
 ### contains 方法
 
 [contains 方法](https://www.cnblogs.com/rubylouvre/archive/2009/10/14/1583523.html)
@@ -374,7 +460,7 @@ let x = (obj, devices = "") => {
 
 ## Vue
 
-###     
+###         
 
 ### .stop 事件修饰符用于阻止事件冒泡
 

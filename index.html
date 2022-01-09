@@ -69,18 +69,9 @@
 <body>
 <div id="app" style=" margin-top: 100px; margin-left: 300px; border: 1px solid red;">
 
-<!--    <div @click="test">-->
-        <y-popover position="bottom">
-            <template slot="content">
-                <div>popover you got to love it popover you got to love it popover you got to love it popover you got to love it</div>
-            </template>
-            <y-button>点我</y-button>
-        </y-popover>
-<!--    </div>-->
-
-    <y-popover position="left">
+    <y-popover width="250">
         <template slot="content">
-            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to love it</div>
+            <div>popover 内容</div>
         </template>
         <y-button>点我</y-button>
     </y-popover>
@@ -92,9 +83,18 @@
         <y-button>点我</y-button>
     </y-popover>
 
-    <y-popover width="250">
+    <!--    <div @click="test">-->
+    <y-popover position="bottom">
         <template slot="content">
-            <div>popover 内容</div>
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to love it</div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
+    <!--    </div>-->
+
+    <y-popover position="left">
+        <template slot="content">
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to love it</div>
         </template>
         <y-button>点我</y-button>
     </y-popover>

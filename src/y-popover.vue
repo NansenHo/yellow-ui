@@ -38,24 +38,34 @@ export default {
   methods: {
     // 定位 contentWrapper 出现的位置
     locate() {
-      let {contentWrapper, triggerWrapper} = this.$refs
+      const {contentWrapper, triggerWrapper} = this.$refs
       document.body.appendChild(contentWrapper)
-      let {height, top, left, width} = triggerWrapper.getBoundingClientRect()
-      let {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
-      if (this.position === 'top') {
-        // 加上 window.scrollX/Y 解决横纵轴上有轮动条时，定位不准问题。
-        contentWrapper.style.left = left + window.scrollX + 'px';
-        contentWrapper.style.top = top + window.scrollY + 'px';
-      } else if (this.position === "bottom") {
-        contentWrapper.style.left = left + window.scrollX + 'px';
-        contentWrapper.style.top = top + height + window.scrollY + 'px';
-      } else if (this.position === 'left') {
-        contentWrapper.style.left = left + window.scrollX + 'px';
-        contentWrapper.style.top = top + window.scrollY + (height - height_contentWrapper) / 2 + 'px';
-      } else if (this.position === "right") {
-        contentWrapper.style.left = left + window.scrollX + width + 'px';
-        contentWrapper.style.top = top + window.scrollY + (height - height_contentWrapper) / 2 + 'px';
+      const {height, top, left, width} = triggerWrapper.getBoundingClientRect()
+      const {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
+      let positionTable = {
+        top: {
+          top: top + window.scrollY,
+          left: left + window.scrollX,
+        },
+        right: {
+          top: top + window.scrollY + (height - height_contentWrapper) / 2,
+          left: left + window.scrollX + width,
+        },
+        bottom: {
+          top: top + height + window.scrollY,
+          left: left + window.scrollX,
+        },
+        left: {
+          top: top + window.scrollY + (height - height_contentWrapper) / 2,
+          left: left + window.scrollX,
+        },
       }
+      // contentWrapper.style.top = positionTable.this.position.top + "px";
+      // 不能用上面的 . 写法，由于 this.position 是一个动态的值
+      contentWrapper.style.top = positionTable[this.position].top + "px";
+      contentWrapper.style.left = positionTable[this.position].left + "px";
+      console.log(positionTable[this.position])
+      console.log(positionTable[top])
     },
 
     // 监听 document 上的点击事件
@@ -196,8 +206,6 @@ export default {
       right: calc(100% - 1px);
     }
   }
-
-
 }
 
 .span {
