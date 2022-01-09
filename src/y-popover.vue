@@ -1,9 +1,9 @@
 <template>
   <div class="popover" @click="appear" ref="popover">
-    <div ref="contentWrapper" class="content-wrapper" v-if="visible">
+    <div ref="contentWrapper" class="content-wrapper" :style="popoverWidth" v-if="visible">
       <slot name="content"></slot>
     </div>
-    <span ref="triggerWrapper">
+    <span ref="triggerWrapper" class="span">
       <slot></slot>
     </span>
   </div>
@@ -15,9 +15,16 @@ export default {
   data() {
     return {
       visible: false,
+      popoverWidth: {
+        width: this.width + 'px',
+      }
     }
   },
-  mounted() {
+  props: {
+    width: {
+      type: [Number, String],
+      default: "200",
+    }
   },
   methods: {
     // 定位 contentWrapper 出现的位置
@@ -67,9 +74,12 @@ export default {
   position: relative;
 }
 
+// 用 border 和 :before & :after 来实现一个对话框
 .content-wrapper {
   position: absolute;
+  max-width: 200px;
   border: 1px solid #ebeef5;
+  border-radius: 4px;
   padding: 18px 20px;
   background: #fff;
   color: #606266;
@@ -80,5 +90,30 @@ export default {
   word-break: break-all;
   width: 200px;
   transform: translateY(-100%);
+  margin-top: -10px;
+
+  &::before, &::after {
+    content: "";
+    display: block;
+    border: 10px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 100%;
+    left: 10px;
+  }
+
+  &:before {
+    border-top-color: #ebeef5;
+  }
+
+  &::after {
+    border-top-color: white;
+    top: calc(100% - 1px);
+  }
+}
+
+.span {
+  display: inline-block;
 }
 </style>

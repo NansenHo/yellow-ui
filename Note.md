@@ -14,6 +14,57 @@
 
 ## CSS
 
+### 画一个小三角形（popover）
+
+这样就能画出一个小三角形。
+
+```scss
+  &::before {
+  content: "";
+  display: block;
+  border: 10px solid red;
+  border-top-color: black;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 100%;
+  left: 10px;
+}
+```
+
+### word-break 
+
+英文网站推荐不要使用 `word-break: break-all;`
+
+因为 break-all 会把很多单词拦腰斩断，比较影响阅读体验。
+
+中文的话还行。 
+
+### calc() 是一个 CSS 函数
+
+该函数允许在声明 CSS 属性值时，执行一些计算。[calc() MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/calc())
+
+用法举例：
+
+```scss
+div {
+  width: calc(100% / 6);
+  width: calc(100% - 1em);
+  width: calc(100% - 80px);
+}
+
+// 也可以和变量一块用
+.foo {
+  --widthA: 100px;
+  --widthB: calc(var(--widthA) / 2);
+  --widthC: calc(var(--widthB) / 2);
+  width: var(--widthC);
+}
+```
+
 ### 把元素放置在画面的最右边
 
 ```css
@@ -319,7 +370,7 @@ let x = (obj, devices = "") => {
 
 ## Vue
 
-###   
+###     
 
 ### .stop 事件修饰符用于阻止事件冒泡
 
@@ -1368,6 +1419,7 @@ export default {
 然后我们就能得到下面的更加简洁，逻辑清晰，易读性更高的代码。
 
 ```vue
+
 <script>
 export default {
   methods: {
@@ -1423,21 +1475,21 @@ export default {
 ### 好代码和坏代码
 
 1. 坏代码：
-   1. 写代码
-   2. 不写测试
-   3. 发现问题（已经写了不少）
-   4. 加代码（不敢轻易删代码，因为要重新手动测试和担心删出问题）
-   5. 然后又发现问题
-   6. 又只能继续加代码
-   7. ... ...
-   8. 最后变成屎山
+    1. 写代码
+    2. 不写测试
+    3. 发现问题（已经写了不少）
+    4. 加代码（不敢轻易删代码，因为要重新手动测试和担心删出问题）
+    5. 然后又发现问题
+    6. 又只能继续加代码
+    7. ... ...
+    8. 最后变成屎山
 2. 好代码
-   1. 写代码
-   2. 写测试
-   3. 出问题
-   4. 继续回到第一步重写
-   5. 能用测试来再次检查以确保不会出现很大的问题
-   6. 如此循环往复，就不会出现屎山的情况了
+    1. 写代码
+    2. 写测试
+    3. 出问题
+    4. 继续回到第一步重写
+    5. 能用测试来再次检查以确保不会出现很大的问题
+    6. 如此循环往复，就不会出现屎山的情况了
 
 小公司一般就是第一种坏代码，健思就是这样的。。。
 
@@ -1459,6 +1511,8 @@ export default {
 2. UI
 3. 代码
 4. 测试
+
+不确定前两步不要开始第三步。
 
 ### 框架的最主要的目的是：
 
