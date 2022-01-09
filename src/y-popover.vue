@@ -48,7 +48,7 @@ export default {
     } else {
       this.$refs.popover.addEventListener("mouseover", this.visibleTrue)
       this.$refs.popover.addEventListener("mouseleave", () => {
-        this.visible = false
+        this.visibleFalse()
       })
     }
   },
@@ -78,9 +78,13 @@ export default {
       } else {
         this.$refs.popover.removeEventListener("mouseover", this.visibleTrue)
         this.$refs.popover.removeEventListener("mouseleave", () => {
-          this.visible = false
+          this.visibleFalse()
         })
       }
+    },
+
+    visibleFalse() {
+      this.visible = false
     },
 
     // 定位 contentWrapper 出现的位置
