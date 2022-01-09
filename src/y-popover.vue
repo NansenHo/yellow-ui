@@ -182,6 +182,7 @@ export default {
 
     &::before, &::after {
       left: 10px;
+      border-bottom: none;
     }
 
     &:before {
@@ -200,6 +201,7 @@ export default {
 
     &::before, &::after {
       left: 10px;
+      border-top: none;
     }
 
     &:before {
@@ -221,6 +223,7 @@ export default {
       left: 100%;
       top: 50%;
       transform: translateY(-50%);
+      border-right: none;
     }
 
     &:before {
@@ -240,6 +243,7 @@ export default {
       right: 100%;
       top: 50%;
       transform: translateY(-50%);
+      border-left: none;
     }
 
     &:before {
