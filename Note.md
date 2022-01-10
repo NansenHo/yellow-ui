@@ -18,6 +18,57 @@
 
 如果两个 border 你想让他们重合，那你可以使用负 margin 。
 
+### 画一个小三角形（popover）
+
+这样就能画出一个小三角形。
+
+```scss
+  &::before {
+  content: "";
+  display: block;
+  border: 10px solid red;
+  border-top-color: black;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 100%;
+  left: 10px;
+}
+```
+
+### word-break
+
+英文网站推荐不要使用 `word-break: break-all;`
+
+因为 break-all 会把很多单词拦腰斩断，比较影响阅读体验。
+
+中文的话还行。
+
+### calc() 是一个 CSS 函数
+
+该函数允许在声明 CSS 属性值时，执行一些计算。[calc() MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/calc())
+
+用法举例：
+
+```scss
+div {
+  width: calc(100% / 6);
+  width: calc(100% - 1em);
+  width: calc(100% - 80px);
+}
+
+// 也可以和变量一块用
+.foo {
+  --widthA: 100px;
+  --widthB: calc(var(--widthA) / 2);
+  --widthC: calc(var(--widthB) / 2);
+  width: var(--widthC);
+}
+```
+
 ### 把元素放置在画面的最右边
 
 ```css
@@ -228,6 +279,101 @@ flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其
 
 ## JavaScript
 
+### 表驱动编程
+
+逻辑相似的多个 if & else if & else ... 可以用表驱动编程来重构、优化。
+
+```javascript
+let {contentWrapper, triggerWrapper} = this.$refs
+document.body.appendChild(contentWrapper)
+let {height, top, left, width} = triggerWrapper.getBoundingClientRect()
+let {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
+if (this.position === 'top') {
+    // 加上 window.scrollX/Y 解决横纵轴上有轮动条时，定位不准问题。
+    contentWrapper.style.left = left + window.scrollX + 'px';
+    contentWrapper.style.top = top + window.scrollY + 'px';
+} else if (this.position === "bottom") {
+    contentWrapper.style.left = left + window.scrollX + 'px';
+    contentWrapper.style.top = top + height + window.scrollY + 'px';
+} else if (this.position === 'left') {
+    contentWrapper.style.left = left + window.scrollX + 'px';
+    contentWrapper.style.top = top + window.scrollY + (height - height_contentWrapper) / 2 + 'px';
+} else if (this.position === "right") {
+    contentWrapper.style.left = left + window.scrollX + width + 'px';
+    contentWrapper.style.top = top + window.scrollY + (height - height_contentWrapper) / 2 + 'px';
+}
+```
+
+从上面呢我们可以看出来
+
+|      | top | right | bottom | left |
+|:-----|-----|-------|--------|------|
+| top  | ... | ...   | ...    | ...  |
+| left | ... | ...   | ...    | ...  |
+
+我们的逻辑就是这张表，四列分别有自己的 top 和 left 。
+
+我们现在需要写一个逻辑来一个对象。
+
+```javascript
+let positionTable = {
+    top: {
+        top: top + window.scrollY,
+        left: left + window.scrollX,
+    },
+    right: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX + width,
+    },
+    bottom: {
+        top: top + height + window.scrollY,
+        left: left + window.scrollX,
+    },
+    left: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX,
+    },
+}
+```
+
+然后再将对应的值放到 top 和 left 里去
+
+```javascript
+contentWrapper.style.top = positionTable[this.position].top + "px";
+contentWrapper.style.left = positionTable[this.position].left + "px";
+```
+
+这样就ok了，避免了 if else 写过多的逻辑。这样清晰明明了，简洁大方地就解决了问题。
+
+下面是最终的完整代码：
+
+```javascript
+const {contentWrapper, triggerWrapper} = this.$refs
+document.body.appendChild(contentWrapper)
+const {height, top, left, width} = triggerWrapper.getBoundingClientRect()
+const {height: height_contentWrapper} = contentWrapper.getBoundingClientRect()
+let positionTable = {
+    top: {
+        top: top + window.scrollY,
+        left: left + window.scrollX,
+    },
+    right: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX + width,
+    },
+    bottom: {
+        top: top + height + window.scrollY,
+        left: left + window.scrollX,
+    },
+    left: {
+        top: top + window.scrollY + (height - height_contentWrapper) / 2,
+        left: left + window.scrollX,
+    },
+}
+contentWrapper.style.top = positionTable[this.position].top + "px";
+contentWrapper.style.left = positionTable[this.position].left + "px";
+```
+
 ### contains 方法
 
 [contains 方法](https://www.cnblogs.com/rubylouvre/archive/2009/10/14/1583523.html)
@@ -272,6 +418,10 @@ export default {
 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
 
 Element.getBoundingClientRect() 方法返回元素的大小及其相对于视口的位置。
+
+### Math.abs()
+
+Math.abs(x) 函数返回指定数字 “x“ 的绝对值。
 
 ### Math.random()
 
@@ -323,7 +473,7 @@ let x = (obj, devices = "") => {
 
 ## Vue
 
-###   
+###         
 
 ### .stop 事件修饰符用于阻止事件冒泡
 
@@ -1372,6 +1522,7 @@ export default {
 然后我们就能得到下面的更加简洁，逻辑清晰，易读性更高的代码。
 
 ```vue
+
 <script>
 export default {
   methods: {
@@ -1416,6 +1567,35 @@ export default {
 </script>
 ```
 
+甚至，如果你代码优化得足够好，你的每一个函数里只有一行代码。
+
+对于一些特别注重面向对象的项目（UI 组件库）来说，这养的优化思路是不错的。
+
++ 我们可以把一个函数的函数体有没有超过 5 行作为一个优化的出发点，
+
++ 如果一个函数的函数体超过了 5 行，那就可以考虑对它进行优化。
+
+### 好代码和坏代码
+
+1. 坏代码：
+    1. 写代码
+    2. 不写测试
+    3. 发现问题（已经写了不少）
+    4. 加代码（不敢轻易删代码，因为要重新手动测试和担心删出问题）
+    5. 然后又发现问题
+    6. 又只能继续加代码
+    7. ... ...
+    8. 最后变成屎山
+2. 好代码
+    1. 写代码
+    2. 写测试
+    3. 出问题
+    4. 继续回到第一步重写
+    5. 能用测试来再次检查以确保不会出现很大的问题
+    6. 如此循环往复，就不会出现屎山的情况了
+
+小公司一般就是第一种坏代码，健思就是这样的。。。
+
 ### 「高内聚，低耦合」设计模式
 
 比如说，如果有个方法很重要，就把它都整合内聚到一个方法里，
@@ -1434,6 +1614,8 @@ export default {
 2. UI
 3. 代码
 4. 测试
+
+不确定前两步不要开始第三步。
 
 ### 框架的最主要的目的是：
 
