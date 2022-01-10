@@ -39,13 +39,13 @@ export default {
     // margin-left: -1px; 和 z-index: 1; 配合解决了三个按钮合一起的时候的边框问题
 
     &:first-child {
-      border-top-left-radius: var(--border-radius);
-      border-bottom-left-radius: var(--border-radius);
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
     }
 
     &:last-child {
-      border-top-right-radius: var(--border-radius);
-      border-bottom-right-radius: var(--border-radius);
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
   }
 }

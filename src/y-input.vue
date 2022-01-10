@@ -70,7 +70,7 @@ $color: #606266;
     display: inline-block;
 
     &:hover {
-      border: 1px solid var(--border-color-hover);
+      border: 1px solid #666;
       //box-shadow: inset 0 1px 3px $box-shadow-color;
     }
 

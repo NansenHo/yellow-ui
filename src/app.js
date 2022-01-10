@@ -44,6 +44,7 @@ new Vue({
     data: {
         message: "hello",
         selectedTab: ["2", "1"],
+        selected: "world"
     },
     mounted() {
     },

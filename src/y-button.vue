@@ -53,13 +53,13 @@ export default {
 <style scoped
        lang="scss">
 .y-button {
-  font-size: var(--font-size);
+  font-size: 14px;
   padding: 10px 16px;
-  color: var(--button-color);
+  color: #6e6d7a;
   text-align: left;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  background: var(--button-bg);
+  border-radius: 8px;
+  border: 1px solid #e7e7e9;
+  background: white;
   font-family: SF Pro SC, SF Pro Text, SF Pro Icons, PingFang SC, Helvetica Neue, Helvetica, Arial, sans-serif;
   display: inline-flex;
   justify-content: center;
@@ -68,12 +68,12 @@ export default {
 }
 
 .y-button:hover {
-  background-color: var(--button-active-bg);
-  border-color: var(--border-color-hover);
+  background-color: #eee;
+  border-color: #666;
 }
 
 .y-button:active {
-  background-color: var(--button-active-bg);
+  background-color: #eee;
 }
 
 .y-button:focus {

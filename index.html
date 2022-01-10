@@ -67,7 +67,7 @@
     </style>
 </head>
 <body>
-<div id="app" style=" margin-top: 100px; margin-left: 300px; border: 1px solid red;">
+<div id="app">
 
     <p>selected 1</p>
     <y-collapse :selected.sync="selectedTab">
@@ -75,7 +75,7 @@
         <y-collapse-item title="title2" name="2">content</y-collapse-item>
         <y-collapse-item title="title3" name="3">content</y-collapse-item>
     </y-collapse>
-    {{selectedTab}}
+    {{ selectedTab }}
 
     <div>
         <p>click 触发</p>
@@ -155,35 +155,36 @@
             </template>
             <y-button>点我</y-button>
         </y-popover>
-
     </div>
-    <!--    <y-tabs :selected.sync="selectedTab" direction="vertical">-->
-    <!--        <y-tabs-nav>-->
-    <!--            <template slot="actions">-->
-    <!--                <button>设置</button>-->
-    <!--            </template>-->
-    <!--            <y-tabs-item name="world">-->
-    <!--                世界杯-->
-    <!--            </y-tabs-item>-->
-    <!--            <y-tabs-item name="olympics" disabled>-->
-    <!--                奥运会-->
-    <!--            </y-tabs-item>-->
-    <!--            <y-tabs-item name="chinese">-->
-    <!--                全运会-->
-    <!--            </y-tabs-item>-->
-    <!--        </y-tabs-nav>-->
-    <!--        <y-tabs-body>-->
-    <!--            <y-tabs-pane name="world">-->
-    <!--                世界杯相关-->
-    <!--            </y-tabs-pane>-->
-    <!--            <y-tabs-pane name="olympics">-->
-    <!--                奥运会相关-->
-    <!--            </y-tabs-pane>-->
-    <!--            <y-tabs-pane name="chinese">-->
-    <!--                全运会相关-->
-    <!--            </y-tabs-pane>-->
-    <!--        </y-tabs-body>-->
-    <!--    </y-tabs>-->
+
+
+    <y-tabs :selected.sync="selected" direction="vertical">
+        <y-tabs-nav>
+            <template slot="actions">
+                <button>设置</button>
+            </template>
+            <y-tabs-item name="world">
+                世界杯
+            </y-tabs-item>
+            <y-tabs-item name="olympics" disabled>
+                奥运会
+            </y-tabs-item>
+            <y-tabs-item name="chinese">
+                全运会
+            </y-tabs-item>
+        </y-tabs-nav>
+        <y-tabs-body>
+            <y-tabs-pane name="world">
+                世界杯相关
+            </y-tabs-pane>
+            <y-tabs-pane name="olympics">
+                奥运会相关
+            </y-tabs-pane>
+            <y-tabs-pane name="chinese">
+                全运会相关
+            </y-tabs-pane>
+        </y-tabs-body>
+    </y-tabs>
 
     <!--      <button class="toast" @click="showToast">-->
     <!--        show toast-->
@@ -266,48 +267,50 @@
     <!--        <y-col :span="3/22" offset="1">2</y-col>-->
     <!--        <y-col :span="3/22" offset="1">2</y-col>-->
     <!--    </y-row>-->
-    <!-- <div class="box">
-      <p class="title">一般输入框：</p>
-      <y-input value="张三"></y-input>
+    <div class="box">
+    </div>
+
+    <p class="title">一般输入框：</p>
+    <y-input value="张三"></y-input>
+
+    <div class="box">
+        <p class="title">禁用输入框：</p>
+        <y-input
+                value="李四"
+                style="margin-right: 20px"
+                :disabled="true"
+        ></y-input>
+        <y-input value="李四" disabled></y-input>
     </div>
     <div class="box">
-      <p class="title">禁用输入框：</p>
-      <y-input
-        value="李四"
-        style="margin-right: 20px"
-        :disabled="true"
-      ></y-input>
-      <y-input value="李四" disabled></y-input>
+        <p class="title">只读输入框：</p>
+        <y-input value="王五" readonly></y-input>
     </div>
     <div class="box">
-      <p class="title">只读输入框：</p>
-      <y-input value="王五" readonly></y-input>
+        <p class="title">带警告信息的输入框：</p>
+        <y-input value="王五" warn="姓名不能少于两个字"></y-input>
     </div>
     <div class="box">
-      <p class="title">带警告信息的输入框：</p>
-      <y-input value="王五" warn="姓名不能少于两个字"></y-input>
-    </div>
-    <div class="box">
-      <y-input v-model="message"></y-input>
-      <p>{{ message }}</p>
-      <y-button @click="message += 1">+1</y-button>
+        <y-input v-model="message"></y-input>
+        <p>{{ message }}</p>
+        <y-button @click="message += 1">+1</y-button>
     </div>
     <y-button icon="settings" @click="test" icon-position="left">
-      按钮
+        按钮
     </y-button>
-    <y-button icon="loading" icon-position="right"> 按钮 </y-button>
-    <y-button icon="settings" icon-position="left"> 按钮 </y-button>
+    <y-button icon="loading" icon-position="right"> 按钮</y-button>
+    <y-button icon="settings" icon-position="left"> 按钮</y-button>
     <y-button icon="settings"></y-button>
-    <y-button icon="settings" icon-position="up">-->
-    <!--        按钮-->
-    <!--    </y-button>-->
-    <!-- <y-icon name="download"></y-icon> -->
-    <!-- <y-button-group>
-      <y-button icon="left">上一页</y-button>
-      <y-button>更多</y-button>
-      <y-button icon="right" icon-position="right">下一页 </y-button>
+    <y-button icon="settings" icon-position="up">
+        按钮
+    </y-button>
+    <y-icon name="download"></y-icon>
+    <y-button-group>
+        <y-button icon="left">上一页</y-button>
+        <y-button>更多</y-button>
+        <y-button icon="right" icon-position="right">下一页</y-button>
     </y-button-group>
-    <y-button>确认</y-button> -->
+    <y-button>确认</y-button>
 </div>
 <script src="./src/app.js"></script>
 </body>
