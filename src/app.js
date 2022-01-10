@@ -43,7 +43,7 @@ new Vue({
     el: "#app",
     data: {
         message: "hello",
-        selectedTab: "chinese",
+        selectedTab: ["2", "1"],
     },
     mounted() {
     },

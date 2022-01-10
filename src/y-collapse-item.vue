@@ -30,30 +30,16 @@ export default {
   },
   inject: ['eventBus'],
   mounted() {
-    this.eventBus && this.eventBus.$on('update:selected', (name) => {
-      console.log(name, "name")
-      if (name !== this.name) {
-        this.close()
-      } else {
-        this.show()
-      }
+    this.eventBus && this.eventBus.$on('update:selected', (names) => {
+      this.visible = names.indexOf(this.name) >= 0;
     })
   },
   methods: {
-    close() {
-      this.visible = false
-    },
-
-    show(){
-      this.visible = true
-    },
-
     visibleTrue() {
       if (this.visible) {
-        this.visible = false
+        this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
       } else {
-        this.eventBus && this.eventBus.$emit('update:selected', this.name)
-        console.log(this.name, "this.name");
+        this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
       }
     }
   }
