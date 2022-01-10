@@ -8,9 +8,13 @@ module.exports = {
             {text: "交流", link: "https://google.com"}
         ],
         sidebar: [
-            '/',
-            '/install/',
-            '/getStart/',
+            {
+                title: "入门",
+                children: [
+                    '/install/',
+                    '/getStart/',
+                ]
+            },
             {
                 title: '组件',
                 children: [
