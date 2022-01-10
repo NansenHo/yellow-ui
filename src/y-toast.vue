@@ -153,7 +153,7 @@ $height: 40px;
   border: 1px solid #ebeef5;
   //   padding: 14px 26px 14px 13px;
   background: #fff;
-  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   min-width: 330px;
   justify-content: space-between;

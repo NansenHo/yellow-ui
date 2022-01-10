@@ -46,12 +46,7 @@ new Vue({
         selectedTab: ["2", "1"],
         selected: "world"
     },
-    mounted() {
-    },
     methods: {
-        test() {
-            console.log("1");
-        },
         showToast() {
             this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}`, {
                 enableHtml: false,
