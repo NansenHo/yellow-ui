@@ -11,6 +11,12 @@ module.exports = {
             '/',
             '/install/',
             '/getStart/',
+            {
+                title: '组件',
+                children: [
+                    '/components/button'
+                ],
+            },
         ],
     }
 }
