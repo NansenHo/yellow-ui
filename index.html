@@ -67,23 +67,29 @@
     </style>
 </head>
 <body>
-<div id="app" style=" margin-top: 100px; margin-left: 100px; border: 1px solid red;">
+<div id="app">
 
-    <div @click="test">
-        <y-popover>
-            <template slot="content">
-                <div>popover 内容</div>
-            </template>
-            <y-button>点我</y-button>
-        </y-popover>
-    </div>
+    <y-collapse>
+        <y-collapse-item title="title1">content1</y-collapse-item>
+        <y-collapse-item title="title2">content2</y-collapse-item>
+        <y-collapse-item title="title3">content3</y-collapse-item>
+    </y-collapse>
 
-    <y-popover>
-        <template slot="content">
-            <div>popover 内容</div>
-        </template>
-        <y-button>点我</y-button>
-    </y-popover>
+    <!--    <div @click="test">-->
+    <!--        <y-popover>-->
+    <!--            <template slot="content">-->
+    <!--                <div>popover 内容</div>-->
+    <!--            </template>-->
+    <!--            <y-button>点我</y-button>-->
+    <!--        </y-popover>-->
+    <!--    </div>-->
+
+    <!--    <y-popover>-->
+    <!--        <template slot="content">-->
+    <!--            <div>popover 内容</div>-->
+    <!--        </template>-->
+    <!--        <y-button>点我</y-button>-->
+    <!--    </y-popover>-->
 
     <!--    <y-tabs :selected.sync="selectedTab" direction="vertical">-->
     <!--        <y-tabs-nav>-->

@@ -14,6 +14,10 @@
 
 ## CSS
 
+### 负 margin 让 border 重合
+
+如果两个 border 你想让他们重合，那你可以使用负 margin 。
+
 ### 把元素放置在画面的最右边
 
 ```css
