@@ -68,6 +68,35 @@
 </head>
 <body>
 <div id="app" style=" margin-top: 100px; margin-left: 300px; border: 1px solid red;">
+
+    <p>multiple</p>
+    <y-collapse multiple>
+        <y-collapse-item title="title1">content</y-collapse-item>
+        <y-collapse-item title="title2">content</y-collapse-item>
+        <y-collapse-item title="title3">content</y-collapse-item>
+    </y-collapse>
+
+    <p>multiple false</p>
+    <y-collapse :multiple="false">
+        <y-collapse-item title="title1">content</y-collapse-item>
+        <y-collapse-item title="title2">content</y-collapse-item>
+        <y-collapse-item title="title3">content</y-collapse-item>
+    </y-collapse>
+
+    <p>multiple true</p>
+    <y-collapse :multiple="true">
+        <y-collapse-item title="title1">content</y-collapse-item>
+        <y-collapse-item title="title2">content</y-collapse-item>
+        <y-collapse-item title="title3">content</y-collapse-item>
+    </y-collapse>
+
+    <p>none multiple</p>
+    <y-collapse>
+        <y-collapse-item title="title1">content</y-collapse-item>
+        <y-collapse-item title="title2">content</y-collapse-item>
+        <y-collapse-item title="title3">content</y-collapse-item>
+    </y-collapse>
+
     <div>
         <p>click 触发</p>
         <y-popover width="250" trigger="click">
@@ -108,6 +137,7 @@
             <y-button>点我</y-button>
         </y-popover>
     </div>
+
     <div>
         <p>hover 触发</p>
         <y-popover width="250" trigger="hover">

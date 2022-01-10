@@ -19,14 +19,31 @@ export default {
       required: true,
     }
   },
-  data(){
+  data() {
     return {
       visible: false,
     }
   },
+  inject: ['eventBus'],
+  mounted() {
+    this.eventBus && this.eventBus.$on('update:selected', (vm) => {
+      if (vm !== this) {
+        this.close()
+      }
+    })
+  },
   methods: {
-    visibleTrue(){
-      this.visible = !this.visible
+    close() {
+      this.visible = false
+    },
+
+    visibleTrue() {
+      if (this.visible) {
+        this.visible = false
+      } else {
+        this.visible = true
+        this.eventBus && this.eventBus.$emit('update:selected', this)
+      }
     }
   }
 }
