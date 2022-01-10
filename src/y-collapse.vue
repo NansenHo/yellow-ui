@@ -18,16 +18,19 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    selected: {
+      type: String,
     }
   },
   provide() {
-    if (this.multiple) {
-    } else {
-      return {
-        eventBus: this.eventBus
-      }
+    return {
+      eventBus: this.eventBus
     }
-  }
+  },
+  mounted() {
+    this.eventBus.$emit("update:selected", this.selected)
+  },
 }
 </script>
 
