@@ -1,5 +1,6 @@
 <template>
   <button class="y-button"
+          :class="classes"
           @click="$emit('click')"
           v-if="iconPosition === 'right' && $slots.default">
     <slot></slot>
@@ -8,6 +9,7 @@
             :name="icon"></y-icon>
   </button>
   <button class="y-button"
+          :class="classes"
           @click="$emit('click')"
           v-else-if="iconPosition === 'left' && $slots.default">
     <y-icon v-if="icon"
@@ -16,6 +18,7 @@
     <slot></slot>
   </button>
   <button class="y-button"
+          :class="classes"
           @click="$emit('click')"
           v-else-if="!$slots.default">
     <y-icon v-if="icon"
@@ -45,8 +48,19 @@ export default {
         return value === 'left' || value === 'right';
         // return value !== 'left' && value !== 'right' ? false : true; // 用三元运算符来做
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     }
   },
+  computed: {
+    classes() {
+      return {
+        disabled: this.disabled
+      }
+    }
+  }
 };
 </script>
 
@@ -65,6 +79,16 @@ export default {
   justify-content: center;
   align-items: center;
   vertical-align: middle;
+
+  &.disabled {
+    cursor: not-allowed;
+    background: #fff;
+    color: #c0c4cc;
+  }
+
+  &.disabled:hover {
+    border-color: #c0c4cc;
+  }
 }
 
 .y-button:hover {

@@ -8,11 +8,16 @@
 
 <script>
 import Button from "../../../src/y-button"
+
 export default {
   name: "ybutton-demo",
   components: {
     "y-button": Button,
   },
+  data() {
+    return {
+    }
+  }
 }
 </script>
 
