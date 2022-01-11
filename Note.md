@@ -1463,6 +1463,29 @@ git log
 
 使用 `git log` 或 `git log path/to/` 后， git 一直停留在 log 模式，这时只需要**按 q 键**即可退出 。
 
+## Vuepress
+
+### vue 组件展示在页面里
+
+1. 在 docs/.vuepress/components 目录下，建立 .vue 文件
+
+2. 在 .nd 文件里
+```markdown
+<ClientOnly>
+<ybutton-demo></ybutton-demo>
+</ClientOnly>
+```
+
+### 增加可执行文件
+
+macOS 需要执行这句代码后才能执行 deploy.sh 文件
+
+`chmod +x deploy.sh` 
+
+直接在命令行中，输入
+
+`./deploy.sh` 即可执行 deploy.sh 文件。
+ 
 ## 编程经验
 
 ### 功能实现后一定要对代码进行重构
@@ -1633,3 +1656,4 @@ export default {
 + 被观察感
 + 在表现好并且他们还不给加薪的时候就走
 
+### 通过删部分代码来熟悉代码和找bug是高效的

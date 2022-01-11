@@ -1,4 +1,5 @@
 module.exports = {
+    base: "/YellowUI/",
     title: 'Yellow UI',
     description: '一个UI框架',
     themeConfig: {
@@ -10,6 +11,7 @@ module.exports = {
         sidebar: [
             {
                 title: "入门",
+                collapsable: false,
                 children: [
                     '/install/',
                     '/getStart/',
@@ -17,6 +19,7 @@ module.exports = {
             },
             {
                 title: '组件',
+                collapsable: false,
                 children: [
                     '/components/button'
                 ],
