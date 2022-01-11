@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ybutton">
     <y-button>默认按钮</y-button>
     <y-button icon="settings">默认按钮</y-button>
     <y-button icon="loading">默认按钮</y-button>
@@ -22,5 +22,12 @@ export default {
 </script>
 
 <style scoped>
-
+.ybutton{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 24px;
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6);
+}
 </style>

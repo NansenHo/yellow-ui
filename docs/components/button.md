@@ -19,6 +19,8 @@ title: y-button 按钮
 <y-button icon="loading">默认按钮</y-button>
 ```
 
+icon 属性可以设置 icon
+
 ## 禁用状态
 
 按钮不可用状态。
