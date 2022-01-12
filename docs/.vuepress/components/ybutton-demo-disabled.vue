@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <y-button disabled>默认按钮</y-button>
+  <div class="ybuttonDisabled">
+    <y-button disabled>禁用按钮</y-button>
+    <y-button :disabled="true">禁用按钮</y-button>
+    <y-button :disabled="false">默认按钮</y-button>
   </div>
 </template>
 
@@ -15,5 +17,12 @@ export default {
 </script>
 
 <style scoped>
-
+.ybuttonDisabled{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 24px;
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6);
+}
 </style>

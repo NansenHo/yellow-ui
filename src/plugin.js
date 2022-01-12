@@ -3,6 +3,7 @@ import Toast from "./y-toast";
 let currentToast;
 
 export default {
+  // VUe 的插件必须要导出一个 install 函数
   install(Vue, options) {
     Vue.prototype.$toast = function (message, toastOptions) {
       if (currentToast) {
@@ -21,6 +22,7 @@ export default {
 };
 
 // 帮助函数
+// 创建一个 toast
 function createToast({ Vue, message, propsData, onClose }) {
   let Constructor = Vue.extend(Toast);
   let toast = new Constructor({

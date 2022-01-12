@@ -21,7 +21,12 @@ module.exports = {
                 title: '组件',
                 collapsable: false,
                 children: [
-                    '/components/button'
+                    '/components/icon',
+                    '/components/button',
+                    '/components/toast',
+                    '/components/popover',
+                    '/components/tabs',
+                    '/components/input',
                 ],
             },
         ],

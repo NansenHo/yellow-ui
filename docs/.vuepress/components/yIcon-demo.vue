@@ -1,17 +1,20 @@
 <template>
-  <div class="ybutton">
-    <y-button>默认按钮</y-button>
-    <y-button icon="aui-icon-plus">默认按钮</y-button>
-    <y-button icon="aui-icon-refresh">默认按钮</y-button>
+  <div class="container">
+    <y-icon name="aui-icon-plus"></y-icon>
+    <y-icon name="aui-icon-comment"></y-icon>
+    <y-icon name="aui-icon-image"></y-icon>
+    <y-button icon="aui-icon-weichat-circle">分享</y-button>
   </div>
 </template>
 
 <script>
+import Icon from "../../../src/y-icon"
 import Button from "../../../src/y-button"
 
 export default {
   name: "ybutton-demo",
   components: {
+    "y-icon": Icon,
     "y-button": Button,
   },
   data() {
@@ -22,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.ybutton{
+.container{
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 24px;

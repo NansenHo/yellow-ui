@@ -15,7 +15,7 @@ title: y-button 按钮
 
 ```vue
 <y-button>默认按钮</y-button>
-<y-button icon="settings">默认按钮</y-button>
+<y-button icon="set">默认按钮</y-button>
 <y-button icon="loading">默认按钮</y-button>
 ```
 
@@ -29,4 +29,17 @@ icon 属性可以设置 icon
 <ybutton-demo-disabled></ybutton-demo-disabled>
 </ClientOnly>
 
+```vue
+<y-button disabled>禁用按钮</y-button>
+<y-button :disabled="true">禁用按钮</y-button>
+<y-button :disabled="false">默认按钮</y-button>
+```
+
+## 按钮组
+
+多个按钮以按钮组的形式出现，常用于多项类似操作。
+
+<ClientOnly>
+<ybutton-demo-group></ybutton-demo-group>
+</ClientOnly>
 

@@ -1455,6 +1455,12 @@ git push origin branchName:branchName
 git checkout branchName
 ```
 
+查看当前所在分支：
+
+```gitexclude
+git branch
+```
+
 查看 git 历史
 
 ```gitexclude
@@ -1657,3 +1663,12 @@ export default {
 + 在表现好并且他们还不给加薪的时候就走
 
 ### 通过删部分代码来熟悉代码和找bug是高效的
+
+### 批量将 iconfont 加入购物车
+
+```javascript
+var span = document.querySelectorAll('.icon-cover');
+for (var i = 0, len = span.length; i < len; i++) {
+     console.log(span[i].querySelector('span').click());
+}
+```
