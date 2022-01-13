@@ -88,7 +88,7 @@ export default {
       if (this.autoClose) {
         setTimeout(() => {
           this.close();
-        }, 5000);
+        }, 3000);
       }
     },
     close() {
@@ -125,6 +125,7 @@ $height: 40px;
 .wrapper {
   position: fixed;
   left: 50%;
+  z-index: 30;
   transform: translateX(-50%);
 
   &.position-top {

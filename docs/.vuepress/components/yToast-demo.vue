@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <y-button @click="showToast">在屏幕中间打开消息提示</y-button>
     <y-button @click="showToast_top">在屏幕上方打开消息提示</y-button>
+    <y-button @click="showToast">在屏幕中间打开消息提示</y-button>
     <y-button @click="showToast_bottom">在屏幕上方打开消息提示</y-button>
   </div>
 </template>
@@ -28,45 +28,21 @@ export default {
   },
   methods: {
     showToast() {
-      let that = this
       this.$toast(`你的智商目前为 ${this.IQ}`, {
         enableHtml: false,
         position: "middle",
-        closeButton: {
-          text: "充值",
-          callback() {
-            that.IQ = that.IQ + 100
-            window.alert(`您已充值100，您现在的智商为 ${that.IQ}`)
-          },
-        },
       });
     },
     showToast_top() {
-      let that = this
       this.$toast(`你的智商目前为 ${this.IQ}`, {
         enableHtml: false,
         position: "top",
-        closeButton: {
-          text: "充值",
-          callback() {
-            that.IQ = that.IQ + 100
-            window.alert(`您已充值100，您现在的智商为 ${that.IQ}`)
-          },
-        },
       });
     },
-    showToast_bottom(){
-      let that = this
+    showToast_bottom() {
       this.$toast(`你的智商目前为 ${this.IQ}`, {
         enableHtml: false,
         position: "bottom",
-        closeButton: {
-          text: "充值",
-          callback() {
-            that.IQ = that.IQ + 100
-            window.alert(`您已充值100，您现在的智商为 ${that.IQ}`)
-          },
-        },
       });
     }
   },
@@ -81,5 +57,9 @@ export default {
   border: 1px solid #ebebeb;
   border-radius: 3px;
   box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6);
+}
+
+.wrapper {
+  z-index: 30;
 }
 </style>

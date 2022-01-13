@@ -43,3 +43,18 @@ icon 属性可以设置 icon
 <ybutton-demo-group></ybutton-demo-group>
 </ClientOnly>
 
+```vue
+<template>
+  <div class="container">
+    <y-button-group>
+      <y-button icon="aui-icon-left">上一页</y-button>
+      <y-button icon="aui-icon-right" icon-position="right">下一页</y-button>
+    </y-button-group>
+    <y-button-group>
+      <y-button icon="aui-icon-pencil"></y-button>
+      <y-button icon="aui-icon-share"></y-button>
+      <y-button icon="aui-icon-trash"></y-button>
+    </y-button-group>
+  </div>
+</template>
+```
