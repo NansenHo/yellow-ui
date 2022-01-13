@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-nav">
+  <div class="tabs-nav" ref="nav">
     <slot></slot>
     <div class="line" ref="line"></div>
     <div class="actions-wrapper">
@@ -19,9 +19,10 @@ export default {
     if (this.eventBus) {
       this.eventBus.$on("update:selected", (vm) => {
         let {width, left} = vm.$el.getBoundingClientRect()
+        let {left: left2} = this.$refs.nav.getBoundingClientRect()
         if (this.$refs.line) {
           this.$refs.line.style.width = `${width}px`
-          this.$refs.line.style.left = `${left}px`
+          this.$refs.line.style.left = `${left - left2}px`
         }
       })
     }

@@ -1,8 +1,8 @@
 <template>
-  <div class="ybuttonDisabled">
-    <y-button disabled>禁用按钮</y-button>
-    <y-button :disabled="true">禁用按钮</y-button>
-    <y-button :disabled="false">默认按钮</y-button>
+  <div class="container">
+    <y-button @click="test" disabled>禁用按钮</y-button>
+    <y-button :disabled="true" @click="test">禁用按钮</y-button>
+    <y-button :disabled="false" @click="test">默认按钮</y-button>
   </div>
 </template>
 
@@ -13,11 +13,16 @@ export default {
   components: {
     "y-button": Button,
   },
+  methods:{
+    test(){
+      console.log(1)
+    }
+  }
 }
 </script>
 
 <style scoped>
-.ybuttonDisabled{
+.container{
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 24px;

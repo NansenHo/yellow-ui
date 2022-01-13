@@ -35,7 +35,11 @@ export default {
     // item 本身也监听这个事件
     if (this.eventBus) {
       this.eventBus.$on('update:selected', (vm) => {
-        this.active = vm.name === this.name;
+        console.log(vm.name);
+        console.log(this.name);
+        if (vm.name === this.name) {
+          this.active = true
+        }
       })
     }
   },

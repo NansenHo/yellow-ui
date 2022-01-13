@@ -162,7 +162,7 @@
         <y-tabs :selected.sync="selected" direction="vertical">
             <y-tabs-nav>
                 <template slot="actions">
-                    <button>设置</button>
+                    <y-button icon="aui-icon-plus"></y-button>
                 </template>
                 <y-tabs-item name="world">
                     世界杯
@@ -187,9 +187,9 @@
             </y-tabs-body>
         </y-tabs>
 
-    <button class="toast" @click="showToast">
+    <y-button class="toast" @click="showToast">
         show toast
-    </button>
+    </y-button>
     <y-toast class="toast"></y-toast>
 
         <y-container style="height: 100vh">
@@ -199,8 +199,7 @@
             <y-content>content</y-content>
           </y-container>
           <y-footer>footer</y-footer>
-        </y-container> -->
-
+        </y-container>
     <!--    &lt;!&ndash; <y-row>-->
     <!--      <y-col-->
     <!--        class="demoBox"-->

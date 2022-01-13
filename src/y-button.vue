@@ -60,7 +60,15 @@ export default {
         disabled: this.disabled
       }
     }
-  }
+  },
+  mounted() {
+    if (this.disabled) {
+      // console.log(document.body.querySelector("button"));
+      // console.log(document.body.querySelector("button").disabled);
+      document.body.querySelector("button").disabled = true
+      // console.log(document.body.querySelector("button").disabled);
+    }
+  },
 };
 </script>
 
@@ -103,7 +111,6 @@ export default {
 .y-button:focus {
   outline: none;
 }
-
 
 .icon {
   width: 1em;
