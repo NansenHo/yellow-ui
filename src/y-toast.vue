@@ -143,6 +143,7 @@ $height: 40px;
 }
 
 .toast {
+  z-index: 99;
   animation: fade 1s;
   color: #606266;
   font-size: $font-size;
