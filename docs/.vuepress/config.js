@@ -22,11 +22,11 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/components/icon',
+                    '/components/tabs',
                     '/components/button',
+                    '/components/input',
                     '/components/toast',
                     '/components/popover',
-                    '/components/tabs',
-                    '/components/input',
                 ],
             },
         ],
