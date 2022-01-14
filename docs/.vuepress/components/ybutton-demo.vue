@@ -1,5 +1,5 @@
 <template>
-  <div class="ybutton">
+  <div class="container">
     <y-button>默认按钮</y-button>
     <y-button icon="aui-icon-plus">默认按钮</y-button>
     <y-button icon="aui-icon-refresh">默认按钮</y-button>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.ybutton{
+.container{
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 24px;
