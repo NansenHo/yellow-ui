@@ -234,6 +234,7 @@ export default {
   padding: 24px;
   border: 1px solid #ebebeb;
   border-radius: 3px;
+  width: 740px;
   box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6);
 
   > .ul-wrapper {
