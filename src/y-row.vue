@@ -30,10 +30,16 @@ export default {
     }
   },
   mounted() {
+    this.gutterData = this.gutter
     this.$children.forEach((vm) => {
       vm.$data.gutter = this.gutter;
     });
-  }
+  },
+  data() {
+    return {
+      gutterData: ''
+    }
+  },
 };
 </script>
 

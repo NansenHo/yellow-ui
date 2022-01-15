@@ -3,6 +3,7 @@
        :class="{warn}">
     <input :value="value"
            class="y-input"
+           :placeholder="placeholder"
            :disabled="disabled"
            :readonly="readonly"
            @change="$emit('change', $event.target.value)"
@@ -10,8 +11,8 @@
            @blur="$emit('blur', $event.target.value)"
            @focus="$emit('focus', $event.target.value)"
            type="text">
-    <template v-if="warn">
-      <y-icon name="error" class="warn-icon"></y-icon>
+    <template v-if="warn" class="warn">
+      <y-icon name="aui-icon-info" class="warn-icon"></y-icon>
       <span class="warn-message">{{ warn }}</span>
     </template>
   </div>
@@ -38,6 +39,9 @@ export default {
       default: false,
     },
     warn: {
+      type: String,
+    },
+    placeholder: {
       type: String,
     }
   }
@@ -79,13 +83,16 @@ $color: #606266;
     }
 
     &[disabled] {
-      border-color: #ccc;
-      color: #ccc;
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
       cursor: not-allowed;
     }
   }
 
   &.warn {
+    font-size: 10px;
+
     > .input {
       border: 1px solid red;
     }

@@ -49,6 +49,9 @@ export default {
       validator,
     },
   },
+  mounted(){
+    this.gutter = this.$parent.$data.gutterData
+  },
   data() {
     return {
       gutter: 0,
@@ -97,8 +100,9 @@ export default {
 
 <style lang="scss" scoped>
 .col {
-  height: 100px;
-  background: gray;
+  //height: 100px;
+  //background: gray;
+  //background: #f1ca17;
   display: flex;
 
   &.align-left {

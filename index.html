@@ -79,73 +79,73 @@
 
     <y-button disabled>push</y-button>
     <!--    <div>-->
-            <p>click 触发</p>
-            <y-popover width="250" trigger="click">
-                <template slot="content">
-                    <div>popover 内容</div>
-                    <a href="https://qq.com">qq</a>
-                    <y-button>click</y-button>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
+    <p>click 触发</p>
+    <y-popover width="250" trigger="click">
+        <template slot="content">
+            <div>popover 内容</div>
+            <a href="https://qq.com">qq</a>
+            <y-button>click</y-button>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
 
-            <y-popover position="right" trigger="click">
-                <template slot="content">
-                    <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
-                        love it
-                    </div>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
+    <y-popover position="right" trigger="click">
+        <template slot="content">
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
+                love it
+            </div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
 
-            <!--    <div @click="test">-->
-            <y-popover position="bottom" trigger="click">
-                <template slot="content">
-                    <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
-                        love it
-                    </div>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
-            <!--    </div>-->
+    <!--    <div @click="test">-->
+    <y-popover position="bottom" trigger="click">
+        <template slot="content">
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
+                love it
+            </div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
+    <!--    </div>-->
 
-            <y-popover position="left" trigger="click">
-                <template slot="content">
-                    <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
-                        love it
-                    </div>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
-        </div>
+    <y-popover position="left" trigger="click">
+        <template slot="content">
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
+                love it
+            </div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
+</div>
 
-        <div>
-            <p>hover 触发</p>
-            <y-popover width="250" trigger="hover">
-                <template slot="content">
-                    <div>popover 内容</div>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
+<div>
+    <p>hover 触发</p>
+    <y-popover width="250" trigger="hover">
+        <template slot="content">
+            <div>popover 内容</div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
 
-            <y-popover position="right" trigger="hover">
-                <template slot="content">
-                    <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
-                        love it
-                    </div>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
+    <y-popover position="right" trigger="hover">
+        <template slot="content">
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
+                love it
+            </div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
 
-            <!--    <div @click="test">-->
-            <y-popover position="bottom" trigger="hover">
-                <template slot="content">
-                    <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
-                        love it
-                    </div>
-                </template>
-                <y-button>点我</y-button>
-            </y-popover>
+    <!--    <div @click="test">-->
+    <y-popover position="bottom" trigger="hover">
+        <template slot="content">
+            <div>popover you got to love it popover you got to love it popover you got to love it popover you got to
+                love it
+            </div>
+        </template>
+        <y-button>点我</y-button>
+    </y-popover>
     <!--        &lt;!&ndash;    </div>&ndash;&gt;-->
 
     <!--        <y-popover position="left" trigger="hover">-->
@@ -159,152 +159,152 @@
     <!--    </div>-->
 
 
-        <y-tabs :selected.sync="selected" direction="vertical">
-            <y-tabs-nav>
-                <template slot="actions">
-                    <y-button icon="aui-icon-plus"></y-button>
-                </template>
-                <y-tabs-item name="world">
-                    世界杯
-                </y-tabs-item>
-                <y-tabs-item name="olympics" disabled>
-                    奥运会
-                </y-tabs-item>
-                <y-tabs-item name="chinese">
-                    全运会
-                </y-tabs-item>
-            </y-tabs-nav>
-            <y-tabs-body>
-                <y-tabs-pane name="world">
-                    世界杯相关
-                </y-tabs-pane>
-                <y-tabs-pane name="olympics">
-                    奥运会相关
-                </y-tabs-pane>
-                <y-tabs-pane name="chinese">
-                    全运会相关
-                </y-tabs-pane>
-            </y-tabs-body>
-        </y-tabs>
+    <y-tabs :selected.sync="selected" direction="vertical">
+        <y-tabs-nav>
+            <template slot="actions">
+                <y-button icon="aui-icon-plus"></y-button>
+            </template>
+            <y-tabs-item name="world">
+                世界杯
+            </y-tabs-item>
+            <y-tabs-item name="olympics" disabled>
+                奥运会
+            </y-tabs-item>
+            <y-tabs-item name="chinese">
+                全运会
+            </y-tabs-item>
+        </y-tabs-nav>
+        <y-tabs-body>
+            <y-tabs-pane name="world">
+                世界杯相关
+            </y-tabs-pane>
+            <y-tabs-pane name="olympics">
+                奥运会相关
+            </y-tabs-pane>
+            <y-tabs-pane name="chinese">
+                全运会相关
+            </y-tabs-pane>
+        </y-tabs-body>
+    </y-tabs>
 
     <y-button class="toast" @click="showToast">
         show toast
     </y-button>
     <y-toast class="toast"></y-toast>
 
-        <y-container style="height: 100vh">
-          <y-header>header2</y-header>
-          <y-container>
+    <y-container style="height: 100vh">
+        <y-header>header2</y-header>
+        <y-container>
             <y-aside>aside</y-aside>
             <y-content>content</y-content>
-          </y-container>
-          <y-footer>footer</y-footer>
         </y-container>
-    <!--    &lt;!&ndash; <y-row>-->
-    <!--      <y-col-->
-    <!--        class="demoBox"-->
-    <!--        span="23"-->
-    <!--        offset="1"-->
-    <!--        :ipad="{span:'10', offset: '14'}"-->
-    <!--        >1</y-col-->
-    <!--      >-->
-    <!--    </y-row> &ndash;&gt;-->
-    <!--    &lt;!&ndash;	<y-row class="topBar">&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col class="demoBox"&ndash;&gt;-->
-    <!--    &lt;!&ndash;			   :span="5">&ndash;&gt;-->
-    <!--    &lt;!&ndash;			<y-row align="middle">&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>3</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>4</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;			</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col class="demoBox"&ndash;&gt;-->
-    <!--    &lt;!&ndash;			   :span="19">&ndash;&gt;-->
-    <!--    &lt;!&ndash;			<y-row align="left">&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>3</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>4</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>5</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>6</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;				<y-col>7</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;			</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	<y-row class="logo-search-qrcode">&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col class="demoBox"&ndash;&gt;-->
-    <!--    &lt;!&ndash;			   span="6"&ndash;&gt;-->
-    <!--    &lt;!&ndash;			   align="middle">&ndash;&gt;-->
-    <!--    &lt;!&ndash;&lt;!&ndash;			<img src="https://xiedaimala.com/packs/_/assets/images/logos/red-logo-3f8db9041e6c15d4ae7ed7e4087c4b98.png"&ndash;&gt;&ndash;&gt;-->
-    <!--    &lt;!&ndash;&lt;!&ndash;				 style="height:24px ;max-width: 100%;"&ndash;&gt;&ndash;&gt;-->
-    <!--    &lt;!&ndash;&lt;!&ndash;				 alt="">&ndash;&gt;&ndash;&gt;-->
-    <!--    &lt;!&ndash;		</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col class="demoBox"&ndash;&gt;-->
-    <!--    &lt;!&ndash;			   span="12"></y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col class="demoBox"&ndash;&gt;-->
-    <!--    &lt;!&ndash;			   span="6"></y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	<y-row gutter="10">&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col>1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col>2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	<y-row gutter="18">&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col>1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col>2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col>2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	<y-row gutter="20">&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col span="2">1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col span="20" offset="2">2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	<y-row gutter="20">&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col span="4">1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;		<y-col span="20">2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;	</y-row>&ndash;&gt;-->
-    <!--    &lt;!&ndash;    <y-row gutter="20">&ndash;&gt;-->
-    <!--    &lt;!&ndash;        <y-col :span="3/22">1</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;        <y-col :span="3/22" offset="1">2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;        <y-col :span="3/22" offset="1">2</y-col>&ndash;&gt;-->
-    <!--    &lt;!&ndash;    </y-row>&ndash;&gt;-->
-    <!--    <div class="box">-->
-    <!--    </div>-->
+        <y-footer>footer</y-footer>
+    </y-container>
 
-        <p class="title">一般输入框：</p>
-        <y-input value="张三"></y-input>
+    <y-row>
+        <y-col
+                class="demoBox"
+                span="23"
+                offset="1"
+                :ipad="{span:'10', offset: '14'}">1
+        </y-col>
+    </y-row>
+    <y-row class="topBar">
+        <y-col class="demoBox"
+               :span="5">
+            <y-row align="middle">
+                <y-col>1</y-col>
+                <y-col>2</y-col>
+                <y-col>3</y-col>
+                <y-col>4</y-col>
+            </y-row>
+        </y-col>
+        <y-col class="demoBox"
+               :span="19">
+            <y-row align="left">
+                <y-col>1</y-col>
+                <y-col>2</y-col>
+                <y-col>3</y-col>
+                <y-col>4</y-col>
+                <y-col>5</y-col>
+                <y-col>6</y-col>
+                <y-col>7</y-col>
+            </y-row>
+        </y-col>
+    </y-row>
+    <!--	<y-row class="logo-search-qrcode">-->
+    <!--		<y-col class="demoBox"-->
+    <!--			   span="6"-->
+    <!--			   align="middle">-->
+    <!--&lt;!&ndash;			<img src="https://xiedaimala.com/packs/_/assets/images/logos/red-logo-3f8db9041e6c15d4ae7ed7e4087c4b98.png"&ndash;&gt;-->
+    <!--&lt;!&ndash;				 style="height:24px ;max-width: 100%;"&ndash;&gt;-->
+    <!--&lt;!&ndash;				 alt="">&ndash;&gt;-->
+    <!--		</y-col>-->
+    <!--		<y-col class="demoBox"-->
+    <!--			   span="12"></y-col>-->
+    <!--		<y-col class="demoBox"-->
+    <!--			   span="6"></y-col>-->
+    <!--	</y-row>-->
+    <!--	<y-row gutter="10">-->
+    <!--		<y-col>1</y-col>-->
+    <!--		<y-col>2</y-col>-->
+    <!--	</y-row>-->
+    <!--	<y-row gutter="18">-->
+    <!--		<y-col>1</y-col>-->
+    <!--		<y-col>2</y-col>-->
+    <!--		<y-col>2</y-col>-->
+    <!--	</y-row>-->
+    <!--	<y-row gutter="20">-->
+    <!--		<y-col span="2">1</y-col>-->
+    <!--		<y-col span="20" offset="2">2</y-col>-->
+    <!--	</y-row>-->
+    <!--	<y-row gutter="20">-->
+    <!--		<y-col span="4">1</y-col>-->
+    <!--		<y-col span="20">2</y-col>-->
+    <!--	</y-row>-->
+    <!--    <y-row gutter="20">-->
+    <!--        <y-col :span="3/22">1</y-col>-->
+    <!--        <y-col :span="3/22" offset="1">2</y-col>-->
+    <!--        <y-col :span="3/22" offset="1">2</y-col>-->
+    <!--    </y-row>-->
+    <div class="box">
+    </div>
 
-        <div class="box">
-            <p class="title">禁用输入框：</p>
-            <y-input
-                    value="李四"
-                    style="margin-right: 20px"
-                    :disabled="true"
-            ></y-input>
-            <y-input value="李四" disabled></y-input>
-        </div>
-        <div class="box">
-            <p class="title">只读输入框：</p>
-            <y-input value="王五" readonly></y-input>
-        </div>
-        <div class="box">
-            <p class="title">带警告信息的输入框：</p>
-            <y-input value="王五" warn="姓名不能少于两个字"></y-input>
-        </div>
-        <div class="box">
-            <y-input v-model="message"></y-input>
-            <p>{{ message }}</p>
-            <y-button @click="message += 1">+1</y-button>
-        </div>
+    <p class="title">一般输入框：</p>
+    <y-input value="张三"></y-input>
 
-        <y-button icon="settings" @click="test" icon-position="left">
-            按钮
-        </y-button>
-        <y-button icon="loading" icon-position="right"> 按钮</y-button>
-        <y-button icon="settings" icon-position="left"> 按钮</y-button>
-        <y-button icon="settings"></y-button>
-        <y-button icon="settings" icon-position="right">
-            按钮
-        </y-button>
+    <div class="box">
+        <p class="title">禁用输入框：</p>
+        <y-input
+                value="李四"
+                style="margin-right: 20px"
+                :disabled="true"
+        ></y-input>
+        <y-input value="李四" disabled></y-input>
+    </div>
+    <div class="box">
+        <p class="title">只读输入框：</p>
+        <y-input value="王五" readonly></y-input>
+    </div>
+    <div class="box">
+        <p class="title">带警告信息的输入框：</p>
+        <y-input value="王五" warn="姓名不能少于两个字"></y-input>
+    </div>
+    <div class="box">
+        <y-input v-model="message"></y-input>
+        <p>{{ message }}</p>
+        <y-button @click="message += 1">+1</y-button>
+    </div>
+
+    <y-button icon="settings" @click="test" icon-position="left">
+        按钮
+    </y-button>
+    <y-button icon="loading" icon-position="right"> 按钮</y-button>
+    <y-button icon="settings" icon-position="left"> 按钮</y-button>
+    <y-button icon="settings"></y-button>
+    <y-button icon="settings" icon-position="right">
+        按钮
+    </y-button>
     <y-icon name="download"></y-icon>
     <y-button-group>
         <y-button icon="left">上一页</y-button>

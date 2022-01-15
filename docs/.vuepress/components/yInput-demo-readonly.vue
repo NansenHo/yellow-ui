@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <y-input
-        placeholder="请输入内容"
-        value=""></y-input>
+    <y-input value="" placeholder="请输入内容" readonly></y-input>
   </div>
 </template>
 
@@ -15,9 +13,8 @@ export default {
     "y-input": Input,
   },
   data() {
-    return {
-    }
-  },
+    return {}
+  }
 }
 </script>
 
