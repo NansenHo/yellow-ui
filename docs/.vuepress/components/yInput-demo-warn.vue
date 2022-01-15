@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <y-input placeholder="请输入内容" warn="长度不能少于两个字"></y-input>
+    <y-input v-model="message" value="" placeholder="请输入内容" warn="长度不能少于两个字"></y-input>
   </div>
 </template>
 
@@ -13,7 +13,9 @@ export default {
     "y-input": Input,
   },
   data() {
-    return {}
+    return {
+      message: ""
+    }
   }
 }
 </script>

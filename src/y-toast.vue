@@ -88,7 +88,7 @@ export default {
       if (this.autoClose) {
         setTimeout(() => {
           this.close();
-        }, 3000);
+        }, 2000);
       }
     },
     close() {

@@ -11,7 +11,21 @@ title: Input 输入框
 </ClientOnly>
 
 ```vue
-<y-input placeholder="请输入内容" value=""></y-input>
+
+<y-input 
+    v-model="message" 
+    placeholder="请输入内容" 
+    value=""></y-input>
+
+<script>
+export default {
+  data() {
+    return {
+      message: ""
+    }
+  }
+}
+</script>
 ```
 
 ## 禁用状态
@@ -23,7 +37,22 @@ title: Input 输入框
 通过 `disabled` 属性指定是否禁用 input 组件。
 
 ```vue
-<y-input value="" placeholder="请输入内容" disabled></y-input>
+
+<y-input 
+    v-model="message" 
+    value="" 
+    placeholder="请输入内容" 
+    disabled></y-input>
+
+<script>
+export default {
+  data() {
+    return {
+      message: ""
+    }
+  }
+}
+</script>
 ```
 
 ## 只读状态
@@ -35,7 +64,20 @@ title: Input 输入框
 通过 `readonly` 属性指定是否让 input 组件只读。
 
 ```vue
-<y-input value="" placeholder="请输入内容" readonly></y-input>
+<y-input
+    value="" 
+    placeholder="请输入内容" 
+    readonly></y-input>
+
+<script>
+export default {
+  data() {
+    return {
+      message: ""
+    }
+  }
+}
+</script>
 ```
 
 ## 带提示信息的输入框
@@ -43,3 +85,25 @@ title: Input 输入框
 <ClientOnly>
 <yInput-demo-warn></yInput-demo-warn>
 </ClientOnly>
+
+通过 `warn` 属性可以指定提示信息。
+
+```vue
+<y-input 
+    v-model="message" 
+    value="" 
+    placeholder="请输入内容" 
+    warn="长度不能少于两个字"></y-input>
+
+<script>
+export default {
+  data() {
+    return {
+      message: ""
+    }
+  }
+}
+</script>
+```
+
+

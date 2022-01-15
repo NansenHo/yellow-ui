@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <y-input
-        v-model="message"
-        placeholder="请输入内容"
-        value=""></y-input>
+    <y-input v-model="message" value="我是默认内容" placeholder="请输入内容"></y-input>
   </div>
 </template>
 
@@ -19,7 +16,7 @@ export default {
     return {
       message: ""
     }
-  },
+  }
 }
 </script>
 

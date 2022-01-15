@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     if (this.eventBus) {
-      this.eventBus.$on("update:selected", (vm) => {
+      this.eventBus.$on("update:selected", (item, vm) => {
         let {width, left} = vm.$el.getBoundingClientRect()
         let {left: left2} = this.$refs.nav.getBoundingClientRect()
         if (this.$refs.line) {

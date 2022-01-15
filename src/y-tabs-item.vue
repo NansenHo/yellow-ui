@@ -33,7 +33,7 @@ export default {
   },
   created() {
     if (this.eventBus) {
-      this.eventBus.$on('update:selected', (vm) => {
+      this.eventBus.$on('update:selected', (item, vm) => {
         this.active = vm.name === this.name;
       })
     }
@@ -44,7 +44,7 @@ export default {
         return
       }
       // 当点击了该item，那就会更新 selected 为 this.name
-      this.eventBus.$emit('update:selected', this, this.name)
+      this.eventBus.$emit('update:selected', this.name, this)
     }
   },
 }

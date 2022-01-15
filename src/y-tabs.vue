@@ -47,7 +47,10 @@ export default {
         if (vm.$options.name === "y-tabs-nav") {
           vm.$children.forEach((vmChildren) => {
             if (vmChildren.$options.name === 'y-tabs-item' && vmChildren.name === this.selected) {
-              this.$emit("update:selected", this.selected, vmChildren)
+              console.log(vmChildren.name);
+              console.log(this.selected);
+              console.log(this)
+              this.eventBus.$emit("update:selected", this.selected, vmChildren)
             }
           })
         }

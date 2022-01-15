@@ -28,7 +28,7 @@ export default {
   },
   created() {
     if (this.eventBus) {
-      this.eventBus.$on('update:selected', (vm) => {
+      this.eventBus.$on('update:selected', (item, vm) => {
         this.active = vm.name === this.name;
       })
     }

@@ -104,6 +104,7 @@ export default {
   //background: gray;
   //background: #f1ca17;
   display: flex;
+  box-sizing: border-box;
 
   &.align-left {
     justify-content: flex-start;

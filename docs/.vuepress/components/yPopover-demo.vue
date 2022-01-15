@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div>
-      <p>click 触发</p>
-      <y-popover position="top" trigger="click">
+    <p>click 触发</p>
+    <div class="row">
+      <y-popover position="top" trigger="click" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。
           </div>
@@ -10,7 +10,7 @@
         <y-button>上方弹出</y-button>
       </y-popover>
 
-      <y-popover position="right" trigger="click">
+      <y-popover position="right" trigger="click" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。
           </div>
@@ -19,7 +19,7 @@
       </y-popover>
 
       <!--    <div @click="test">-->
-      <y-popover position="bottom" trigger="click">
+      <y-popover position="bottom" trigger="click" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。
           </div>
@@ -28,7 +28,7 @@
       </y-popover>
       <!--    </div>-->
 
-      <y-popover position="left" trigger="click">
+      <y-popover position="left" trigger="click" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。</div>
         </template>
@@ -36,16 +36,16 @@
       </y-popover>
     </div>
 
-    <div>
-      <p>hover 触发</p>
-      <y-popover width="250" trigger="hover">
+    <p>hover 触发</p>
+    <div class="row">
+      <y-popover width="250" trigger="hover" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。</div>
         </template>
         <y-button>上面弹出</y-button>
       </y-popover>
 
-      <y-popover position="right" trigger="hover">
+      <y-popover position="right" trigger="hover" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。
           </div>
@@ -54,7 +54,7 @@
       </y-popover>
 
       <!--    <div @click="test">-->
-      <y-popover position="bottom" trigger="hover">
+      <y-popover position="bottom" trigger="hover" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。
           </div>
@@ -62,7 +62,7 @@
         <y-button>下面弹出</y-button>
       </y-popover>
 
-      <y-popover position="left" trigger="hover">
+      <y-popover position="left" trigger="hover" class="popover">
         <template slot="content">
           <div>这是一段内容,这是一段内容,这是一段内容,这是一段内容。
           </div>
@@ -100,5 +100,21 @@ export default {
   border: 1px solid #ebebeb;
   border-radius: 3px;
   box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6);
+}
+
+.row {
+  margin-bottom: 2em;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
+.popover {
+  margin: 0 10px
+}
+
+p:first-child {
+  margin-top: 0;
 }
 </style>
