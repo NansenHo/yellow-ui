@@ -5,8 +5,8 @@ module.exports = {
     themeConfig: {
         nav: [
             {text: "主页", link: "/"},
-            {text: "文档", link: "/guide"},
-            {text: "交流", link: "https://google.com"}
+            {text: "源码", link: "/guide"},
+            {text: "交流", link: "../../components/author"}
         ],
         sidebar: [
             {
@@ -32,6 +32,13 @@ module.exports = {
                     '/components/collapse',
                 ],
             },
+            {
+                title: "关于作者",
+                collapsable: false,
+                children: [
+                    '/components/author'
+                ]
+            }
         ],
     },
     host: 'localhost',

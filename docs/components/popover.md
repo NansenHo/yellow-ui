@@ -4,7 +4,7 @@ title: Popover 弹出框
 
 # Popover 弹出框
 
-## 基础用法
+## 基本用法
 
 popover 弹出框提供 click 激活和 hover 激活两种触发方式。
 

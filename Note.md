@@ -1340,6 +1340,12 @@ npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai mocha sinon si
 
 ### 打包发布 npm
 
+先打包
+
+```shell
+npx parcel build index.js --no-cache
+```
+
 1. `npm adduser` 命令行在终端中登录 npm 帐号
 2. 查看 package.json 中规定的入口文件是哪个？
     - package.json 中规定的入口文件即，main 字段的值；

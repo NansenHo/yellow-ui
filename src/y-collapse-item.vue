@@ -1,6 +1,6 @@
 <template>
   <div class="yCollapseItem">
-    <div class="yCollapseItemTitle" @click="visibleTrue">
+    <div class="yCollapseItemTitle" :style="borderStyle" @click="visibleTrue">
       {{ title }}
       <y-icon name="settings"></y-icon>
     </div>
@@ -21,6 +21,13 @@ export default {
     name: {
       type: String,
       required: true,
+    }
+  },
+  computed: {
+    borderStyle: function(){
+      if(!this.visible){
+        return {borderBottom:'1px solid #ebeef5'}
+      }
     }
   },
   data() {
@@ -49,7 +56,7 @@ export default {
 <style lang="scss" scoped>
 .yCollapseItem {
   > .yCollapseItemTitle {
-    border-bottom: 1px solid #ebeef5;
+    border: 1px solid transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
