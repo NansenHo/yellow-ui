@@ -15,8 +15,8 @@ title: Button 按钮
 
 ```vue
 <y-button>默认按钮</y-button>
-<y-button icon="set">默认按钮</y-button>
-<y-button icon="loading">默认按钮</y-button>
+<y-button icon="aui-icon-plus">默认按钮</y-button>
+<y-button icon="aui-icon-recovery">加载中</y-button>
 ```
 
 icon 属性可以设置 icon

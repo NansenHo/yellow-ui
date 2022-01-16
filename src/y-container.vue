@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class="container" :class="containerClass">
+  <div class="y-container-vue" :class="containerClass">
     <slot></slot>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.container {
+.y-container-vue {
   display: flex;
   flex-direction: column;
   flex-grow: 1;

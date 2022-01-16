@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p>click 触发</p>
+    <p>click 激活</p>
     <div class="row">
       <y-popover position="top" trigger="click" class="popover">
         <template slot="content">
@@ -36,7 +36,7 @@
       </y-popover>
     </div>
 
-    <p>hover 触发</p>
+    <p>hover 激活</p>
     <div class="row">
       <y-popover width="250" trigger="hover" class="popover">
         <template slot="content">

@@ -1,6 +1,6 @@
 <template>
   <svg
-    v-if="name === 'loading'"
+    v-if="name === 'aui-icon-recovery'"
     @click="$emit('click')"
     class="y-icon y-icon-loading"
     aria-hidden="true"

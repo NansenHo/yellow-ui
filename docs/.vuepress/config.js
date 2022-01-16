@@ -23,11 +23,13 @@ module.exports = {
                 children: [
                     '/components/icon',
                     '/components/grid',
+                    '/components/layout',
                     '/components/tabs',
                     '/components/button',
                     '/components/input',
                     '/components/toast',
                     '/components/popover',
+                    '/components/collapse',
                 ],
             },
         ],

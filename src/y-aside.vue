@@ -13,6 +13,7 @@
 //例如：import 《组件名称》 from '《组件路径》';
 import Icon from "./y-icon.vue";
 export default {
+  name: "y-aside",
   //import引入的组件需要注入到对象中才能使用
   components: {
     "y-icon": Icon,
