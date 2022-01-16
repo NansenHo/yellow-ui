@@ -1,6 +1,8 @@
-# yellow - 这是一个 Vue UI 组件
+# yellow
 
 ## 介绍
+
+这是一个简单易用且漂亮的 Vue UI 框架。
 
 在公司项目中接触到了 elementUI ，觉得 elementUI 真的极大地方便了前端画面的开发，尤其是后台管理类项目。
 
@@ -21,24 +23,9 @@
 ```
 IE 8 及以上浏览器支持该样式；
 
-并将默认颜色等变量也写进去。
-```CSS
-:root {
---button-color: #6e6d7a;
---button-height: 32px;
---font-size: 14px;
---button-bg: white;
---button-active-bg: #eee;
---border-radius: 8px;
---border-color: #E7E7E9;
---border-color-hover: #666;
-}
-```
- IE 15 及以上浏览器支持该样式。
-
 #### 2. 安装 yellow
 
-请在使用 vue-cli 来搭建的项目中使用该 package。 并使用 yarn 来安装。
+请在使用 vue-cli 来搭建的项目中使用该 package。
 
 ```shell
 yarn add yellow --save
@@ -82,5 +69,6 @@ export default {
 ## 变更记录
 
 ## 联系方式
++ 
 
 ## 贡献代码
