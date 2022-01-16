@@ -1,5 +1,5 @@
 module.exports = {
-    base: "/YellowUI/",
+    base: "/",
     title: 'Yellow UI',
     description: '一个UI框架',
     themeConfig: {
