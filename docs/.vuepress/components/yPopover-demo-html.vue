@@ -17,7 +17,7 @@ import Button from "../../../src/y-button"
 import Popover from "../../../src/y-popover"
 
 export default {
-  name: "yPopover-demo",
+  name: "yPopover-demo-html",
   components: {
     "y-icon": Icon,
     "y-button": Button,

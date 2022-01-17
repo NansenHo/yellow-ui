@@ -11,7 +11,7 @@
 import Input from "../../../src/y-input"
 
 export default {
-  name: "ybutton-demo",
+  name: "yInput-demo",
   components: {
     "y-input": Input,
   },

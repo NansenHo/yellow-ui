@@ -27,7 +27,7 @@ import Collapse from "../../../src/y-collapse"
 import CollapseItem from "../../../src/y-collapse-item"
 
 export default {
-  name: "yCollapse-demo",
+  name: "yCollapse-demo-multiple",
   components: {
     "y-collapse": Collapse,
     "y-collapse-item": CollapseItem,

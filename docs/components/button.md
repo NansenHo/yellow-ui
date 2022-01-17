@@ -13,13 +13,15 @@ title: Button 按钮
 <ybutton-demo></ybutton-demo>
 </ClientOnly>
 
++ `icon` 属性可以为 button 设置按钮图标
++ `icon-position` 属性可以设置 button 图标显示的位置。`icon-position` 接受 "left" / "right" 这两个值。
+
 ```vue
 <y-button>默认按钮</y-button>
 <y-button icon="aui-icon-plus">默认按钮</y-button>
+<y-button icon="aui-icon-plus" icon-position="right">默认按钮</y-button>
 <y-button icon="aui-icon-recovery">加载中</y-button>
 ```
-
-icon 属性可以设置 icon
 
 ## 禁用状态
 
@@ -28,6 +30,8 @@ icon 属性可以设置 icon
 <ClientOnly>
 <ybutton-demo-disabled></ybutton-demo-disabled>
 </ClientOnly>
+
+`disabled` 属性接受一个 Boolean 值，默认为 false。
 
 ```vue
 <y-button disabled>禁用按钮</y-button>
@@ -42,6 +46,8 @@ icon 属性可以设置 icon
 <ClientOnly>
 <ybutton-demo-group></ybutton-demo-group>
 </ClientOnly>
+
+> `y-button-group` 组件里面只能放 `y-button` 组件。
 
 ```vue
 <template>

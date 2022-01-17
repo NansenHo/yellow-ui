@@ -39,7 +39,7 @@ import TabsPane from "../../../src/y-tabs-pane"
 import Icon from "../../../src/y-icon"
 
 export default {
-  name: "ybutton-demo-disabled",
+  name: "yTabs-demo",
   components: {
     "y-tabs": Tabs,
     "y-tabs-body": TabsBody,

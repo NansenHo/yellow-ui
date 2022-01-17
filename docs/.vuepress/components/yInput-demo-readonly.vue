@@ -8,7 +8,7 @@
 import Input from "../../../src/y-input"
 
 export default {
-  name: "ybutton-demo",
+  name: "yInput-demo-readonly",
   components: {
     "y-input": Input,
   },

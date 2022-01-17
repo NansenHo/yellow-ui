@@ -216,7 +216,7 @@ import Icon from "../../../src/y-icon"
 import Button from "../../../src/y-button"
 
 export default {
-  name: "ybutton-demo",
+  name: "yIcon-demo-all",
   components: {
     "y-icon": Icon,
     "y-button": Button,

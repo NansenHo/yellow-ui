@@ -15,7 +15,7 @@ Vue.use(plugin)
 
 
 export default {
-  name: "yToast-demo",
+  name: "yToast-demo-2",
   components: {
     "y-button": Button,
     "y-toast": Toast,

@@ -2,6 +2,7 @@
   <div class="container">
     <y-button>默认按钮</y-button>
     <y-button icon="aui-icon-plus">默认按钮</y-button>
+    <y-button icon="aui-icon-plus" icon-position="right">默认按钮</y-button>
     <y-button icon="aui-icon-recovery">加载中</y-button>
   </div>
 </template>

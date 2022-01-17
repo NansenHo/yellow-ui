@@ -16,7 +16,7 @@ import Row from "../../../src/y-row"
 import Col from "../../../src/y-col"
 
 export default {
-  name: "ybutton-demo",
+  name: "yGrid-demo-gutter",
   components: {
     "y-row": Row,
     "y-col": Col,

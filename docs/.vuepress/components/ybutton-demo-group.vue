@@ -17,7 +17,7 @@ import Button from "../../../src/y-button"
 import ButtonGroup from "../../../src/y-button-group"
 
 export default {
-  name: "ybutton-demo-disabled",
+  name: "ybutton-demo-group",
   components: {
     "y-button": Button,
     "y-button-group": ButtonGroup,

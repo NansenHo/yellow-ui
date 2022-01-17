@@ -1678,3 +1678,40 @@ for (var i = 0, len = span.length; i < len; i++) {
      console.log(span[i].querySelector('span').click());
 }
 ```
+
+## 服务器配置
+
+### 中断连接上服务器
+
+在终端中输入以下命令行
+
+```shell
+SSH root@服务器地址（不需要端口）
+```
+
+然后输入密码即可。
+
+### 查看服务器是 nginx 配置
+
+进入服务器后，在终端中输入以下命令行
+
+```shell
+curl -I http://127.0.0.1
+```
+
+然后查看 server 字段就行了。
+
+### 查找到 nginx.conf 文件的位置
+
+```shell
+locate nginx.conf
+```
+
+### 打开 nginx.conf 文件
+
+首先用 locate nginx.conf 拿到路径，然后用 `vim 路径` 就可以进入 nginx.conf 文件了。
+
+```shell
+vim nginx.conf的路径
+```
+
