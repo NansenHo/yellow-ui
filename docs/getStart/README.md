@@ -42,5 +42,3 @@ export default {
 ```
 IE 8 及以上浏览器支持该样式；
 
-## Hello World
-

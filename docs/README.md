@@ -1,6 +1,6 @@
 # Yellow UI 官网
 
-Yellow UI 是一个简单易用又漂亮的 Vue UI 框架。
+Yellow UI 是一个简单易用又漂亮的 Vue UI 库。
 
 > 在公司项目中接触到了 elementUI ，觉得 elementUI 真的极大地方便了前端画面的开发，尤其是后台管理类项目。
 >
