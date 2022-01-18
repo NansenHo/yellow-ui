@@ -1,5 +1,6 @@
+const path = require('path')
 module.exports = {
-    base: "./",
+    base: "/",
     title: 'Yellow UI',
     description: '一个UI框架',
     themeConfig: {
@@ -41,5 +42,9 @@ module.exports = {
             }
         ],
     },
-    host: 'localhost',
+    host: '103.210.22.56',
+    port: '80',
+    scss:{
+        includePaths: [path.join(__dirname, '../../styles')]
+    }
 }
