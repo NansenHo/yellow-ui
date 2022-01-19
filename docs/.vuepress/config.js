@@ -6,7 +6,7 @@ module.exports = {
     themeConfig: {
         nav: [
             {text: "主页", link: "/"},
-            {text: "源码", link: "/guide"},
+            {text: "源码", link: "https://github.com/NansenHo/YellowUI"},
             {text: "交流", link: "../../components/author"}
         ],
         sidebar: [
