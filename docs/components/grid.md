@@ -127,17 +127,11 @@ title: Grid 栅栏
 Row 组件 提供 `gutter` 属性来指定每一栏之间的间隔，默认间隔为 0 px。
 
 ```vue
-<y-row class="row" gutter="20">
-  <y-col span="6">
+<y-row class="row" gutter="10">
+  <y-col span="12">
     <div class="grid-content bg-deep"></div>
   </y-col>
-  <y-col span="6">
-    <div class="grid-content bg-light"></div>
-  </y-col>
-  <y-col span="6">
-    <div class="grid-content bg-deep"></div>
-  </y-col>
-  <y-col span="6">
+  <y-col span="12">
     <div class="grid-content bg-deep"></div>
   </y-col>
 </y-row>

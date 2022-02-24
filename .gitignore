@@ -4,4 +4,6 @@ node_modules
 dist
 .history
 .vscode
-
+docs/.DS_Store
+docs/.vuepress/.DS_Store
+.DS_Store

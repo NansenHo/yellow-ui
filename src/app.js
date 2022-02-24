@@ -48,6 +48,7 @@ new Vue({
     },
     methods: {
         showToast() {
+            console.log("1")
             this.$toast(`你的智商目前为 ${parseInt(Math.random() * 100)}`, {
                 enableHtml: false,
                 position: "middle",

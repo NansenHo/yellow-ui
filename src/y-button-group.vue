@@ -10,7 +10,7 @@ export default {
   mounted() {
     for (let node of this.$el.children) {
       let name = node.nodeName.toLowerCase();
-      if (name !== 'button') {
+      if (name !== 'y-button') {
         console.warn(`y-button-group 的子元素只能是 y-button，但你写的是 ${name}`);
       }
     }
